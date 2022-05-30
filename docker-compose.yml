@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  node:
+    build:
+      context: .
+      args:
+        - NODE_TAG=${NODE_TAG:-18.2.0-alpine3.15}
+        - PROJECT_WORKDIR=${PROJECT_WORKDIR:-/srv/app}
+    image: ${PROJECT_NAME}:${APP_ENV:-dev}
+    container_name: ${PROJECT_CONTAINER_NAME}
+    environment:
+      APP_ENV: ${APP_ENV:-dev}
+    ports:
+      # HTTP
+      - target: 4200
+        published: ${ANGULAR_PORT:-4400}
+        protocol: tcp
+    volumes:
+      - ./:${PROJECT_WORKDIR:-/srv/app}:rw
+      - ${PROJECT_WORKDIR:-/srv/app}/node_modules
+      - ${PROJECT_WORKDIR:-/srv/app}/dist
