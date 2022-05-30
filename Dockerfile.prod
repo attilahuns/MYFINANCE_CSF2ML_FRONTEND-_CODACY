@@ -1,0 +1,60 @@
+# the different stages of this Dockerfile are meant to be built into separate images
+# https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
+# https://docs.docker.com/compose/compose-file/#target
+
+
+# https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
+
+# define Node & Nginx versions
+ARG NODE_TAG=18.2.0-alpine3.15
+ARG NGINX_TAG=1.21.6-alpine
+
+# project working directory
+ARG PROJECT_WORKDIR=/srv/app
+ARG PROJECT_BUILD_OUTPUT_PATH=dist/build
+
+# Nginx env variables
+ARG NGINX_HOST=localhost
+ARG NGINX_HTTP_PORT=80
+
+### Node Stage
+### Build the angular production ready application
+FROM node:${NODE_TAG} AS build
+
+# retrieve ARG variables defined before the "FROM" clause
+ARG PROJECT_WORKDIR
+ARG PROJECT_BUILD_OUTPUT_PATH
+
+# set project working directory
+WORKDIR ${PROJECT_WORKDIR}
+
+# copy project dependencies files (package.json & package-lock.json)
+COPY package*.json .
+# install project dependencies
+RUN npm install
+
+# copy project files
+COPY . .
+# build project for production environnement
+RUN $(npm bin)/ng build --configuration=production --output-path=${PROJECT_BUILD_OUTPUT_PATH} --extractLicenses=false
+
+### Nginx Stage
+### Serving the angular production ready application built in Node stage
+FROM nginx:${NGINX_TAG}
+
+# retrieve ARG variables defined before the "FROM" clause
+ARG PROJECT_WORKDIR
+ARG PROJECT_BUILD_OUTPUT_PATH
+ARG NGINX_HOST
+ARG NGINX_HTTP_PORT
+
+# Env variables used in default nginx config file <nginx.conf>, it can be override by .env file if needed
+ENV PROJECT_WORKDIR ${PROJECT_WORKDIR}
+ENV NGINX_HOST ${NGINX_HOST}
+ENV NGINX_HTTP_PORT ${NGINX_HTTP_PORT}
+# copy default nginx config
+COPY ./nginx.conf /etc/nginx/templates/default.conf.template
+# copy the built app directory
+COPY --from=build ${PROJECT_WORKDIR}/${PROJECT_BUILD_OUTPUT_PATH} ${PROJECT_WORKDIR}
+# set project working directory
+WORKDIR ${PROJECT_WORKDIR}
