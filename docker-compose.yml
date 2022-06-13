@@ -7,16 +7,27 @@ services:
       args:
         - NODE_TAG=${NODE_TAG:-18.2.0-alpine3.15}
         - PROJECT_WORKDIR=${PROJECT_WORKDIR:-/srv/app}
+        - ANGULAR_PORT=${ANGULAR_PORT:-4200}
+        - ANGULAR_POLL_FREQUENCY=${ANGULAR_POLL_FREQUENCY:-200}
     image: ${PROJECT_NAME}:${APP_ENV:-dev}
-    container_name: ${PROJECT_CONTAINER_NAME}
+    container_name: ${PROJECT_NAME}_node
     environment:
       APP_ENV: ${APP_ENV:-dev}
-    ports:
-      # HTTP
-      - target: 4200
-        published: ${ANGULAR_PORT:-4400}
-        protocol: tcp
     volumes:
       - ./:${PROJECT_WORKDIR:-/srv/app}:rw
       - ${PROJECT_WORKDIR:-/srv/app}/node_modules
       - ${PROJECT_WORKDIR:-/srv/app}/dist
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.${PROJECT_NAME}_node.loadbalancer.server.port=${ANGULAR_PORT}
+      - traefik.http.routers.${PROJECT_NAME}_node.rule=Host(`${PROJECT_NAME}.${PROJECT_BASE_URL}`)
+
+  traefik:
+    image: traefik:v2.7.0
+    container_name: ${PROJECT_NAME}_traefik
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "${PROJECT_HTTP_PORT}:80"
+      - '8080:8080' # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
