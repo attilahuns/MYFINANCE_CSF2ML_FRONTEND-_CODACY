@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  node:
+  nginx:
     build:
       context: .
       dockerfile: Dockerfile.prod
@@ -17,5 +17,5 @@ services:
     ports:
       # HTTP
       - target: ${NGINX_HTTP_PORT:-80}
-        published: ${ANGULAR_PORT:-4400}
+        published: ${PROJECT_HTTP_PORT:-80}
         protocol: tcp
