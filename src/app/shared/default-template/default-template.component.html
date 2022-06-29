@@ -1,0 +1,11 @@
+<div class="template__container">
+  <div class="breadcrumb__container" *ngIf="deviceDetector.isLaptop()">Home  >  contact</div>
+  <div class="template__grid">
+    <div class="template__main">
+      <ng-content select="[main]"></ng-content>
+    </div>
+    <div class="template__side">
+      <f2ml-faq-tile></f2ml-faq-tile>
+    </div>
+  </div>
+</div>

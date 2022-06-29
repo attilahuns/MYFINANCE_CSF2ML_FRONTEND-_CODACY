@@ -1,0 +1,14 @@
+<f2ml-default-template *ngIf="informations$ | async as informations">
+  <f2ml-default-card main [title]="title">
+    <div class="information__card" content>
+      <div class="information__card__content">
+        <div class="information__tile__container">
+          <f2ml-information-tile class="information__tile" [information]="information" *ngFor="let information of informations"></f2ml-information-tile>
+        </div>
+      </div>
+      <div class="information__card__footer">
+        <p>Need to update your personal information ? <span class="is-link">Fill a form</span></p>
+      </div>
+    </div>
+  </f2ml-default-card>
+</f2ml-default-template>

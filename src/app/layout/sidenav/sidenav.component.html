@@ -1,0 +1,54 @@
+<section class="menu__container">
+  <mat-sidenav-container class="menu-sidenav__container" (backdropClick)="close()">
+    <!-- Left sidebar -->
+    <mat-sidenav class="menu-sidenav" #sidenav
+      disableClose
+      [mode]="deviceDetector.isLaptop() ? 'side' : 'over'"
+      [opened]="deviceDetector.isLaptop() || (opened$ | async)"
+      [fixedInViewport]="!deviceDetector.isLaptop()"
+      [fixedTopGap]="96"
+      [autoFocus]="false"
+    >
+      <mat-nav-list class="menu-navlist__container" *ngIf="sideMenuItems$ | async as menuItems">
+        <ng-template ngFor let-item [ngForOf]="menuItems">
+          <mat-list-item class="menu-navlist__item is-main"
+            [routerLink]="item.path"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{exact: true}"
+            (click)="!deviceDetector.isLaptop() && close()"
+          >
+            <img class="menu-navlist__item-icon" alt="" src="../../assets/images/{{item.icon}}.svg" width="40px">
+            <div class="menu-navlist__item-label">
+              <span>{{item.title}}</span>
+            </div>
+          </mat-list-item>
+          <mat-list class="menu-navlist__submenu-container" *ngIf="item.subMenu">
+            <mat-list-item class="menu-navlist__item is-sub"
+              [routerLink]="subItem.path"
+              routerLinkActive="is-active"
+              [routerLinkActiveOptions]="{exact: true}"
+              (click)="!deviceDetector.isLaptop() && close()"
+              *ngFor="let subItem of item.subMenu"
+            >
+              <div class="menu-navlist__item-label">
+                <span>{{subItem.title}}</span>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </ng-template>
+      </mat-nav-list>
+      <f2ml-footer class="menu-sidenav__footer" *ngIf="!deviceDetector.isLaptop()"></f2ml-footer>
+    </mat-sidenav>
+    <mat-sidenav-content class="mat-sidenav__content">
+      <div class="menu-sidenav__content-container">
+          <!-- Main content -->
+          <main class="menu-sidenav__content">
+            <router-outlet></router-outlet>
+          </main>
+          <div class="menu-sidenav__content-footer">
+            <f2ml-footer></f2ml-footer>
+          </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</section>

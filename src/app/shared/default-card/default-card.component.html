@@ -1,0 +1,8 @@
+<div class="default-card__container">
+  <div class="default-card">
+    <h1 class="default-card__title" *ngIf="title">{{title}}</h1>
+    <div class="default-card__content__container">
+        <ng-content select="[content]"></ng-content>
+    </div>
+  </div>
+</div>

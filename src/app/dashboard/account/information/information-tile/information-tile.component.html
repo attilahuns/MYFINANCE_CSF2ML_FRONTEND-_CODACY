@@ -1,0 +1,18 @@
+<div class="information-tile__container">
+  <div class="information-tile">
+    <h2 class="information-tile__title">{{ information.title }}</h2>
+    <div class="information-tile__content">
+      <table class="information-tile__table">
+        <tr class="information-tile__row" *ngFor="let data of information.data">
+          <td class="information-tile__row-label information-tile__cell">{{data.label}}:</td>
+          <td class="information-tile__row-value information-tile__cell" *ngIf="!data.isSecrect">{{ data.value }}</td>
+          <td class="information-tile__row-value information-tile__cell" *ngIf="data.isSecrect">{{ isVisible(data) ? data.value : hash(data.value) }}</td>
+          <td class="information-tile__row-icon information-tile__cell">
+            <mat-icon *ngIf="data.isSecrect && !isVisible(data)" (click)="toggleVisibility(data)">visibility_outline</mat-icon>
+            <mat-icon *ngIf="data.isSecrect && isVisible(data)" (click)="toggleVisibility(data)">visibility_off_outline</mat-icon>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

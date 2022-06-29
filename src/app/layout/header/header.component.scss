@@ -1,0 +1,133 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.header__container {
+  display: flex;
+  overflow: auto;
+}
+
+.header-spacer {
+  flex: 1 1 auto;
+}
+
+.header-toolbar__container {
+  flex-grow: 1;
+  background-color: $color-background-primary;
+}
+
+.header__toolbar {
+  height: 96px;
+  width: 98%;
+  background-color: $color-background-primary;
+  background: url('../../../assets/images/header_background.png') no-repeat center;
+  background-size: 100% 96px;
+  padding: 0px;
+  margin: auto;
+}
+
+.header-toolbar__menu-icon {
+  color: $color-font-primary-in-filled-background;
+}
+
+.header-toolbar__logo--desktop {
+  width: 270px;
+}
+
+.header-avatar__container {
+  box-sizing: border-box;
+  height: 100%;
+  border-bottom: 3.5px solid $color-background-variant;
+  padding: 0px 20px;
+  background-color: $color-background-primary;
+
+  &:hover{
+      cursor: pointer;
+  }
+}
+
+.header-avatar__icon {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background-color: $color-background-accent;
+  border-radius: 40px;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.header-avatar__divider {
+  vertical-align: top;
+  border-left: 2px solid $color-font-welcome;
+  height: 20px;
+  margin: 0px 10px;
+  margin-top: 40px;
+  display: inline-block;
+}
+
+.header-avatar__welcome {
+  text-align: right;
+  display: inline-block;
+  color: $color-font-welcome;
+  font-size: $font-size-fourth;
+  line-height: 1.5;
+  vertical-align: top;
+  margin-top: 20px;
+}
+
+.header-avatar__name {
+  color: $color-font-primary-in-filled-background;
+  font-size: $font-size-second;
+}
+
+.header-menu__container {
+  background-color: $color-background-primary;
+  height: 96px;
+}
+
+.header-menu__item {
+  display: inline-block;
+  text-align: center;
+  width: 70px;
+  &.is-sign_out {
+    padding-left: 15px;
+  }
+}
+
+.header-menu__item-img {
+  margin-top: 20px;
+  width: 35px;
+  height: 35px;
+}
+
+.header-menu__item-caption {
+  display: block;
+  color: $color-font-primary-in-filled-background;
+  margin-top: 3px;
+  font-size: $font-size-sixth;
+  line-height: normal;
+}
+
+
+@include device.viewport(laptop) {
+  .header-toolbar__logo__container{
+    margin-left: 1em;
+  }
+}
+@include device.viewport(not-laptop) {
+  .header-menu__item {
+    width: 60px;
+    &.is-sign_out {
+      padding-left: 0;
+    }
+  }
+}
+@include device.viewport(tablet) {
+  .header-toolbar__logo--mobile {
+    width: 136px;
+  }
+}
+@include device.viewport(mobile) {
+  .header-toolbar__logo--mobile {
+    width: 100px;
+  }
+}

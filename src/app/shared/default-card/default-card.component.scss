@@ -1,0 +1,21 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.default-card__container {
+  border-left: 4px solid $color-background-edge;
+  background-color: $color-background-block;
+  padding: 2em;
+}
+
+.default-card__title {
+  color: $color-font-title;
+  font-size: $font-size-first;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+@include device.viewport(not-laptop) {
+  .default-card__container {
+    padding: 1em;
+  }
+}

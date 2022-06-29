@@ -1,0 +1,50 @@
+<f2ml-default-template>
+  <section *ngIf="deviceDetector.isLaptop() || deviceDetector.isTablet()" class="bank-container row col-md-12" main>
+    <div class="title">Bank details</div>
+    <div class="col-md-3"></div>
+    <div class="form-container col-md-8">
+      <div class="example-container row">
+        <div class="label col-md-4" >Name of Bank : </div>
+        <div class="data col-md-8" style="float: right;">HSBC</div>
+      </div>
+      <hr style="opacity: 0.1;">
+      <div class="example-container row">
+        <div class="label col-md-4" >Bank account number : </div>
+        <div class="data col-md-8" style="float: right;">XXXX 2345 3000 XXXX XXXX XXXX XX X</div>
+      </div>
+      <hr style="opacity: 0.1;">
+      <div class="example-container row">
+        <div class="label col-md-4" >Bank details : </div>
+        <div class="data col-md-8" style="float: right;">21 Prescot street E18AD London</div>
+      </div>
+      <hr style="opacity: 0.1;">
+    </div>
+    <div class="link row">
+      <p>Need to update your bank information? <span class="link-form"> Fill to form</span> </p>
+    </div>
+  </section>
+  <section *ngIf="deviceDetector.isMobile()" class="bank-container-mobile row col-md-12" main>
+    <div class="title">Bank details</div>
+    <div class="form-container">
+      <div class="example-container">
+        <p class="label" style="margin-right: 20px;" >Name : </p>
+        <p class="data">HSBC</p>
+      </div>
+      <hr style="opacity: 0.2;">
+      <div class="example-container row">
+        <p class="label" >Bank account number : </p>
+        <p class="data" >XXXX 2345 3000 XXXX XXXX XXXX XX X</p>
+      </div>
+      <hr style="opacity: 0.2;">
+      <div class="example-container row">
+        <p class="label">Bank details : </p>
+        <p class="data">21 Prescot street E18AD London</p>
+      </div>
+      <hr style="opacity: 0.2;">
+      <div class="link row">
+        <p>Need to update your bank information? <span class="link-form"> Fill to form</span> </p>
+      </div>
+    </div>
+  </section>
+</f2ml-default-template>
+

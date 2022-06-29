@@ -1,0 +1,30 @@
+@use 'variables' as v;
+
+.detail-document{
+  margin: 20px;
+  background-color: v.$color-font-primary-in-filled-background;
+  border-left: 4px solid v.$color-background-edge;
+  border-radius: 0 10px 10px 0;
+}
+
+.btnContainer{
+  display: flex;
+  flex-direction: row-reverse;
+
+  button{
+    background-color: v.$color-primary;
+    color: v.$color-font-primary-in-filled-background;
+    padding: 4px 25px;
+    border-radius: 20px;
+    font-family: 'Encode Sans Expanded', sans-serif;
+    text-align: right !important;
+
+    margin: 20px 10px 10px 0;
+  }
+}
+
+.pdf-container{
+  padding: 10px;
+  margin: 0 auto;
+  height: 700px
+}

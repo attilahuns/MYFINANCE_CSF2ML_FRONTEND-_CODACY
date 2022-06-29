@@ -1,0 +1,40 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.information__card {
+  display: flex;
+  flex-direction: column;
+}
+.information__card__footer {
+  margin-top: 5em;
+  align-self: center;
+  color: $color-font-subtitle;
+  font-size: $font-size-fourth;
+  font-weight: bold;
+  text-align: center;
+  .is-link {
+    color: $color-primary;
+  }
+}
+.information__tile__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+@include device.viewport(laptop) {
+  .information__wrapper {
+    padding: 2em;
+  }
+  .information__card__title {
+    margin-bottom: 1.5em;
+  }
+  .information__tile__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .information__tile:nth-child(even) {
+    border-left: 1px solid $color-font-divider;
+    padding-left: 2em;
+  }
+}

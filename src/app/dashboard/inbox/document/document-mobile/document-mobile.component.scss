@@ -1,0 +1,63 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+@include device.viewport(mobile){
+  .cards{
+    border-radius: 8px;
+    opacity: 1;
+    font-size: $font-size-sixth;
+    letter-spacing: 0px;
+    color: $color-background-primary;
+    opacity: 1;
+    .contract-infos-container{
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    .contract-line {
+      display: flex;
+      padding: 0 16px;
+      height: 30px;
+      align-items: center;
+    }
+    .contract-line-label {
+      flex: 2;
+      display: inline-flex;
+      align-items: center;
+      font-size: $font-size-sixth !important;
+    }
+    .contract-line-data {
+      flex: 2;
+      font-size: $font-size-fifth !important;
+    }
+  }
+}
+
+@include device.viewport(tablet){
+  .cards{
+    border-radius: 8px;
+    opacity: 1;
+    font-size: $font-size-sixth;
+    letter-spacing: 0px;
+    color: $color-background-primary;
+    opacity: 1;
+    .contract-line-data {
+      font-weight: bold;
+      font-size: $font-size-fifth !important;
+    }
+    .contract-line-label {
+      font-size: $font-size-sixth !important;
+    }
+  }
+  .document-row{
+    padding: 10px 30px 16px !important;
+  }
+}
+.selected{
+  background-color: $color-background-highlighter !important;
+  .contract-line-data{
+    font-weight: bold;
+  }
+}
+.default{
+  background-color: $color-background-accent !important;
+}

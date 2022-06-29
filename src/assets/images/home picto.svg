@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="_0025_X95Home_Outline" data-name="0025_X95Home_Outline" width="32" height="32" fill="#fff" opacity="0"/>
+    </clipPath>
+  </defs>
+  <g id="Groupe_de_masques_2" data-name="Groupe de masques 2" clip-path="url(#clip-path)">
+    <path id="Tracé_40" data-name="Tracé 40" d="M16,7.71l8.88,6.69V24.64h-6V18.56H13.12v6.08h-6V14.4ZM16,6.5l-.58.44L6.54,13.63l-.38.29V25.6h7.92V19.52h3.84V25.6h7.92V13.92l-.38-.29L16.58,6.94Z" fill="#fff"/>
+  </g>
+</svg>

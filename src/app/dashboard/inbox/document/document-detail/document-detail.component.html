@@ -1,0 +1,22 @@
+<f2ml-default-template>
+  <div class="detail-document" main>
+
+    <div class="btnContainer">
+      <button mat-flat-button>Download the pdf</button>
+    </div>
+
+    <div class="pdf-container">
+      <ngx-extended-pdf-viewer
+      [src]="'assets/demo.pdf'"
+      [useBrowserLocale]="true"
+      [textLayer]="true"
+      [showHandToolButton]="true"
+      [showPresentationModeButton]="true"
+      [showDownloadButton]="false"
+    >
+    </ngx-extended-pdf-viewer>
+
+    </div>
+  </div>
+
+</f2ml-default-template>

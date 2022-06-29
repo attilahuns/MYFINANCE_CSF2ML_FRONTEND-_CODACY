@@ -1,0 +1,23 @@
+<f2ml-default-card [title]="title" *ngIf="deviceDetector.isLaptop()">
+  <div class="faq__list" content>
+    <div class="faq__item-container" *ngFor="let faq of faqs">
+      <span class="faq__item">{{faq.label}}</span>
+    </div>
+  </div>
+</f2ml-default-card>
+
+<div class="faq-mobile__container is-animated" (click)="openFaq()" [class.is-extended]="displayFaq" *ngIf="!deviceDetector.isLaptop()">
+  <div class="faq-mobile__list-container" *ngIf="displayFaq">
+    <div class="faq-mobile__item-container" *ngFor="let faq of faqs">
+      <span class="faq__item faq-mobile__item">{{faq.label}}</span>
+    </div>
+    <div class="faq-mobile__close">
+      <img class="faq-mobile__close-icon" alt="close help" src="assets/images/close.svg" (click)="closeFaq($event)">
+    </div>
+  </div>
+  <div class="faq-mobile__launcher-container">
+    <div class="faq-mobile__launcher" *ngIf="!displayFaq">
+      <img class="faq-mobile__lancher-icon" src="/assets/images/faq.svg"/>
+    </div>
+  </div>
+</div>

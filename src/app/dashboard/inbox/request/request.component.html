@@ -1,0 +1,97 @@
+<f2ml-default-template>
+  <f2ml-default-card main title="Requests">
+    <div content class="requests">
+      <div class="mb-2">
+        <mat-form-field appearance="legacy"  >
+          <mat-label></mat-label>
+          <input matInput type="text" class="example-right-align" (keyup)="filterTable($event)" placeholder="Research" >
+          <span matPrefix><mat-icon>search</mat-icon></span>
+        </mat-form-field>
+        <button mat-flat-button class="requests__new__btn" >Make a new request</button>
+      </div>
+
+      <div class="requests__desktop__display">
+        <div *ngIf="dataSource.filteredData.length">
+          <table mat-table [dataSource]="dataSource" matSort cellspacing="2px" class=" table__data__header">
+            <ng-container matColumnDef="request">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by request" >Requests</th>
+            </ng-container>
+            <ng-container matColumnDef="details">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by details">
+                <span class="table__vertical__line">&#8739;</span>Request details
+              </th>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">
+                <span class="table__vertical__line">&#8739;</span>Status
+              </th>
+            </ng-container>
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by date">
+                <span class="table__vertical__line">&#8739;</span>Date submitted
+              </th>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          </table>
+
+          <table mat-table [dataSource]="dataSource" matSort cellspacing="2px" class="table__data__display">
+            <ng-container matColumnDef="request">
+              <td mat-cell *matCellDef="let element">{{element.request}}</td>
+            </ng-container>
+            <ng-container matColumnDef="details">
+              <td mat-cell *matCellDef="let element"> {{element.details}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <td mat-cell *matCellDef="let element"> <span class="requests__mobile__dot" [ngStyle]="{'background-color': element.color }"></span> <span style="padding-left:10px;">{{element.status}}</span> </td>
+            </ng-container>
+            <ng-container matColumnDef="date">
+              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="requests__responsive__display">
+        <div *ngIf="dataSource.filteredData.length">
+          <div class="requests__responsive__card" *ngFor="let item of dataSource.filteredData">
+            <table class="requests__responsive__card__table"  >
+              <tr class="requests__only__for__tablet">
+                <td>Requests<br/>{{ item.request }}</td>
+                <td>Request details<br/>{{ item.request }}</td>
+              </tr>
+              <tr class="requests__only__for__tablet">
+                <td>Status<br/><span class="requests__mobile__dot" [ngStyle]="{'background-color': item.color }"></span><span style="padding-left: 5px;"> {{ item.status }}</span></td>
+                <td>Date submitted<br/>{{ item.date }}</td>
+              </tr>
+
+              <tr class="requests__only__for__mobile">
+                <td>Requests</td>
+                <td>{{ item.request }}</td>
+              </tr>
+              <tr class="requests__only__for__mobile">
+                <td>Request details</td>
+                <td>{{ item.details }}</td>
+              </tr>
+              <tr class="requests__only__for__mobile">
+                <td>Status</td>
+                <td><span class="requests__mobile__dot" [ngStyle]="{'background-color': item.color }"></span><span style="padding-left: 5px;"> {{ item.status }}</span></td>
+              </tr>
+              <tr class="requests__only__for__mobile">
+                <td>Date submitted</td>
+                <td>{{ item.date }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="requests__data__display" *ngIf="dataSource.filteredData.length && ELEMENT_DATA.length > 5">
+        <img src="/assets/images/view.png"/>&nbsp;
+        <span (click)="showData()">View {{ fullDataDisplayed ? 'less' : 'more' }}</span>
+      </div>
+      <div *ngIf="!dataSource.filteredData.length" >NO DATA TO DISPLAY</div>
+
+    </div>
+  </f2ml-default-card>
+</f2ml-default-template>

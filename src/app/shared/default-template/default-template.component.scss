@@ -1,0 +1,34 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.template__container {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+}
+.breadcrumb__container {
+  padding-bottom: 2em;
+  font-size: 1em;
+}
+.template__grid {
+  display: grid;
+  grid-template-columns: 80fr 20fr;
+  grid-template-areas: "main side";
+  grid-column-gap: 2em;
+}
+.template__main {
+  grid-area: main;
+}
+.template__side {
+  grid-area: side;
+}
+
+@include device.viewport(not-laptop) {
+  .template__container {
+    padding: 1em;
+  }
+  .template__grid {
+    grid-template-areas: "main main";
+    grid-column-gap: 0;
+  }
+}

@@ -1,0 +1,30 @@
+// Breakpoint per device
+// $screen-mobile: 576px !default;
+$screen-mobile: 428px !default;
+// $screen-tablet: 768px !default;
+$screen-laptop: 992px !default;
+// $screen-large: 1200px !default;
+
+// Define media queries using breakpoints
+$mobile-query: '(max-width: #{$screen-mobile})';
+$tablet-query: '(min-width: #{$screen-mobile + 1}) and (max-width: #{$screen-laptop - 1})';
+$laptop-query: '(min-width: #{$screen-laptop})';
+$not-laptop-query: 'not all and #{$laptop-query}';
+$not-mobile-query: 'not all and #{$mobile-query}';
+
+$viewports: (
+  mobile: $mobile-query,
+  tablet: $tablet-query,
+  laptop: $laptop-query,
+  not-mobile: $not-mobile-query,
+  not-laptop: $not-laptop-query,
+) !default;
+@mixin viewport($viewport) {
+  @if map-has-key($viewports, $viewport) {
+    @media #{map-get($viewports, $viewport)} {
+      @content
+    }
+  } @else {
+    @error 'Undefind viewport "#{$viewport}", Allowed viewport values: `#{map-keys($viewports)}`.'
+  }
+}
