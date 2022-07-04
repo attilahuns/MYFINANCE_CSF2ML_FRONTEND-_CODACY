@@ -6,6 +6,9 @@ import { DefaultTemplateComponent } from './default-template/default-template.co
 import { FaqTileComponent } from './faq-tile/faq-tile.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { DefaultCardComponent } from './default-card/default-card.component';
+import { ViewMoreComponent } from './view-more/view-more.component';
+import { SearchInputComponent } from './search-input/search-input.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,9 +16,12 @@ import { DefaultCardComponent } from './default-card/default-card.component';
     DefaultTemplateComponent,
     FaqTileComponent,
     DefaultCardComponent,
+    ViewMoreComponent,
+    SearchInputComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MaterialModule,
     NgxExtendedPdfViewerModule,
   ],
@@ -24,7 +30,10 @@ import { DefaultCardComponent } from './default-card/default-card.component';
     DefaultTemplateComponent,
     FaqTileComponent,
     DefaultCardComponent,
+    ViewMoreComponent,
+    SearchInputComponent,
     CommonModule,
+    FormsModule,
     MaterialModule,
     NgxExtendedPdfViewerModule,
   ]

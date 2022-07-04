@@ -1,0 +1,19 @@
+.view-more__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  margin-top: 1em;
+  span {
+    text-decoration: underline;
+    &:hover {
+      cursor: pointer;
+      font-weight: bold;
+    }
+  }
+  img {
+    width: 30px;
+  }
+}

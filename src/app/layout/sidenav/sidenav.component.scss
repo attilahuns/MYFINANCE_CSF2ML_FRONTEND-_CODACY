@@ -24,6 +24,9 @@
   flex-direction: column;
   height: 100%;
 }
+.mat-sidenav__content {
+  display: flex;
+}
 .menu-sidenav__content {
   flex-grow: 1;
   background-color: $color-background-accent;

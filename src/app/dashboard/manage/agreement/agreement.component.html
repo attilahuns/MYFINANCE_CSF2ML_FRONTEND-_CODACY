@@ -1,0 +1,29 @@
+<f2ml-default-template *ngIf="(agreements$ | async)?.length as agreements">
+  <f2ml-default-card [title]="title" main>
+    <div class="agreement__container" content>
+      <!--search -->
+      <div class="agreement-search__container">
+        <f2ml-search-input (searchValue)="filterChange($event)"></f2ml-search-input>
+      </div>
+
+      <!-- Mobile & Tablet -->
+      <ng-template [ngIf]="!deviceDetector.isLaptop()">
+        <f2ml-agreement-mobile [dataSource]="dataSource.filteredData" [columns]="columns"></f2ml-agreement-mobile>
+      </ng-template>
+      <!-- Laptop -->
+      <ng-template [ngIf]="deviceDetector.isLaptop()">
+        <f2ml-agreement-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)"></f2ml-agreement-laptop>
+      </ng-template>
+
+      <!--View more | less -->
+      <div class="agreement-viewmore__container" *ngIf="dataSource.filteredData.length">
+        <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData"></f2ml-view-more>
+      </div>
+
+      <!--No data message -->
+      <div class="agreement-nodata__container" *ngIf="!dataSource.filteredData.length">
+        <span class="agreement-nodata__message">NO DATA TO DISPLAY</span>
+      </div>
+    </div>
+  </f2ml-default-card>
+</f2ml-default-template>

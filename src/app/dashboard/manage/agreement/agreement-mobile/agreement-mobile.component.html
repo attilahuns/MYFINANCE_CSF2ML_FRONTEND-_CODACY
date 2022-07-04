@@ -1,0 +1,15 @@
+ <div class="agreement-mobile__container" *ngIf="dataSource.length">
+  <div class="agreement-tile__container" *ngFor="let row of dataSource">
+    <div class="agreement-tile__content">
+      <table class="agreement-tile__table">
+        <tr class="agreement-tile__row" *ngFor="let column of columns" >
+          <td class="agreement-tile__row-label agreement-tile__cell">{{ column.header }}:</td>
+          <td class="agreement-tile__row-value agreement-tile__cell" *ngIf="'details' !== column.name">{{ column.value(row) }}</td>
+          <td class="agreement-tile__row-value agreement-tile__cell" *ngIf="'details' == column.name">
+            <button mat-raised-button color="primary">View agreement</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

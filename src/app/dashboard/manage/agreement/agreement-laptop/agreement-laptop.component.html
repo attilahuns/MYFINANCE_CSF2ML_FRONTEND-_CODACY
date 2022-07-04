@@ -1,0 +1,31 @@
+<div class="agreement-laptop__container" *ngIf="dataSource.filteredData.length">
+  <table mat-table matSort [dataSource]="dataSource" class="agreement-laptop__table">
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.name">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef class="agreement-table__header">
+        <div class="agreement-table__header__content">
+          {{column.header}}
+        </div>
+        <mat-icon class="agreement-table__header-icon" *ngIf="column.sortable">unfold_more</mat-icon>
+      </th>
+      <ng-template [ngIf]="'details' !== column.name">
+        <td mat-cell *matCellDef="let row" class="agreement-table__data">
+          {{column.value(row)}}
+        </td>
+      </ng-template>
+      <ng-template [ngIf]="'details' === column.name">
+        <td mat-cell *matCellDef="let row" class="agreement-table__data">
+          <button mat-raised-button color="primary">View agreement</button>
+        </td>
+      </ng-template>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- second header used to put margin between thead and tbody -->
+    <ng-container matColumnDef="header-row-second">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="displayedColumns.length"></th>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['header-row-second']"></tr>
+  </table>
+</div>

@@ -42,7 +42,7 @@ export class LayoutEffect {
     },
     {
       title: 'Manage',
-      path: '#',
+      path: 'manage',
       icon: 'message picto',
       notification: false,
       subMenu: [
@@ -53,7 +53,7 @@ export class LayoutEffect {
         },
         {
           title: 'Agreements',
-          path: 'agreements',
+          path: 'manage/agreements',
           notification: false,
         },
         {

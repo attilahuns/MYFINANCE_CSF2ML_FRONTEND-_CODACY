@@ -1,0 +1,17 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.agreement-search__container {
+  margin-bottom: 1em;
+}
+
+@include device.viewport(tablet) {
+  .agreement-search__container {
+    width: 60%;
+  }
+}
+@include device.viewport(laptop) {
+  .agreement-search__container {
+    width: 40%;
+  }
+}

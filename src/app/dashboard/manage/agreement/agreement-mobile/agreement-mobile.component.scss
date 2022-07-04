@@ -1,0 +1,53 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.agreement-tile__container {
+  color: $color-font-primary;
+  background-color: $color-background-accent;
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  &.is-highlited
+  , &:first-child // for demo only
+  {
+    background-color: $color-background-highlighter;
+    .agreement-tile__row-value {
+      font-weight: bold;
+    }
+    button {
+      background-color: $color-background-edge;
+      &:hover {
+        background-color: $color-background-primary;
+      }
+    }
+  }
+}
+
+.agreement-tile__content {
+  display: flex;
+}
+.agreement-tile__table {
+  flex-grow: 1;
+}
+.agreement-tile__cell {
+  padding-bottom: 1em;
+  &:hover {
+    button {
+      background-color: $color-background-primary;
+    }
+  }
+}
+.agreement-tile__row-value {
+  font-weight: bold;
+}
+
+@include device.viewport(tablet) {
+  .agreement-tile__table {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .agreement-tile__row {
+    display: flex;
+    flex-direction: column;
+  }
+}

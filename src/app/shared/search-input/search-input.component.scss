@@ -1,0 +1,26 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.search-input__container {
+  display: flex;
+}
+.search-input__input {
+  flex-grow: 1;
+  input::placeholder {
+    font-style: italic;
+  }
+}
+.search-input__icon {
+  margin: 5px 0;
+}
+
+:host::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: $color-primary;
+  height: 1.5px;
+}
+:host::ng-deep.mat-form-field-ripple {
+  background-color: $color-accent !important;
+}
+:host::ng-deep.mat-form-field-wrapper:hover .mat-form-field-underline {
+  background-color: $color-accent;
+}
