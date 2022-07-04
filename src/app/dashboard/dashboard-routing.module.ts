@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: 'inbox', loadChildren: () => import('./inbox/inbox.module').then(m => m.InboxModule) },
       { path: 'manage', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) },
       { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
+      { path: 'manage', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]
   },
