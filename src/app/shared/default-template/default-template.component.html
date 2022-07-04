@@ -6,6 +6,9 @@
     </div>
     <div class="template__side">
       <f2ml-faq-tile></f2ml-faq-tile>
+      <f2ml-communication-tile *ngIf="deviceDetector.isLaptop()"></f2ml-communication-tile>
     </div>
   </div>
 </div>
+<f2ml-communication-tile *ngIf="!deviceDetector.isLaptop()"></f2ml-communication-tile>
+

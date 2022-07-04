@@ -1,0 +1,46 @@
+<div *ngIf="deviceDetector.isLaptop()" class="communication-information-container">
+  <div class="communication-information-title" [innerHTML]="communicationTitle">
+  </div>
+  <div class="communication-information-subtitle">
+    <div class="communication-information-subtitle-label" [innerHTML]="communicationContentfield_description">
+    </div>
+  </div>
+  <div class="video-container" *ngIf="currentUrl">
+    <div id="message"></div>
+    <iframe width="100%" height="auto" [src]="currentUrl"
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+    <div class="communication-information-subtitle">
+      <span>cliquez ici pour voir plus de details</span>
+    </div>
+  </div>
+  <div class="information-description-button-container" [ngClass]="[centered ? 'center-style' : 'end-style']">
+    <button class="primary-button">{{communicationContentButtonTitle}}</button>
+  </div>
+</div>
+<div *ngIf="!deviceDetector.isLaptop()" class="communication-information-container communication-card">
+  <div class="communication-information-title" [innerHTML]="communicationTitle">
+  </div>
+  <div class="communication-mobile-content">
+    <div class="communication-information-subtitle" [innerHTML]="communicationContentfield_description">
+    </div>
+    <div class="video-container" *ngIf="currentUrl">
+      <div id="message"></div>
+      <iframe width="100%" height="auto" [src]="currentUrl"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      <div class="communication-information-subtitle">
+        <span>cliquez ici pour voir plus de details</span>
+      </div>
+    </div>
+    <div class="information-description-button-container" [ngClass]="[centered ? 'center-style' : 'end-style']">
+      <button class="primary-button">
+          {{communicationContentButtonTitle}}
+      </button>
+    </div>
+  </div>
+</div>

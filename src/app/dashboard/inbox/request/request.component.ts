@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
 
 export interface PeriodicElement  {
   request: string;
@@ -41,7 +42,7 @@ export class RequestComponent implements OnInit , AfterViewInit {
   searchFilter : string = "";
   fullDataDisplayed : boolean = false;
 
-  constructor() { }
+  constructor(public deviceDetector: DeviceDetectorService) { }
 
   @ViewChild(MatSort) sort!: MatSort;
 

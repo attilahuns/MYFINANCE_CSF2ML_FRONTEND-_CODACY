@@ -6,6 +6,7 @@ import { DefaultTemplateComponent } from './default-template/default-template.co
 import { FaqTileComponent } from './faq-tile/faq-tile.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { DefaultCardComponent } from './default-card/default-card.component';
+import { CommunicationTileComponent } from './communication-tile/communication-tile.component';
 import { ViewMoreComponent } from './view-more/view-more.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     DefaultTemplateComponent,
     FaqTileComponent,
     DefaultCardComponent,
+    CommunicationTileComponent,
     ViewMoreComponent,
     SearchInputComponent,
   ],
@@ -36,6 +38,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     MaterialModule,
     NgxExtendedPdfViewerModule,
+    CommunicationTileComponent,
   ]
 })
 export class SharedModule { }

@@ -5,10 +5,6 @@
   .bank-container{
     padding-top: 10px;
     height: 100%;
-    opacity: 1;
-    border-left: solid $color-background-edge;
-    background-color: $color-background-block;
-    border-left-width: 4px;
     .title{
       padding-top: 5vh;
       padding-left: 5vh;
@@ -43,10 +39,6 @@
 }
 @include device.viewport(tablet){
   .bank-container{
-    opacity: 1;
-    border-left: solid $color-background-edge;
-    background-color: $color-background-block;
-    border-left-width: 4px;
     .title{
       padding-top: 5vh;
       padding-left: 5vh;
@@ -83,10 +75,6 @@
 .bank-container-mobile{
   padding: 10px;
   height: 100%;
-  background-color: $color-background-block;
-  border-left: solid;
-  border-left-color: $color-background-edge;
-  border-width: 4px;
   .title{
     padding: 2vh;
     text-align: left;

@@ -1,0 +1,68 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.primary-button{
+  background-color: $color-primary;
+  color: $color-font-primary-in-filled-background;
+  font-size: $font-size-fourth;
+  border: 1px solid $color-primary;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: center;
+  border-radius: 4px;
+  padding: 1vh 2vh;
+  z-index: 1;
+}
+.primary-button:hover{
+  background-color: $color-background-primary;
+  color: $color-font-primary-in-filled-background;
+}
+.communication-information-container {
+  background-color: $color-background-block;
+  padding: 2vh 1.6vh;
+  height: auto;
+  margin-top: 5vh;
+  border-left: 4px solid $color-background-edge;
+  .communication-information-title{
+    font-weight: bold;
+    font-size: 18px;
+    padding: 0.5em;
+  }
+  .communication-information-subtitle {
+    display: flex;
+    margin: 1.6vh 0;
+    align-items: center;
+    padding: 0.5em;
+    .communication-information-subtitle-label {
+      flex: 2;
+    }
+    span{
+      text-decoration: underline;
+      font-weight: bold;
+      color: $color-primary;
+      cursor: pointer;
+    }
+  }
+  .information-description-button-container {
+    display: flex;
+    padding-bottom: 1vw;
+  }
+}
+.center-style {
+  justify-content: center;
+}
+.end-style {
+  justify-content: end;
+}
+.communication-card{
+  margin: 1em !important;
+}
+.video-container{
+  padding: 0.5em;
+}
+
+@include device.viewport(not-laptop) {
+  .communication-information-subtitle, .information-description-button-container{
+    padding-left: 0.5em;
+  }
+}

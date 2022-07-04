@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
 
 @Component({
   templateUrl: './homepage.component.html',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {
   }

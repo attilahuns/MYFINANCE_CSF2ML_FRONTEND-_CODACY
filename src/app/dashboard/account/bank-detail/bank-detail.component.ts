@@ -8,6 +8,7 @@ import { DeviceDetectorService } from 'src/app/core/services/device-detector/dev
 })
 export class BankDetailComponent implements OnInit {
 
+  title = "Bank details";
   constructor( public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {

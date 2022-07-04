@@ -13,7 +13,7 @@ export class DocumentMobileComponent implements OnInit {
   @Input() data: any;
   @Input() indice: any;
   isTablette!: boolean;
-  innerWidth: number = window.innerWidth;
+  communicationContentDisplay: boolean = true;
   constructor(public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {
