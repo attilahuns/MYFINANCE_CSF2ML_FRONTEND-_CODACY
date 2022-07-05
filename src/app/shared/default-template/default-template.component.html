@@ -4,7 +4,7 @@
     <div class="template__main">
       <ng-content select="[main]"></ng-content>
     </div>
-    <div class="template__side">
+    <div class="template__side" *ngIf="!hiddenSideFaq">
       <f2ml-faq-tile></f2ml-faq-tile>
       <f2ml-communication-tile *ngIf="deviceDetector.isLaptop()"></f2ml-communication-tile>
     </div>

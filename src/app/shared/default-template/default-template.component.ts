@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { DeviceDetectorService } from 'src/app/core/services/device-detector/dev
   styleUrls: ['./default-template.component.scss']
 })
 export class DefaultTemplateComponent implements OnInit {
+
+  @Input() hiddenSideFaq:boolean = false;
 
   constructor(public deviceDetector: DeviceDetectorService) { }
 

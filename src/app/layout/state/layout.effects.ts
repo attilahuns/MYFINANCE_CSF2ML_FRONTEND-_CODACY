@@ -88,18 +88,18 @@ export class LayoutEffect {
     },
     {
       title: 'Help',
-      path: '#',
+      path: 'help',
       icon: 'message picto',
       notification: false,
       subMenu: [
         {
           title: 'FAQ',
-          path: 'faq',
+          path: 'help/faq',
           notification: false,
         },
         {
           title: 'Contact us',
-          path: 'contact',
+          path: 'help/contact',
           notification: false,
         }
       ],
