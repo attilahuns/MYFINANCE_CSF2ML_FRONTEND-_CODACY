@@ -1,6 +1,5 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { Document } from '../document';
 
 @Component({
   selector: 'f2ml-document-mobile',
@@ -9,16 +8,12 @@ import { DeviceDetectorService } from 'src/app/core/services/device-detector/dev
 })
 export class DocumentMobileComponent implements OnInit {
 
+  @Input() columns: { name: string, header: string, value: CallableFunction }[] = [];
+  @Input() dataSource: Document[] = [];
 
-  @Input() data: any;
-  @Input() indice: any;
-  isTablette!: boolean;
-  communicationContentDisplay: boolean = true;
-  constructor(public deviceDetector: DeviceDetectorService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-
-
 
 }

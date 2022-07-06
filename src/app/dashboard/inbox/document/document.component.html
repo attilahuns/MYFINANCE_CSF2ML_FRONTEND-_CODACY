@@ -1,119 +1,30 @@
+<f2ml-default-template *ngIf="(documents$ | async)?.length as documents">
+  <f2ml-default-card [title]="title" main>
+    <div class="document__container" content>
+      <!--search -->
+      <div class="document-search__container">
+        <f2ml-search-input (searchValue)="filterChange($event)"></f2ml-search-input>
+      </div>
 
-<f2ml-default-template>
-  <section *ngIf="deviceDetector.isLaptop()" class="document-container" main>
-    <span class="title">Documents</span>
-    <div class="row search" >
-      <div class="col-md-6">
-        <div class="input-container" style="padding-left: 2vh;">
-          <mat-form-field appearance="standard" fxFlex>
-            <img matPrefix alt="search picto" src="../../../assets/images/research picto.svg"/>
-            <input (keyup)="applyFilter($event)" type="search" placeholder="Research..." matInput  #input>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="noData" *ngIf="noData"> NO DATA TO DISPLAY</div>
-      <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" *ngIf="!noData">
-        <ng-container matColumnDef="documentType">
-          <th class="left-radius header-font md1" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='after' sortActionDescription="Sort by documentType">
-            Document Type
-          </th>
-          <td *matCellDef="let element; let j = index;" class="{{j != 0 ? 'div-cell div-cell-label':'div-cell-selected div-cell-label'}}" mat-cell> {{element.documentType}}</td> <!-- style="table-layout: fixed;width: 350px;text-overflow: ellipsis;"-->
-        </ng-container>
-        <ng-container matColumnDef="Date">
-          <th class="left-radius header-font md3 fs-style-4" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Date">
-            <span class="pipe"> | </span>
-            Date
-          </th>
-          <td *matCellDef="let element; let j = index;" class="{{j != 0 ? 'div-cell div-cell-label':'div-cell-selected div-cell-label'}}" mat-cell> {{element.Date}} </td>
-        </ng-container>
-        <ng-container matColumnDef="Financeproduct">
-          <th class="left-radius md4" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Financeproduct">
-            <span class="pipe"> | </span>
-            Finance product
-          </th>
-          <td *matCellDef="let element; let j = index;" class="{{j != 0 ? 'div-cell div-cell-label':'div-cell-selected div-cell-label'}}" mat-cell> {{element.Financeproduct}} </td>
-        </ng-container>
-        <ng-container matColumnDef="contrat">
-          <th class="left-radius header-font md2 fs-style-4" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by contrat">
-            <span class="pipe"> | </span>
-            contract
-          </th>
-          <td *matCellDef="let element; let j = index;" class="{{j != 0 ? 'div-cell div-cell-label':'div-cell-selected div-cell-label'}}" mat-cell> {{element.contrat}} </td>
-        </ng-container>
-        <ng-container matColumnDef="vehicle">
-          <th class="left-radius header-font md2 fs-style-4" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by vehicle">
-            <span class="pipe"> | </span>
-            vehicle
-          </th>
-          <td *matCellDef="let element; let j = index;" class="{{j != 0 ? 'div-cell div-cell-label':'div-cell-selected div-cell-label'}}" mat-cell > {{element.vehicle}} </td>
-        </ng-container>
-        <ng-container matColumnDef="RegistrationNumber">
-          <th class="left-radius header-font md1 fs-style-4" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by RegistrationNumber">
-            <span class="pipe"> | </span>
-            Registration Number
-          </th>
-          <td *matCellDef="let element; let j = index;" class="{{j != 0 ? 'div-cell div-cell-label':'div-cell-selected div-cell-label'}}" mat-cell > {{element.RegistrationNumber}} </td>
-        </ng-container>
-        <ng-container matColumnDef="Download">
-          <th style="flex:0.2 !important" class="left-radius header-font fs-style-4"  mat-header-cell *matHeaderCellDef>
-            <span class="pipe-child"> | </span>
-            Dow
-          </th>
-          <td style="flex:0.2 !important" mat-cell *matCellDef="let element; let j = index;"><div class="{{j != 0 ? 'div-cell':'div-cell-selected'}}"> <img alt="download picto" class="icon-picto" src="../../../assets/images/download picto.svg" /> </div> </td> <!--class="div-cell normal-cell-font fs-style-4"-->
-        </ng-container>
-        <ng-container matColumnDef="view">
-          <th style="flex:0.2 !important" class="left-radius header-font fs-style-4"  mat-header-cell *matHeaderCellDef class="header-font fs-style-4 hide-arrow">
-            <span class="pipe-child" > | </span>
-            View
-          </th>
-          <td  style="flex:0.2 !important" mat-cell *matCellDef="let element; let j = index;"> <div class="{{j != 0 ? 'div-cell':'div-cell-selected'}}" routerLink="/dashboard/inbox/documents/detail"><img alt="view picto" class="icon-picto" style=" width: 25px; height: 25px; margin-top: 1.9vh;" src="../../../assets/images/white_eye_outline.png" /></div> </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr  mat-row  *matRowDef="let row; columns: displayedColumns;let i=index " [hidden]="i >= displayLength"></tr>
-      </table>
-    </div>
-    <div class="expand-shrink" *ngIf="!noData">
-      <img alt="view" class="eye-img" src="../../../assets/images/white_eye_outline.png">
-      <div *ngIf="!expended" (click)='expand()'>
-        View more
-      </div>
-      <div *ngIf="expended" (click)='shrink()'>
-        View less
-      </div>
-    </div>
-  </section>
+      <!-- Laptop -->
+      <ng-template [ngIf]="deviceDetector.isLaptop()">
+        <f2ml-document-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)"></f2ml-document-laptop>
+      </ng-template>
 
-  <section *ngIf="!deviceDetector.isLaptop()" class="document-container-mobile" main>
-    <div class="title">
-      Documents
-    </div>
-    <form fxLayout="row"  class="col-md-6">
-      <div class="input-container">
-        <mat-form-field appearance="standard" fxFlex>
-          <img matPrefix alt="search picto" src="../../../assets/images/research picto.svg"/>
-          <input (keyup)="applyFilter($event)"  [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" placeholder="Research..." matInput >
-        </mat-form-field>
+      <!-- Mobile & Tablet -->
+       <ng-template [ngIf]="!deviceDetector.isLaptop()">
+        <f2ml-document-mobile [dataSource]="dataSource.filteredData" [columns]="columns"></f2ml-document-mobile>
+      </ng-template>
+
+      <!--View more | less -->
+      <div class="document-viewmore__container" *ngIf="dataSource.filteredData.length">
+        <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData"></f2ml-view-more>
       </div>
-    </form>
-    <div class="noData" style="font-size: 12px;" *ngIf="noData">NO DATA TO DISPLAY</div>
-    <div *ngIf="listContracts.length != 0">
-      <div class="document-card"
-          *ngFor="let document of  (listContracts | filterAll: searchText ) | slice:0:myVal; let i=index">
-          <f2ml-document-mobile [data]='document' [indice]='i'></f2ml-document-mobile>
+
+      <!--No data message -->
+      <div class="document-nodata__container" *ngIf="!dataSource.filteredData.length">
+        <span class="document-nodata__message">NO DATA TO DISPLAY</span>
       </div>
     </div>
-    <div class="expand-shrink-mobile">
-      <img style="filter: saturate(80%);"  alt="" height="24px" src="../../../assets/images/white_eye_outline.png" *ngIf="(listContracts | filterAll: searchText).length >= myVal">
-      <div class="expand-tile" *ngIf="!showAll &&  (listContracts | filterAll: searchText).length > myVal" (click)='expandMobile()'>
-        View more
-      </div>
-      <div class="expand-tile" *ngIf="showAll && (listContracts | filterAll: searchText).length === myVal" (click)='shrinkMobile()'>
-        View less
-      </div>
-    </div>
-  </section>
+  </f2ml-default-card>
 </f2ml-default-template>
-
-

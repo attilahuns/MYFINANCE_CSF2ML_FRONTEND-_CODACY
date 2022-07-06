@@ -68,7 +68,7 @@ export class InformationEffect {
   private informations: Information[] = [this.informationData, this.contactData];
 
 
-  loadfooterItems$ = createEffect(() => {
+  loadinformationItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(InformationActions.loadInformation),
       mergeMap(() => of(this.informations).pipe(

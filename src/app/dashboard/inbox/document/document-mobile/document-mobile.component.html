@@ -1,36 +1,17 @@
-<div class="{{indice == 0 ? 'cards selected' : 'cards default'}}" >
-  <div class="{{deviceDetector.isTablet() ? 'row' : 'contract-infos-container'}}">
-    <div class="{{deviceDetector.isTablet() ? 'document-row col-md-4' : 'contract-line'}}">
-      <div class="contract-line-label">Document type</div>
-      <div class="contract-line-data">{{data.documentType}}</div>
-    </div>
-    <div class="{{deviceDetector.isTablet() ? 'document-row col-md-4' : 'contract-line'}}">
-      <div class="contract-line-label">Date</div>
-      <div class="contract-line-data">{{data.Date}}</div>
-    </div>
-    <div class="{{deviceDetector.isTablet() ? 'document-row col-md-4' : 'contract-line'}}">
-      <div class="contract-line-label">Finance product</div>
-      <div class="contract-line-data">{{data.Financeproduct}}</div>
-    </div>
-    <div class="{{deviceDetector.isTablet() ? 'document-row col-md-4' : 'contract-line'}}">
-      <div class="contract-line-label">Contract</div>
-      <div class="contract-line-data">{{data.contrat}}</div>
-    </div>
-    <div class="{{deviceDetector.isTablet() ? 'document-row col-md-4' : 'contract-line'}}">
-      <div class="contract-line-label">Vehicle</div>
-      <div class="contract-line-data">{{data.vehicle}}</div>
-    </div>
-    <div class="{{deviceDetector.isTablet() ? 'document-row col-md-4' : 'contract-line'}}">
-      <div class="contract-line-label">Registration Num</div>
-      <div class="contract-line-data">{{data.RegistrationNumber}}</div>
-    </div>
-    <div class="{{deviceDetector.isTablet() ? 'document-row col-md-4' : 'contract-line'}}">
-      <div class="contract-line-label">Download</div>
-      <div class="contract-line-data" routerLink="/dashboard/document/detail"><img alt="download picto" src="../../../../../assets/images/download picto.svg" width="23px" /></div>
-    </div>
-    <div class="{{deviceDetector.isTablet() ? 'document-row col-md-4' : 'contract-line'}}">
-      <div class="contract-line-label">View</div>
-      <div class="contract-line-data"><img alt="download picto" src="../../../../../assets/images/white_eye_outline.png" width="23px" /></div>
+
+<div class="document-mobile__container" *ngIf="dataSource.length">
+  <div class="document-tile__container" *ngFor="let row of dataSource">
+    <div class="document-tile__content">
+      <table class="document-tile__table">
+        <tr class="document-tile__row" *ngFor="let column of columns" >
+          <td class="document-tile__row-label document-tile__cell">{{ column.header }}:</td>
+          <td class="document-tile__row-value document-tile__cell" *ngIf="'download' !== column.name && 'view' !== column.name">{{ column.value(row) }}</td>
+          <td class="document-tile__row-value document-tile__cell" *ngIf="'download' == column.name || 'view' == column.name">
+            <img routerLink="detail" src="{{column.value(row)}}"/>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
+

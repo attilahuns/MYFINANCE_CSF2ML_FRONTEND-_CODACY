@@ -25,7 +25,7 @@ export class AgreementEffect {
     {contactHolder: 'XXXXXXX', vehicule: 'C5 Citroen', registrationNumber:'AA-212-ZB', financeProduct: 'PCP Plus', agreementNumber: 'CT-76', agreementStartDate: '21/01/2016', mot: '15/03/2021'},
   ];
 
-  loadfooterItems$ = createEffect(() => {
+  loadagreementItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(AgreementAction.loadAgreement),
       mergeMap(() => of(this.agreements).pipe(
