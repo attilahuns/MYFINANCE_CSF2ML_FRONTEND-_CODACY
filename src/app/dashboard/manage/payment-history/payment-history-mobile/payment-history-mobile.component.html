@@ -1,0 +1,16 @@
+<div class="payment-mobile__container" *ngIf="dataSource.length">
+  <div class="payment-tile__container" *ngFor="let row of dataSource">
+    <div class="payment-tile__content">
+      <table class="payment-tile__table">
+        <tr class="payment-tile__row" *ngFor="let column of columns" >
+          <td class="payment-tile__row-label payment-tile__cell">{{ column.header }}:</td>
+          <td class="payment-tile__row-value payment-tile__cell" *ngIf="'View' !== column.name">{{ column.value(row) }}</td>
+          <td class="payment-tile__row-value payment-tile__cell" *ngIf="'View' == column.name">
+            <img mat-raised-button matTooltip="View" [matTooltipPosition]="'right'" src="{{column.value(row)}}"/>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
