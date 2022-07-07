@@ -1,0 +1,19 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.account-footer__container {
+  display: flex;
+}
+.account-footer__links__container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+.account-footer__link__container {
+  display: flex;
+  margin-left: 1em;
+}
+.account-footer__link {
+  color: $color-font-primary;
+  font-size: $font-size-fifth;
+}

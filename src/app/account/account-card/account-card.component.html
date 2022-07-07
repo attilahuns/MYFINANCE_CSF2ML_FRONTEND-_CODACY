@@ -1,0 +1,13 @@
+<div class="account-card__container">
+  <div class="account-card">
+    <div class="account-card__logo__container">
+      <img class="account-card__logo" src="./assets/logo_stellantis.svg" alt="stellantis logo">
+    </div>
+    <div class="account-card__content__container">
+        <ng-content select="[content]"></ng-content>
+    </div>
+    <div class="account-card__footer" *ngIf="withFooter">
+      <f2ml-account-footer-menu></f2ml-account-footer-menu>
+    </div>
+  </div>
+</div>

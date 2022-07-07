@@ -1,0 +1,44 @@
+<f2ml-account-card>
+  <div class="signup-complete-individual__container" content>
+
+    <div class="signup-complete-individual__feedback-message__container" *ngIf="submitted">
+      <span class="signup-complete-individual__feedback-message">You will receive an e-mail.</span>
+    </div>
+
+    <div class="signup-complete-individual__form__wrapper" *ngIf="!submitted">
+      <div class="signup-complete-individual__form__container">
+        <div class="signup-complete-individual__legend__container">
+          <span class="signup-complete-individual__legend">Please fill in the fields to help us identify you :</span>
+        </div>
+        <form class="signup-complete-individual__form" novalidate (ngSubmit)="submit()" [formGroup]="signupCompleteForm">
+          <div class="signup-complete-individual__nif__container signup-complete-individual__input__container">
+            <mat-label class="signup-complete-individual__nif__label signup-complete-individual__input__label">NIF</mat-label>
+            <mat-form-field class="signup-complete-individual__nif__input signup-complete-individual__input" appearance="legacy" [hideRequiredMarker]="true">
+              <mat-label></mat-label>
+              <input formControlName="nif" type="text" matInput placeholder="XXXXXXXXX" />
+              <mat-error>
+                <p ngxError="pattern">NIF not valid</p>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="signup-complete-individual__birth-day__container signup-complete-individual__input__container">
+            <mat-label class="signup-complete-individual__birth-day__label signup-complete-individual__input__label">Birth date</mat-label>
+            <mat-form-field class="signup-complete-individual__birth-day__input signup-complete-individual__input" appearance="legacy" [hideRequiredMarker]="true">
+              <mat-label></mat-label>
+              <input formControlName="birthDate" type="date" matInput placeholder="dd-mm-yyyy" />
+              <mat-error>
+                <p ngxError="pattern">Birth date not valid</p>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="signup-complete-individual__submit__container">
+            <button class="signup-complete-individual__submit__button" mat-raised-button color="primary" type="submit" [disabled]="!signupCompleteForm.valid">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</f2ml-account-card>

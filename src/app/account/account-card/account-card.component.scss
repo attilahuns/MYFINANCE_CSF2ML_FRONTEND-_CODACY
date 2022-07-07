@@ -1,0 +1,41 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.account-card__container {
+  display: flex;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  padding: 1em;
+}
+.account-card {
+  display: grid;
+  grid-template-rows: 25fr 75fr;
+  margin-top: 5em;
+  margin-top: 2em;
+  flex-grow: 1;
+}
+
+.account-card__logo__container {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+.account-card__logo {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(1203%) hue-rotate(202deg) brightness(92%) contrast(102%);
+  width: 300px;
+  width: 50%;
+}
+
+.account-card__footer {
+  margin-top: auto;
+}
+
+@include device.viewport(not-laptop) {
+  .account-card {
+    margin-top: 2em;
+  }
+  .account-card__logo {
+    width: 80%;
+  }
+}

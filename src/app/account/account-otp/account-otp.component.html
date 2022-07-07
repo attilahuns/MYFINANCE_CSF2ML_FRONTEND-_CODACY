@@ -1,0 +1,33 @@
+<f2ml-account-card>
+  <div class="account-otp__container" content>
+
+    <div class="account-otp__feedback-message__container" *ngIf="submitted">
+      <span class="account-otp__feedback-message">You will receive an e-mail.</span>
+    </div>
+
+    <div class="account-otp__form__wrapper" *ngIf="!submitted">
+      <div class="account-otp__form__container">
+        <form class="account-otp__form" novalidate (ngSubmit)="submit()" [formGroup]="otpForm">
+          <div class="account-otp__otp__container">
+            <mat-label class="account-otp__otp__label">Enter the OTP you have received at XXXXXX</mat-label>
+            <mat-form-field class="account-otp__otp__input" appearance="legacy" [hideRequiredMarker]="true">
+              <mat-label></mat-label>
+              <input formControlName="otp" type="text" matInput placeholder="XXXXXXX" />
+              <mat-error>
+                <p ngxError="pattern">OTP not valid</p>
+              </mat-error>
+            </mat-form-field>
+            <div class="account-otp__not-received__container">
+              <a class="account-otp__not-received__link" [routerLink]="'../otp-not-received'">I did not receive a SMS OTP</a>
+            </div>
+          </div>
+
+          <div class="account-otp__confirm__container">
+            <button class="account-otp__confirm__button" mat-raised-button color="primary" type="submit" [disabled]="!otpForm.valid">Validate</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</f2ml-account-card>

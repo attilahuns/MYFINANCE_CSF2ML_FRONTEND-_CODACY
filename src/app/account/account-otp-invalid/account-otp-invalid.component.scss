@@ -1,0 +1,47 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.account-otp-invalid__container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.account-otp-invalid__submit__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+.account-otp-invalid__submit__button {
+  font-size: $font-size-second;
+  padding: 0.5em 1.5em;
+  white-space: pre-wrap;
+  word-break: break-all;
+  &:hover:not([disabled]) {
+    background-color: $color-background-primary;
+  }
+}
+
+.account-otp-invalid__feedback-message__container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.account-otp-invalid__feedback-message {
+  color: $color-font-primary;
+  font-size: $font-size-second;
+  font-weight: bold;
+}
+
+@include device.viewport(tablet) {
+  .account-otp-invalid__form__container {
+    padding: 0 10%;
+  }
+}
+
+@include device.viewport(mobile) {
+  .account-otp-invalid__form__container {
+    padding: 0 5%;
+  }
+}

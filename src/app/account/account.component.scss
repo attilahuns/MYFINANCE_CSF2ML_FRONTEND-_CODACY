@@ -1,0 +1,137 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.account__container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  &.is-signup_page {
+    background-image: linear-gradient(rgba(36, 55, 130, .66), rgba(36, 55, 130, .66)), url('../../assets/images/lady sitting on floor using laptop.jpg');
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+.account-title__container {
+  text-align: center;
+  align-self: center;
+  margin: 2% 0;
+}
+.account-title {
+  font-size: 60px;
+  color: $color-font-primary-in-filled-background;
+  font-weight: lighter;
+  line-height: 1;
+}
+
+.account-content__container {
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  column-gap: 10em;
+  align-self: start;
+  padding: 0 10%;
+  margin-bottom: 2%;
+  margin-top: auto;
+}
+
+.account-service__container {
+  display: flex;
+  align-items: center;
+  padding: 5em 0;
+}
+.account-service__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 5em;
+  grid-row-gap: 5em;
+}
+.account-service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2em;
+  &:nth-child(1) { grid-area: 1 / 1 / 2 / 2; }
+  &:nth-child(2) { grid-area: 1 / 3 / 2 / 4; }
+  &:nth-child(3) { grid-area: 2 / 1 / 3 / 2; }
+  &:nth-child(4) { grid-area: 2 / 2 / 3 / 3; }
+  &:nth-child(5) { grid-area: 2 / 3 / 3 / 4; }
+}
+.account-service__icon {
+  height: 80px;
+  width: 80px;
+}
+.account-service__presentation-container {
+  text-align: center;
+}
+.account-service__presentation {
+  font-size: $font-size-first;
+  color: $color-font-primary-in-filled-background;
+  font-weight: lighter;
+}
+
+.account-footer__container {
+  margin-top: auto;
+}
+
+@include device.viewport(mobile) {
+  .account-title {
+    font-size: $font-size-first;
+  }
+  .account-service__presentation {
+    font-size: $font-size-fourth;
+  }
+}
+@include device.viewport(not-laptop) {
+  .account-title__container {
+    margin: 5em 0 2em 0;
+  }
+  .account-content__container {
+    display: grid;
+    grid-template-columns: auto;
+    margin-bottom: 2em;
+  }
+
+  .account-service__container {
+    padding: 0;
+  }
+  .account-service__list {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    margin-bottom: 1em;
+  }
+  .account-service {
+    row-gap: 0;
+    &:nth-child(1) { grid-area: 1 / 1 / 2 / 2; }
+    &:nth-child(2) { grid-area: 1 / 3 / 2 / 4; }
+    &:nth-child(3) { grid-area: 2 / 1 / 3 / 2; }
+    &:nth-child(4) { grid-area: 3 / 2 / 4 / 3; margin-top: -5em; }
+    &:nth-child(5) { grid-area: 2 / 3 / 3 / 4; }
+  }
+  .account-service__icon {
+    height: 50px;
+    width: 50px;
+  }
+  .account-service__presentation {
+    font-size: $font-size-fourth;
+  }
+
+  .account-form__container {
+    margin-top: -5em;
+  }
+}
+
+@include device.viewport(tablet) {
+  .account-form__container {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+  .account-service__list {
+    margin-bottom: 5em;
+
+  }
+}

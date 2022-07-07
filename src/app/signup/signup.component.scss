@@ -1,0 +1,122 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.signup__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-form__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 20%;
+}
+
+.input__container {
+  margin-top: 1em;
+}
+.input__label {
+  color: $color-font-primary;
+  font-size: $font-size-fifth;
+}
+:host::ng-deep.signup-email__input.mat-form-field.mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple {
+  background-color: $color-accent;
+}
+:host::ng-deep.signup-email__input.mat-form-field .mat-form-field-wrapper:hover .mat-form-field-underline {
+  background-color: $color-accent;
+}
+:host::ng-deep.signup-email__input.mat-form-field .mat-form-field-wrapper .mat-form-field-underline {
+  background-color: $color-primary;
+}
+
+.signup-email__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-captcha__container {
+  display: flex;
+  column-gap: 1em
+}
+.signup-captcha__input {
+  border: 1px solid $color-font-primary;
+  width: 200px;
+  height: 170px;
+}
+
+.signup-confirm__container {
+  display: flex;
+  justify-content: center;
+}
+.signup-confirm__button {
+  font-size: $font-size-second;
+  padding: 0.5em 1.5em;
+  white-space: pre-wrap;
+  &:hover:not([disabled]) {
+    background-color: $color-background-primary;
+  }
+}
+
+.signup-redirect__container {
+  display: flex;
+  column-gap: 2em;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1em;
+  margin: 2em 2em 0 2em;
+  border-top: 1px solid $color-font-primary;
+}
+.signup-redirect__text {
+  color: $color-font-primary;
+  font-size: $font-size-fourth;
+}
+.signup-redirect__button {
+  font-size: $font-size-fifth;
+  padding: 0.5em 1.5em;
+  &:hover {
+    background-color: $color-background-primary;
+  }
+}
+
+.signup-feedback__message__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  text-align: center;
+}
+.signup-feedback__message {
+  color: $color-font-primary;
+  font-size: $font-size-first;
+  font-weight: bold;
+}
+
+@include device.viewport(not-laptop) {
+  .signup-form__container {
+    padding: 0 10%;
+  }
+  .signup-confirm__button {
+    font-size: $font-size-fourth;
+    padding: 0.5em 1em;
+  }
+  .signup-redirect__container {
+    margin: 1em 1em  0.5em 1em;
+    padding: 1em 1em  0em 1em
+  }
+}
+
+@include device.viewport(tablet) {
+  .signup-form__container {
+    padding: 0 10%;
+  }
+}
+@include device.viewport(mobile) {
+  .signup-form__container {
+    padding: 0 5%;
+  }
+  .signup-captcha__input {
+    width: 100px;
+    height: 80px;
+  }
+}

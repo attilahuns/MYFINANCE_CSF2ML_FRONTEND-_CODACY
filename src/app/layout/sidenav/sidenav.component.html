@@ -37,7 +37,9 @@
           </mat-list>
         </ng-template>
       </mat-nav-list>
-      <f2ml-footer class="menu-sidenav__footer" *ngIf="!deviceDetector.isLaptop()"></f2ml-footer>
+      <div class="menu-sidenav__footer" *ngIf="!deviceDetector.isLaptop()">
+        <f2ml-footer class="menu-sidenav__footer" [footerItems]="footerItems" *ngIf="footerItems$ | async as footerItems"></f2ml-footer>
+      </div>
     </mat-sidenav>
     <mat-sidenav-content class="mat-sidenav__content">
       <div class="menu-sidenav__content-container">
@@ -45,8 +47,8 @@
           <main class="menu-sidenav__content">
             <router-outlet></router-outlet>
           </main>
-          <div class="menu-sidenav__content-footer">
-            <f2ml-footer></f2ml-footer>
+          <div class="menu-sidenav__content-footer" *ngIf="footerItems$ | async as footerItems">
+            <f2ml-footer [footerItems]="footerItems"></f2ml-footer>
           </div>
       </div>
     </mat-sidenav-content>

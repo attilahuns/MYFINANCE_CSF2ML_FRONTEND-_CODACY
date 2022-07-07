@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+import { FooterService } from 'src/app/shared/footer/footer.service';
 import { SidenavMenuItem } from '../sidenav/sidenav-menu-item';
 import * as LayoutActions from './layout.actions';
 
@@ -109,12 +110,7 @@ export class LayoutEffect {
   loadfooterItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(LayoutActions.loadFooterItems),
-      mergeMap(() => of([
-        { label: 'Welcome page', href: '/welcome' },
-        { label: 'Legals', href: '/legal' },
-        { label: 'Cookies reglementations', href: '' },
-        { label: 'Personal data', href: '' },
-      ]).pipe(
+      mergeMap(() => this.footerService.getFooterItems().pipe(
         map(footerItems => LayoutActions.loadFooterItemsSuccess({footerItems})),
         catchError(error => {
           return of(LayoutActions.loadFooterItemsFailure({error}))
@@ -135,5 +131,5 @@ export class LayoutEffect {
     )
   });
 
-  constructor(private actions: Actions) { }
+  constructor(private actions: Actions, private footerService: FooterService) { }
 }

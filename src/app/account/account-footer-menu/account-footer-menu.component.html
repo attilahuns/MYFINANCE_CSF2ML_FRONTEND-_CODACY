@@ -1,0 +1,7 @@
+<div class="account-footer__container" *ngIf="accountFooterItems$ | async as accountFooterItems">
+  <div class="account-footer__links__container">
+    <div class="account-footer__link__container" *ngFor="let item of accountFooterItems">
+      <a class="account-footer__link" [href]="item.href">{{ item.label }}</a>
+    </div>
+  </div>
+</div>

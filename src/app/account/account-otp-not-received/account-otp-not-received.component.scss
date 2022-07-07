@@ -1,0 +1,90 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.account-otp-not-received__container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+.account-otp-not-received__form__wrapper {
+  margin: 3em 0;
+}
+
+.account-otp-not-received__form__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 20%;
+}
+.account-otp-not-received__legend__container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+.account-otp-not-received__legend {
+  color: $color-font-primary;
+  font-size: $font-size-fourth;
+  font-weight: bold;
+}
+
+.account-otp-not-received__input__label {
+  color: $color-font-primary;
+  font-size: $font-size-fifth;
+}
+:host::ng-deep.account-otp-not-received__input.mat-form-field.mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple {
+  background-color: $color-accent;
+}
+:host::ng-deep.account-otp-not-received__input.mat-form-field .mat-form-field-wrapper:hover .mat-form-field-underline {
+  background-color: $color-accent;
+}
+:host::ng-deep.account-otp-not-received__input.mat-form-field .mat-form-field-wrapper .mat-form-field-underline {
+  background-color: $color-primary;
+}
+.account-otp-not-received__input__container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.account-otp-not-received__submit__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+.account-otp-not-received__submit__button {
+  font-size: $font-size-second;
+  padding: 0.5em 1.5em;
+  white-space: pre-wrap;
+  word-break: break-all;
+  &:hover:not([disabled]) {
+    background-color: $color-background-primary;
+  }
+}
+
+.account-otp-not-received__feedback-message__container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 20%;
+  margin-top: -10em;
+}
+.account-otp-not-received__feedback-message {
+  color: $color-font-primary;
+  font-size: $font-size-second;
+  font-weight: bold;
+}
+
+@include device.viewport(tablet) {
+  .account-otp-not-received__form__container {
+    padding: 0 10%;
+  }
+}
+@include device.viewport(mobile) {
+  .account-otp-not-received__form__container {
+    padding: 0 5%;
+  }
+  .account-otp-not-received__feedback-message__container {
+    margin-top: 0;
+  }
+}
