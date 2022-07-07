@@ -7,12 +7,36 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'home', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
-      { path: 'inbox', loadChildren: () => import('./inbox/inbox.module').then(m => m.InboxModule) },
-      { path: 'manage', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) },
-      { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
-      { path: 'help', loadChildren: () => import('./help/help.module').then(m => m.HelpModule) },
+      {
+        path: 'inbox',
+        data: {
+          breadcrumb: 'Inbox'
+        },
+        loadChildren: () => import('./inbox/inbox.module').then(m => m.InboxModule),
+      },
+      {
+        path: 'account',
+        data: {
+          breadcrumb: 'Account'
+        },
+        loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
+      },
+      {
+        path: 'manage',
+        data: {
+          breadcrumb: 'Manage'
+        },
+        loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule),
+      },
+      {
+        path: 'help',
+        data: {
+          breadcrumb: 'Help'
+        },
+        loadChildren: () => import('./help/help.module').then(m => m.HelpModule),
+      },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
     ]
   },
 ];

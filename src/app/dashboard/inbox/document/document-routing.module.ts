@@ -4,8 +4,14 @@ import { DocumentDetailComponent } from './document-detail/document-detail.compo
 import { DocumentComponent } from './document.component';
 
 const routes: Routes = [
-  { path: '' , component : DocumentComponent},
-  { path: 'detail', component : DocumentDetailComponent},
+  { path:'', component: DocumentComponent },
+  {
+    path: 'detail',
+    component: DocumentDetailComponent,
+    data: {
+      breadcrumb: 'Details'
+    }
+  },
 ];
 
 @NgModule({

@@ -3,8 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'requests', pathMatch: 'full' },
-  { path: 'requests', loadChildren: () => import('./request/request.module').then(m => m.RequestModule) },
-  { path: 'documents', loadChildren: () => import('./document/document.module').then(m => m.DocumentModule) },
+  {
+    path: 'requests',
+    data: {
+      breadcrumb: 'Requests'
+    },
+   loadChildren: () => import('./request/request.module').then(m => m.RequestModule)
+  },
+  {
+    path: 'documents',
+    data: {
+      breadcrumb: 'Documents'
+    },
+    loadChildren: () => import('./document/document.module').then(m => m.DocumentModule)
+  },
 ];
 
 @NgModule({
