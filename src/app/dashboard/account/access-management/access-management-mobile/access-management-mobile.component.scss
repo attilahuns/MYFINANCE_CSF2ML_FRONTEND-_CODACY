@@ -1,0 +1,69 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.access-management-tile__container {
+  color: $color-font-primary;
+  background-color: $color-background-accent;
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  &.is-highlited
+  , &:first-child // for demo only
+  {
+    background-color: $color-background-highlighter;
+    .access-management-tile__row-value {
+      font-weight: bold;
+    }
+  }
+}
+
+.access-management-tile__content {
+  display: flex;
+  position: relative;
+}
+.access-management-tile__table {
+  flex-grow: 1;
+}
+.access-management-tile__row-value {
+  font-weight: bold;
+}
+
+.access-management-tile__actions__container {
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.access-management-table__action {
+  cursor: pointer;
+}
+
+:host::ng-deep.access-management-input__input.mat-form-field .mat-input-element {
+  color: $color-font-primary;
+  font-weight: bold;
+}
+:host::ng-deep.access-management-input__input.mat-form-field.mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
+  height: 0;
+}
+
+@include device.viewport(mobile) {
+  .access-management-tile__row {
+    display: flex;
+    flex-direction: column;
+  }
+  .access-management-input__input {
+    width: 100%;
+  }
+}
+
+@include device.viewport(tablet) {
+  .access-management-tile__table {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .access-management-tile__row {
+    display: flex;
+    flex-direction: column;
+  }
+}

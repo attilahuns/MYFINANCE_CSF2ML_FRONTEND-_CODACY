@@ -81,8 +81,8 @@ export class LayoutEffect {
           notification: false,
         },
         {
-          title: 'Preferences',
-          path: 'preferences',
+          title: 'Access Management',
+          path: 'account/access-management',
           notification: false,
         }
       ],

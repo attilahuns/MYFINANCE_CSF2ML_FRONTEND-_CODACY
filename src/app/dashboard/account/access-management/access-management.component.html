@@ -1,0 +1,51 @@
+<f2ml-default-template *ngIf="(accessManagementItems$ | async)?.length as accessManagementItems">
+  <f2ml-default-card [title]="title" main>
+    <div class="access-management__container" content>
+      <div class="access-management__header__container">
+        <div class="access-management__header__title-container">
+          <h3 class="access-management__header__title">Who do you want to give access to ?</h3>
+        </div>
+        <div class="access-management__actions__container">
+          <button class="access-management__header__button" mat-raised-button color="primary" (click)="addRow()">Add new access</button>
+        </div>
+      </div>
+
+      <!-- Mobile & Tablet -->
+      <ng-template [ngIf]="!deviceDetector.isLaptop()">
+        <f2ml-access-management-mobile
+          [dataSource]="dataSource.filteredData"
+          [columns]="columns"
+          [onEdit$]="onEdit$"
+          [onCancelEdit$]="onCancelEdit$"
+          (editAccessManagement)="editRow($event)"
+          (deleteAccessManagement)="deleteRow($event)"
+          (saveAccessManagement)="saveRow($event)"
+          (cancelAccessManagement)="cancelRow($event)"
+          (cancelAppliedAccessManagement)="cancelAppliedRow($event)"
+        >
+        </f2ml-access-management-mobile>
+      </ng-template>
+      <!-- Laptop -->
+      <ng-template [ngIf]="deviceDetector.isLaptop()">
+        <f2ml-access-management-laptop
+          [dataSource]="dataSource"
+          [columns]="columns"
+          (sortChange)="sortChange($event)"
+          [onEdit$]="onEdit$"
+          [onCancelEdit$]="onCancelEdit$"
+          (editAccessManagement)="editRow($event)"
+          (deleteAccessManagement)="deleteRow($event)"
+          (saveAccessManagement)="saveRow($event)"
+          (cancelAccessManagement)="cancelRow($event)"
+          (cancelAppliedAccessManagement)="cancelAppliedRow($event)"
+        >
+      </f2ml-access-management-laptop>
+      </ng-template>
+
+      <div class="access-management__footer__container">
+        <p class="access-management__footer__warning-text">Be careful who you give access to, because the manager will access all information in the space including modifying the contract payment</p>
+        <button class="access-management__footer__button-update" mat-raised-button color="primary">Update</button>
+     </div>
+    </div>
+  </f2ml-default-card>
+</f2ml-default-template>

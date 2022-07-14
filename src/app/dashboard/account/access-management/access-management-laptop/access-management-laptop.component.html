@@ -1,0 +1,40 @@
+<div class="access-management-laptop__container">
+  <table mat-table matSort [dataSource]="dataSource" class="access-management-laptop__table" *ngIf="onEdit$ | async as onEditElement">
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.name">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef class="access-management-table__header">
+        <div class="access-management-table__header__content">
+          {{column.header}}
+        </div>
+        <mat-icon class="access-management-table__header-icon" *ngIf="column.sortable">unfold_more</mat-icon>
+      </th>
+      <ng-template [ngIf]="'actions' !== column.name">
+        <td mat-cell *matCellDef="let row" class="access-management-table__data">
+          <div class="access-management-input__container">
+            <mat-form-field appearance="legacy" class="access-management-input__input">
+              <input matInput [value]="column.value(row)" [disabled]="!isOnEdit(onEditElement, row)" [name]="column.name" />
+            </mat-form-field>
+          </div>
+        </td>
+      </ng-template>
+      <ng-template [ngIf]="'actions' === column.name">
+        <td mat-cell *matCellDef="let row" class="access-management-table__data">
+          <div class="access-management-table__actions__container">
+            <mat-icon class="access-management-table__action" (click)="editRow(row)" *ngIf="!isOnEdit(onEditElement, row)">edit</mat-icon>
+            <mat-icon class="access-management-table__action" (click)="deleteRow(row)" *ngIf="!isOnEdit(onEditElement, row)">delete</mat-icon>
+            <mat-icon class="access-management-table__action" (click)="saveRow(row)" *ngIf="isOnEdit(onEditElement, row)">check</mat-icon>
+            <mat-icon class="access-management-table__action" (click)="cancelRow(row)" *ngIf="isOnEdit(onEditElement, row)">close</mat-icon>
+          </div>
+        </td>
+      </ng-template>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- second header used to put margin between thead and tbody -->
+    <ng-container matColumnDef="header-row-second">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="displayedColumns.length"></th>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['header-row-second']"></tr>
+  </table>
+</div>

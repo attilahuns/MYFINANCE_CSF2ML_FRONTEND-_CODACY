@@ -17,6 +17,13 @@ const routes: Routes = [
     },
     loadChildren: () => import('./bank-detail/bank-detail.module').then(m => m.BankDetailModule),
   },
+  {
+    path: 'access-management',
+    data: {
+      breadcrumb: 'Access Management'
+    },
+    loadChildren: () => import('./access-management/access-management.module').then(m => m.AccessManagementModule)
+  },
 ];
 
 @NgModule({

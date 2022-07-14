@@ -1,0 +1,36 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.access-management__header__container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1em;
+  margin: 2em 0;
+}
+.access-management__header__button {
+  padding: 0.5em 2em;
+}
+
+.access-management__footer__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2em;
+  row-gap: 1em;
+}
+.access-management__footer__warning-text {
+  text-align: center;
+}
+.access-management__footer__button-update {
+  padding: 0.5em 2em;
+}
+
+@include device.viewport(mobile) {
+  .access-management__header__container {
+    display: flex;
+    flex-direction: column;
+  }
+  .access-management__actions__container {
+    align-self: end;
+  }
+}
