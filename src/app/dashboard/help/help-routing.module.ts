@@ -9,6 +9,13 @@ const routes: Routes = [
       breadcrumb: 'Contact us'
     },
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
+  },
+  {
+    path: 'faq',
+    data: {
+      breadcrumb: 'FAQ'
+    },
+    loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule)
   }
 ];
 

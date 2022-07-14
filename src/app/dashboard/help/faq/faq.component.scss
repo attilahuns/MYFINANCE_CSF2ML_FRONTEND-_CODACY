@@ -1,0 +1,77 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.faq__page {
+  .mat-accordion .mat-expansion-panel-spacing {
+    margin: 0 !important;
+  }
+  .faq__headers__align .mat-expansion-panel-header-description {
+    justify-content: flex-end;
+    align-items: center;
+  }
+  mat-icon {
+    margin-right: -12px;
+  }
+  .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]) {
+    background: $color-font-primary-in-filled-background !important;
+  }
+  .mat-expansion-panel-header {
+    padding: 0px !important;
+    font-size: $font-size-third;
+  }
+  p {
+    font-size: $font-size-fourth;
+    line-height: 1.6em;
+    margin-top: 16px;
+    text-align: justify;
+  }
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0px;
+  }
+  .faq__feedback__form {
+    span {
+      font-size: $font-size-third;
+      font-weight: bold;
+    }
+    mat-radio-button {
+      margin-right: 70px;
+    }
+    mat-radio-button {
+      font-size: $font-size-fourth;
+    }
+    button {
+      background-color: $color-primary;
+      color: $color-font-primary-in-filled-background;
+      font-weight: 500;
+      height: 50px;
+      padding: 0 30px;
+      margin: 10px 0 16px 35px;
+    }
+    ::ng-deep .mat-ripple-element {
+      display: none !important;
+    }
+    ::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+      border-color: $color-primary !important;
+    }
+    ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+      background-color: $color-primary !important;
+    }
+  }
+  .is-bold {
+    font-weight: bold;
+  }
+  .rotate90deg {
+    transform: rotate(90deg);
+  }
+  @include device.viewport(mobile) {
+    .faq__feedback__form {
+      mat-radio-button {
+        margin-right: 40px !important;
+      }
+      button {
+        margin-left: 20px !important;
+        margin-top: 10px !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<f2ml-default-template [hiddenSideFaq]="true">
+  <f2ml-default-card title="Help page" main>
+    <div content class="faq__page">
+      <mat-accordion class="faq__headers__align">
+        <mat-expansion-panel [expanded]="panelIndex == i" *ngFor="let item of questions;let i = index" [attr.data-index]="i" class="mat-elevation-z0" hideToggle (closed)="closePanel(i)" (opened)="openPanel(i)">
+        <mat-expansion-panel-header>
+          <mat-panel-title><span [class.is-bold]="i === panelIndex">{{ item }}</span></mat-panel-title>
+          <mat-panel-description>
+            <mat-icon [class.rotate90deg]="i === panelIndex">arrow_forward_ios</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>
+          Payment can be made by credit or debit card via the Account section of this website. You will just need to login or register to make payment.<br/><br/>
+          We acknowledge that some people feel safer using a credit card online but please remember repaying your debt with a credit card may
+          increase the risk of escalating debt and financial difficulties. Please talk to us if you find yourself in financial difficulties.<br/><br/>
+          Alternative methods of payment are as follows. Please note that we can only take payment from the account holder or an authorised third
+          party.<br/><br/>
+          Call us: 0345 345 5449
+        </p>
+        <br/>
+        <form class="faq__feedback__form">
+          <span>Did this answer help you ?</span><br/>
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+          <button mat-flat-button>Submit</button>
+        </form>
+      <hr *ngIf="questions.length > i+1"/>
+    </mat-expansion-panel>
+   </mat-accordion>
+  </div>
+ </f2ml-default-card>
+</f2ml-default-template>
+
