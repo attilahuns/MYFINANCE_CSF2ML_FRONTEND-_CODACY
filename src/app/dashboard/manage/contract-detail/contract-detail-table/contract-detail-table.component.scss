@@ -1,0 +1,72 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.contract-details-laptop__container{
+  table{
+    width: 100%;
+  }
+}
+.contract-details-table__header {
+  color: $color-font-primary-in-filled-background;
+  background-color: $color-background-primary;
+  line-height: 1;
+  padding: 0 1em !important;
+  border-color: transparent;
+  position: relative;
+  &:first-child {
+    border-radius: 10px 0 0 10px;
+  }
+  &:last-child {
+    border-radius: 0px 10px 10px 0;
+  }
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 35%;
+    top: 35%;
+    border-right: 1px solid $color-font-welcome;
+  }
+  ::ng-deep.mat-sort-header-content {
+    display: flex;
+    flex-grow: 1;
+    text-align: left;
+  }
+  ::ng-deep.mat-sort-header-arrow {
+    display: none;
+  }
+
+}
+.contract-details-table__header__content{
+  &.is-centered{
+    margin: auto !important;
+  }
+}
+.contract-details-table__header-icon {
+  height: 16px;
+  width: 16px;
+  font-size: 16px;
+  margin-left: auto;
+}
+.contract-details-table__data {
+  color: $color-font-primary;
+  background-color: $color-background-accent;
+  border-radius: 1em;
+  padding: 0 1em !important;
+  border: 4px solid white;
+  cursor: default;
+  img{
+    width: 30%;
+  }
+}
+.mat-header-row:last-child {
+  border: unset;
+  height: 1em;
+  .mat-header-cell {
+    display: none;
+  }
+}
+.is-closed{
+  font-weight: bold;
+  background-color: $color-background-highlighter;
+}

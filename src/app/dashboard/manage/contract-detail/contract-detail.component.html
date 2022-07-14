@@ -1,4 +1,4 @@
-<f2ml-default-template>
+<f2ml-default-template *ngIf="(contracts$| async)?.length as contractDetails">
   <div content class="contract__card" main>
     <div class="row">
       <div class="col-lg-5">
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="contract__card__details" >
+    <div class="contract__card__details">
       <h3>Agreements details</h3>
       <div class="row contract__display__desktop__mobile">
         <div class="col-lg-3">
@@ -33,7 +33,7 @@
       </div>
 
       <div class="row contract__display__tablet">
-        <table >
+        <table>
           <tr>
             <td><p><span class="contract__agreements__details__title">Finance product</span></p></td>
             <td><p>PCP</p></td>
@@ -75,29 +75,25 @@
       <div class="row contract__display__desktop__mobile">
         <div class="col-lg-2" >
           <div class="mt-1 car__container">
-            <img src="/assets/images/car__details.png" />
-            <p style="padding-top: 15px;"><b>3008 Peugeot</b></p>
+            <img src="/assets/images/car__details.png"/>
+            <p><b>3008 Peugeot</b></p>
           </div>
         </div>
         <div class="col-lg-2">
           <p><span class="contract__agreements__details__title">VIN</span><br/>VF3F678FH76</p><br/>
           <p><span class="contract__agreements__details__title">Model</span><br/>208 Allure 1.2L PureTech 82 5d</p>
         </div>
-
-        <div class="col-lg-3 contract__card__border">
+        <div class="col-lg-2 contract__card__border">
           <p><span class="contract__agreements__details__title">Registration number</span><br/>WW-342-ZE</p><br/>
           <p><span class="contract__agreements__details__title">CO2 consumption</span><br/>98 g/miles</p>
         </div>
-
         <div class="col-lg-2 contract__card__border">
           <p><span class="contract__agreements__details__title">Delivery date</span><br/>15/03/2021</p><br/>
           <p><span class="contract__agreements__details__title">Horsepower</span><br/>5 cv</p>
         </div>
-
-        <div class="col-lg-1 contract__card__border" style="padding-right: 10px;">
-          <p><span class="contract__agreements__details__title" >Cylinder</span><br/>1560 cc</p>
+        <div class="col-lg-2 contract__card__border">
+          <p><span class="contract__agreements__details__title">Cylinder</span><br/>1560 cc</p>
         </div>
-
         <div class="col-lg-2 contract__card__border">
           <p><span class="contract__agreements__details__title">TAN</span><br/>2,990140%</p><br/>
           <p><span class="contract__agreements__details__title">Residual value</span><br/>6801,64 €</p>
@@ -105,7 +101,7 @@
       </div>
 
       <div class="row contract__display__tablet">
-        <table >
+        <table>
           <tr>
             <td><p><span class="contract__agreements__details__title">VIN</span></p></td>
             <td><p>VF3F678FH76</p></td>
@@ -149,100 +145,57 @@
     <div class="contract__card__details">
       <h3>Service details</h3>
       <div class="row mt-3">
-        <div class="col-lg-4">
-          <p><span class="contract__agreements__details__title">EGVO Premiuim VEG 12</span><br/>Lorem Ipsum</p>
+        <div class="mb-3" *ngFor="let service of servicesDataSource;let i = index" [attr.data-index]="i" [ngClass]="i % 2 == 0 ? 'col-lg-4' : 'col-lg-8 contract__card__border'">
+          <p><span class="contract__agreements__details__title">{{ service.title }}</span><br/>{{ service.text }}</p>
         </div>
-        <div class="col-lg-8 contract__card__border">
-          <p><span class="contract__agreements__details__title">Death insurance</span><br/>Lorem Ipsum</p>
-        </div>
+      </div>
+      <div *ngIf="services.length > 2">
+        <f2ml-view-more (viewMore)="displayServicesData($event)" [displayFullData]="displayFullServices"></f2ml-view-more>
       </div>
     </div>
 
     <div class="mt-4 contract__desktop__display">
-       <div class="table__header__container">
-        <table mat-table [dataSource]="dataSource" matSort cellspacing="2px" class=" table__data__header">
-          <ng-container matColumnDef="document">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by document" style="width: 25%;" >Documents</th>
-          </ng-container>
-          <ng-container matColumnDef="reference">
-            <th class="table__vertical__line" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by reference" style="width: 35%;">
-              References
-            </th>
-          </ng-container>
-          <ng-container matColumnDef="date">
-            <th class="table__vertical__line" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by date" style="width: 13%;">
-             Date
-            </th>
-          </ng-container>
-          <ng-container matColumnDef="download">
-            <th class="table__vertical__line" mat-header-cell *matHeaderCellDef  style="width: 13%;text-align: center;">
-             Download
-            </th>
-          </ng-container>
-          <ng-container matColumnDef="view">
-            <th class="table__vertical__line" mat-header-cell *matHeaderCellDef  style="width: 13%;text-align: center;">
-              <span style="padding-left: 20px;">View</span>
-            </th>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        </table>
-       </div>
-
-      <table mat-table [dataSource]="dataSource" matSort cellspacing="2px" class="table__data__display">
-        <ng-container matColumnDef="document">
-          <td mat-cell *matCellDef="let element" style="width: 25%;" [ngClass]="element.unopened && 'unopened'">{{element.document}}</td>
-        </ng-container>
-        <ng-container matColumnDef="reference">
-          <td mat-cell *matCellDef="let element" style="width: 35%;" [ngClass]="element.unopened && 'unopened'"> {{element.reference}}</td>
-        </ng-container>
-        <ng-container matColumnDef="date">
-          <td mat-cell *matCellDef="let element" style="width: 13%;" [ngClass]="element.unopened && 'unopened'"> {{element.date}} </td>
-        </ng-container>
-        <ng-container matColumnDef="download">
-          <td mat-cell *matCellDef="let element" style="width: 13%;" [ngClass]="element.unopened && 'unopened'"> <img src="/assets/images/download_icon.png" class="mx-auto d-flex" style="width: 22%;"/> </td>
-        </ng-container>
-        <ng-container matColumnDef="view">
-          <td mat-cell *matCellDef="let element" style="width: 13%;" [ngClass]="element.unopened && 'unopened'"> <img src="/assets/images/view_icon.png"  class="mx-auto d-flex" style="width: 28%;"/> </td>
-        </ng-container>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+      <f2ml-contract-detail-table [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)"></f2ml-contract-detail-table>
     </div>
 
     <div class="contract__responsive__display mt-4">
-      <div class="contract__responsive__card" *ngFor="let item of dataSource.filteredData" [ngStyle]="{'background-color' : item.unopened && '#ffc7a0'  }">
-        <table class="contract__responsive__card__table" >
+      <div class="contract__responsive__card" *ngFor="let item of dataSource.filteredData" [class.color-background-highlighter]="item.unopened">
+        <table class="contract__responsive__card__table">
           <tr class="contract__only__for__tablet">
-            <td style="width: 35%;">Document<br/><b>{{ item.document }}</b></td>
-            <td style="width: 30%;">Reference<br/> <b>{{ item.reference }}</b></td>
-            <td style="width: 30%;">Date<br/><b>{{ item.date }}</b></td>
+            <td class="contract__only__for__tablet__document__col">Document<br/><b>{{ item.document }}</b></td>
+            <td class="contract__only__for__tablet__references__col">Reference<br/> <b>{{ item.reference }}</b></td>
+            <td class="contract__only__for__tablet__date__col">Date<br/><b>{{ item.date }}</b></td>
           </tr>
           <tr class="contract__only__for__tablet">
-            <td>Download<br/><img src="/assets/images/download_icon.png" style="width: 40px;" /></td>
-            <td>View<br/><img src="/assets/images/view_icon.png" style="width: 40px;" /></td>
+            <td>Download<br/><img src="/assets/images/download_icon.png"/></td>
+            <td>View<br/><img src="/assets/images/view_icon.png"/></td>
           </tr>
 
           <tr class="contract__only__for__mobile">
             <td>Document</td>
-            <td [ngStyle]="{'font-weight' : item.unopened && 'bold'  }">{{ item.document }}</td>
+            <td [class.text-bold]="item.unopened">{{ item.document }}</td>
           </tr>
           <tr class="contract__only__for__mobile">
             <td>Reference</td>
-            <td [ngStyle]="{'font-weight' : item.unopened && 'bold'  }">{{ item.reference }}</td>
+            <td [class.text-bold]="item.unopened">{{ item.reference }}</td>
           </tr>
           <tr class="contract__only__for__mobile">
-            <td> Date</td>
-            <td [ngStyle]="{'font-weight' : item.unopened && 'bold'  }">{{ item.date }}</td>
+            <td>Date</td>
+            <td [class.text-bold]="item.unopened">{{ item.date }}</td>
           </tr>
           <tr class="contract__only__for__mobile">
             <td>Download</td>
             <td><img src="/assets/images/download_icon.png"/></td>
           </tr>
           <tr class="contract__only__for__mobile">
-            <td> View</td>
+            <td>View</td>
             <td><img src="/assets/images/view_icon.png"/></td>
           </tr>
         </table>
       </div>
+    </div>
+    <div *ngIf="originalData.length > 3">
+      <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData"></f2ml-view-more>
     </div>
   </div>
 </f2ml-default-template>
