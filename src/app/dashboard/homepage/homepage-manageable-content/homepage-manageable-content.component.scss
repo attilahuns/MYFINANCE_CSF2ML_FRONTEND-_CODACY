@@ -1,0 +1,19 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.home__manageable__content {
+  max-height: 260px;
+  min-height: 260px;
+}
+@include device.viewport(tablet) {
+  .home__manageable__content {
+    max-height: 260px;
+    min-height: 260px;
+  }
+}
+@include device.viewport(mobile) {
+  .home__manageable__content {
+    max-height: fit-content;
+    min-height: fit-content;
+  }
+}

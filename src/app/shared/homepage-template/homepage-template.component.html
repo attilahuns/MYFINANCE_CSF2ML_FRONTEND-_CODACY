@@ -1,0 +1,21 @@
+<div class="template__container">
+  <f2ml-breadcrumb class="breadcrumb__container"></f2ml-breadcrumb>
+  <div>
+    <ng-content select="[header]"></ng-content>
+  </div>
+  <div class="template__grid__home">
+    <div class="template__agreement">
+      <ng-content select="[agreement]"></ng-content>
+    </div>
+    <div class="template__document">
+      <ng-content select="[document]"></ng-content>
+    </div>
+    <div class="template__request">
+      <ng-content select="[request]"></ng-content>
+    </div>
+    <div class="template__manageable">
+      <ng-content select="[manageable]"></ng-content>
+    </div>
+  </div>
+</div>
+

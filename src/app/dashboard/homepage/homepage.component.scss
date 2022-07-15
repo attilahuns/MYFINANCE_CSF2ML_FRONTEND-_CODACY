@@ -1,0 +1,20 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.home__welcome__message {
+  p {
+    font-size: $font-size-zero;
+    margin-bottom: 35px;
+  }
+}
+@include device.viewport(tablet) {
+  .home__welcome__message {
+    margin-top: 10px;
+  }
+}
+@include device.viewport(mobile) {
+  .home__welcome__message {
+    margin-top: 10px;
+  }
+}
+

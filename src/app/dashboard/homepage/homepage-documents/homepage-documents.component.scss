@@ -1,0 +1,41 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.home__documents {
+  max-height: 260px;
+  min-height: 260px;
+}
+.home__documents .home__documents__card, .home__requests__element {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: stretch;
+  height: 55px;
+  padding: 10px;
+}
+.home__documents__card {
+  background-color: $color-background-accent;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  span {
+    font-size: $font-size-fourth;
+  }
+  img {
+    width: 40px;
+    margin-top: -5px;
+  }
+}
+@include device.viewport(tablet) {
+  .home__documents {
+    max-height: 260px;
+    min-height: 260px;
+  }
+}
+@include device.viewport(mobile) {
+  .home__documents {
+    max-height: fit-content;
+    min-height: fit-content;
+  }
+}

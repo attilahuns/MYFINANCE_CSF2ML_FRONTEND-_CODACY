@@ -1,0 +1,86 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.home__requests {
+  max-height: 260px;
+  min-height: 260px;
+}
+.home__requests__element {
+  border-left: 2px solid $color-background-accent;
+  margin-bottom: 25px;
+  padding-left: 10px;
+}
+.home__requests__element__title {
+  font-weight: bold;
+  font-size: $font-size-third;
+  line-height: 2em;
+  margin-bottom: 15px;
+}
+.home__requests__element__details {
+  font-size: $font-size-fourth;
+}
+.home__requests__dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+.home__requests__mobile {
+  display: none;
+}
+.home__requests__element__text {
+  width: 75%;
+}
+.home__requests__desktop {
+  width: 20%;
+}
+.home__requests__dot__cancelled {
+  background-color: red;
+}
+.home__requests__dot__progress {
+  background-color: #ffc44f;
+}
+.home__requests__dot__completed {
+  background-color: green;
+}
+.home__requests__element {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: stretch;
+  height: 55px;
+  padding: 10px;
+}
+@include device.viewport(tablet) {
+  .home__requests {
+    max-height: 260px;
+    min-height: 260px;
+  }
+  .home__requests__element__text {
+    width: 65%;
+  }
+  .home__requests__desktop {
+    width: 30%;
+  }
+}
+@include device.viewport(mobile) {
+  .home__requests {
+    max-height: fit-content;
+    min-height: fit-content;
+  }
+  .home__requests__element__details {
+    font-size: $font-size-fifth;
+  }
+  .home__requests__mobile {
+    display: inline-block;
+  }
+  .home__requests__desktop {
+    display: none;
+  }
+  .home__requests__element {
+    height: 75px;
+  }
+}

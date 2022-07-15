@@ -12,6 +12,7 @@ import { CommunicationTileComponent } from './communication-tile/communication-t
 import { ViewMoreComponent } from './view-more/view-more.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { FormsModule } from '@angular/forms';
+import { HomepageTemplateComponent } from './homepage-template/homepage-template.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     CommunicationTileComponent,
     ViewMoreComponent,
     SearchInputComponent,
+    HomepageTemplateComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     NgxExtendedPdfViewerModule,
     CommunicationTileComponent,
+    HomepageTemplateComponent
   ]
 })
 export class SharedModule { }

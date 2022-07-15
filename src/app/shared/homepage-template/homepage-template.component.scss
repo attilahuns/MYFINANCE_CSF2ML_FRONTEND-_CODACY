@@ -1,0 +1,47 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.template__container {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+}
+.breadcrumb__container {
+  padding-bottom: 2em;
+  font-size: 1em;
+}
+.template__document {
+  grid-area: document;
+}
+.template__agreement {
+  grid-area: agreement;
+}
+.template__request {
+  grid-area: request;
+}
+.template__manageable {
+  grid-area: manageable;
+}
+.template__grid__home {
+  display: grid;
+  grid-template-columns: 60fr 40fr;
+  grid-template-areas:
+  "agreement document"
+  "request manageable";
+  grid-column-gap: 2em;
+}
+
+@include device.viewport(mobile) {
+  .template__container {
+    padding: 1em;
+  }
+  .template__grid__home{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "agreement"
+    "document"
+    "request"
+    "manageable";
+    grid-column-gap: 0;
+  }
+}
