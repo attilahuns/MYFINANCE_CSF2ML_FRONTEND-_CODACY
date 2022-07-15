@@ -1,0 +1,19 @@
+<div class="request-mobile__container" *ngIf="dataSource.length">
+  <div class="request-tile__container" *ngFor="let row of dataSource">
+    <div class="request-tile__content">
+      <table class="request-tile__table">
+        <tr class="request-tile__row" *ngFor="let column of columns" >
+          <td class="request-tile__row-label request-tile__cell">{{ column.header }}:</td>
+          <td class="request-tile__row-value request-tile__cell">
+            <div *ngIf="'status' === column.name">
+              <span [ngClass]="{'is-completed': isCompleted(column.value(row)), 'is-in_progress': isInProgress(column.value(row)), 'is-canceled': isCanceled(column.value(row)) }" class="request_pastille"></span>{{ column.value(row)}}
+            </div>
+            <div *ngIf="'status' !== column.name">
+              {{ column.value(row)}}
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

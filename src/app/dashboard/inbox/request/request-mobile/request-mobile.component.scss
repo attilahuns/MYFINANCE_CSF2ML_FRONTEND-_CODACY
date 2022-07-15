@@ -1,0 +1,66 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.color-background-highlighter {
+  background-color: $color-background-highlighter;
+}
+.request-tile__container {
+  color: $color-font-primary;
+  background-color: $color-background-accent;
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 10px;
+}
+.request_pastille {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  &.is-completed {
+    background-color: #00794D;
+  }
+  &.is-in_progress {
+    background-color: #FFC44F;
+  }
+  &.is-canceled {
+    background-color: #FF0000;
+  }
+}
+
+.request-tile__content {
+  display: flex;
+}
+.request-tile__table {
+  flex-grow: 1;
+}
+.request-tile__cell {
+  padding-bottom: 1em;
+  &:hover {
+    button {
+      background-color: $color-background-primary;
+    }
+  }
+  img {
+    width: 24%;
+  }
+}
+.request-tile__row-value {
+  font-weight: bold;
+}
+
+@include device.viewport(tablet) {
+  .request-tile__table {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .request-tile__row {
+    display: flex;
+    flex-direction: column;
+  }
+  .request-tile__cell {
+    img {
+      width: 20%;
+    }
+  }
+}
