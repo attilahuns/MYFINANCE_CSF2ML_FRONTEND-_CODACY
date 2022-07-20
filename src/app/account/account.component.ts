@@ -28,7 +28,7 @@ export class AccountComponent implements OnInit {
   isSignupPage() {
     return this.router.url.startsWith('/signup');
   }
-  isLoginPage() {
-    return this.router.url.startsWith('/login');
+  isSigninPage() {
+    return this.router.url.startsWith('/signin');
   }
 }

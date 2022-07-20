@@ -1,0 +1,131 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.signin__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-form__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 20%;
+}
+
+.input__container {
+  margin-top: 1em;
+}
+.input__label {
+  color: $color-font-primary;
+  font-size: $font-size-fifth;
+}
+:host::ng-deep.signin-email__input.mat-form-field.mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple {
+  background-color: $color-accent;
+}
+:host::ng-deep.signin-email__input.mat-form-field .mat-form-field-wrapper:hover .mat-form-field-underline {
+  background-color: $color-accent;
+}
+:host::ng-deep.signin-email__input.mat-form-field .mat-form-field-wrapper .mat-form-field-underline {
+  background-color: $color-primary;
+}
+
+.signin-email__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-captcha__container {
+  display: flex;
+  column-gap: 1em
+}
+.signin-captcha__input {
+  border: 1px solid $color-font-primary;
+  width: 200px;
+  height: 170px;
+}
+
+.signin-confirm__container {
+  display: flex;
+  justify-content: center;
+}
+.signin-confirm__button {
+  font-size: $font-size-second;
+  padding: 0.5em 1.5em;
+  white-space: pre-wrap;
+  &:hover:not([disabled]) {
+    background-color: $color-background-primary;
+  }
+}
+
+.signin-redirect__container {
+  display: flex;
+  column-gap: 2em;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1em;
+  margin: 2em 2em 0 2em;
+  border-top: 1px solid $color-font-primary;
+}
+.signin-redirect__text {
+  color: $color-font-primary;
+  font-size: $font-size-fourth;
+}
+.signin-redirect__button {
+  font-size: $font-size-fifth;
+  padding: 0.5em 1.5em;
+  margin-right: 3vh;
+  &:hover {
+    background-color: $color-background-primary;
+  }
+}
+
+.signin-feedback__message__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  text-align: center;
+}
+.signin-feedback__message {
+  color: $color-font-primary;
+  font-size: $font-size-first;
+  font-weight: bold;
+}
+
+@include device.viewport(not-laptop) {
+  .signin-form__container {
+    padding: 0 10%;
+  }
+  .signin-confirm__button {
+    font-size: $font-size-fourth;
+    padding: 0.5em 1em;
+  }
+  .signin-redirect__container {
+    margin: 1em 1em  0.5em 1em;
+    padding: 1em 1em  0em 1em
+  }
+  .signin-redirect__button {
+    font-size: $font-size-fifth;
+    padding: 0.5em 1.5em;
+    margin-bottom: 2vh;
+    &:hover {
+      background-color: $color-background-primary;
+    }
+  }
+}
+
+@include device.viewport(tablet) {
+  .signin-form__container {
+    padding: 0 10%;
+  }
+}
+@include device.viewport(mobile) {
+  .signin-form__container {
+    padding: 0 5%;
+  }
+  .signin-captcha__input {
+    width: 100px;
+    height: 80px;
+  }
+}

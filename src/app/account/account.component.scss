@@ -12,6 +12,13 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+  &.is-signin_page {
+    background-image: linear-gradient(rgba(36, 55, 130, .66), rgba(36, 55, 130, .66)), url('../../assets/images/lady sitting on floor using laptop.jpg');
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 .account-title__container {
