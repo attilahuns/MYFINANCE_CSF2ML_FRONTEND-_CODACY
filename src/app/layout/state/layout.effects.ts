@@ -11,6 +11,18 @@ import * as LayoutActions from './layout.actions';
 })
 export class LayoutEffect {
 
+  loadheaderItems$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(LayoutActions.loadHeaderItems),
+      mergeMap(() => this.layoutService.getHeaderItems().pipe(
+        map(headerItems => LayoutActions.loadHeaderItemsSuccess({headerItems})),
+        catchError(error => {
+          return of(LayoutActions.loadHeaderItemsFailure({error}))
+        })
+      ))
+    )
+  });
+
   loadfooterItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(LayoutActions.loadFooterItems),

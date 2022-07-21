@@ -1,6 +1,6 @@
 <header class="header__container">
   <div class="header-toolbar__container">
-    <mat-toolbar class="header__toolbar">
+    <mat-toolbar class="header__toolbar" *ngIf="headerItems$ | async as headerItems">
       <button mat-icon-button class="header-toolbar__menu-button" (click)="toggleMenu()" *ngIf="!deviceDetector.isLaptop()">
         <mat-icon class="header-toolbar__menu-icon">{{ (isMenuOpen$ | async) ? 'close' : 'menu' }}</mat-icon>
       </button>
@@ -11,26 +11,30 @@
       </div>
       <span class="header-spacer"></span>
 
-      <div class="header-avatar__container" *ngIf="deviceDetector.isLaptop()">
-        <p class="header-avatar__welcome">Welcome <br/><span class="header-avatar__name">Enrico Fermi</span></p>
-        <div class="header-avatar__divider"></div>
-        <img class="header-avatar__icon" src="/assets/images/avatar.png"  alt="avatar icon"/>
-      </div>
+      <ng-template [ngIf]="deviceDetector.isLaptop()">
+        <ng-container *ngFor="let item of headerItems">
+          <div class="header-avatar__container" *ngIf="item.isProfile">
+            <p class="header-avatar__welcome">{{ item.welcomeMessage }} <br/><span class="header-avatar__name">Enrico Fermi</span></p>
+            <div class="header-avatar__divider"></div>
+            <img class="header-avatar__icon" src="/assets/images/avatar.png"  alt="avatar icon"/>
+          </div>
+          <div class="header-menu__container" *ngIf="!item.isProfile && !item.isMobileOnly">
+            <div class="header-menu__item">
+              <img class="header-menu__item-img" [src]="getIconUrl(item.icon)" [alt]="item.title" />
+              <span class="header-menu__item-caption" >{{ item.title }}</span>
+            </div>
+          </div>
+        </ng-container>
+      </ng-template>
 
-      <div class="header-menu__container">
-        <div class="header-menu__item" *ngIf="!deviceDetector.isLaptop()">
-          <img class="header-menu__item-img" src="/assets/images/avatar_white.png" alt="profile" />
-          <span class="header-menu__item-caption" >Profile</span>
+      <ng-template [ngIf]="!deviceDetector.isLaptop()">
+        <div class="header-menu__container">
+          <div class="header-menu__item" *ngFor="let item of headerItems">
+            <img class="header-menu__item-img" [src]="getIconUrl(item.icon)" [alt]="item.title" />
+            <span class="header-menu__item-caption" >{{ item.title }}</span>
+          </div>
         </div>
-        <div class="header-menu__item" *ngIf="!deviceDetector.isLaptop()">
-          <img class="header-menu__item-img" src="/assets/images/chat.png" alt="chat" />
-          <span class="header-menu__item-caption" >Chat</span>
-        </div>
-        <div class="header-menu__item is-sign_out">
-          <img class="header-menu__item-img" src="/assets/images/sign_out.png" alt="sign out" />
-          <span class="header-menu__item-caption" >Sign out</span>
-        </div>
-      </div>
+      </ng-template>
     </mat-toolbar>
   </div>
 </header>
