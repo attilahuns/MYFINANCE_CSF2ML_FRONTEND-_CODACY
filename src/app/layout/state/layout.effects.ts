@@ -3,109 +3,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { FooterService } from 'src/app/shared/footer/footer.service';
-import { SidenavMenuItem } from '../sidenav/sidenav-menu-item';
+import { LayoutService } from '../layout.service';
 import * as LayoutActions from './layout.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LayoutEffect {
-
-  private menuItems: SidenavMenuItem[] = [
-    {
-      title: 'Dashboard',
-      path: 'home',
-      icon: 'home picto',
-      notification: false,
-    },
-    {
-      title: 'Inbox',
-      path: 'inbox',
-      icon: 'message picto',
-      notification: false,
-      subMenu: [
-        {
-          title: 'Message',
-          path: 'message',
-          notification: false,
-        },
-        {
-          title: 'Requests',
-          path: 'inbox/requests',
-          notification: false,
-        },
-        {
-          title: 'Documents',
-          path: 'inbox/documents',
-          notification: false,
-        }
-      ],
-    },
-    {
-      title: 'Manage',
-      path: 'manage',
-      icon: 'message picto',
-      notification: false,
-      subMenu: [
-        {
-          title: 'Finance applications',
-          path: 'finance',
-          notification: false,
-        },
-        {
-          title: 'Agreements',
-          path: 'manage/agreements',
-          notification: false,
-        },
-        {
-          title: 'Overdue',
-          path: 'overdue',
-          notification: false,
-        }
-      ],
-    },
-    {
-      title: 'Account',
-      path: 'account',
-      icon: 'account picto',
-      notification: false,
-      subMenu: [
-        {
-          title: 'Information',
-          path: 'account/information',
-          notification: false,
-        },
-        {
-          title: 'Bank details',
-          path: 'account/bank-details',
-          notification: false,
-        },
-        {
-          title: 'Access Management',
-          path: 'account/access-management',
-          notification: false,
-        }
-      ],
-    },
-    {
-      title: 'Help',
-      path: 'help',
-      icon: 'message picto',
-      notification: false,
-      subMenu: [
-        {
-          title: 'FAQ',
-          path: 'help/faq',
-          notification: false,
-        },
-        {
-          title: 'Contact us',
-          path: 'help/contact',
-          notification: false,
-        }
-      ],
-    }
-  ];
 
   loadfooterItems$ = createEffect(() => {
     return this.actions.pipe(
@@ -122,7 +26,7 @@ export class LayoutEffect {
   loadSidenavMenuItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(LayoutActions.loadSidenavMenuItems),
-      mergeMap(() => of(this.menuItems).pipe(
+      mergeMap(() => this.layoutService.getSidenavMenuItems().pipe(
         map(sidenavMenuItems => LayoutActions.loadSidenavMenuItemsSuccess({sidenavMenuItems})),
         catchError(error => {
           return of(LayoutActions.loadSidenavMenuItemsFailure({error}))
@@ -131,5 +35,5 @@ export class LayoutEffect {
     )
   });
 
-  constructor(private actions: Actions, private footerService: FooterService) { }
+  constructor(private actions: Actions, private footerService: FooterService, private layoutService: LayoutService) { }
 }

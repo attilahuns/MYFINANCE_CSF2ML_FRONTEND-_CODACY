@@ -5,6 +5,8 @@ import { getFooterItems, getSidenavMenuItems, getSidenavToggle, State } from '..
 import * as LayoutAction from "../state/layout.actions";
 import { Observable } from 'rxjs';
 import { FooterItem } from 'src/app/shared/footer/footer-item';
+import { environment } from 'src/environments/environment';
+import { SidenavMenuItem } from './sidenav-menu-item';
 
 @Component({
   selector: 'f2ml-sidenav',
@@ -14,17 +16,18 @@ import { FooterItem } from 'src/app/shared/footer/footer-item';
 export class SidenavComponent implements OnInit {
 
   footerItems$: Observable<FooterItem[]> = this.store.select(getFooterItems);
-  sideMenuItems$ = this.store.select(getSidenavMenuItems);
-  opened$ = this.store.select(getSidenavToggle);
+  sideMenuItems$: Observable<SidenavMenuItem[]> = this.store.select(getSidenavMenuItems);
+  opened$: Observable<boolean> = this.store.select(getSidenavToggle);
 
   constructor(private store: Store<State>, public deviceDetector: DeviceDetectorService) { }
 
-  ngOnInit(): void {
-    this.store.dispatch(LayoutAction.loadSidenavMenuItems());
-    this.store.dispatch(LayoutAction.loadFooterItems());
-  }
+  ngOnInit(): void { }
 
   close(): void {
     this.store.dispatch(LayoutAction.closeSidenavMenu());
+  }
+
+  getIconUrl(icon?: string): string {
+    return environment.cms.endpoint + icon;
   }
 }

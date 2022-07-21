@@ -17,7 +17,7 @@
             [routerLinkActiveOptions]="{exact: true}"
             (click)="!deviceDetector.isLaptop() && close()"
           >
-            <img class="menu-navlist__item-icon" alt="" src="../../assets/images/{{item.icon}}.svg" width="40px">
+            <img class="menu-navlist__item-icon" alt="" [src]="getIconUrl(item.icon)" width="40px">
             <div class="menu-navlist__item-label">
               <span>{{item.title}}</span>
             </div>

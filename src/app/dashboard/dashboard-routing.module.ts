@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../layout/layout.component';
+import { LayoutResolver } from '../layout/layout.resolver';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    resolve: {
+      layout: LayoutResolver
+    },
     children: [
       {
         path: 'inbox',
@@ -37,7 +41,7 @@ const routes: Routes = [
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
-    ]
+    ],
   },
 ];
 
