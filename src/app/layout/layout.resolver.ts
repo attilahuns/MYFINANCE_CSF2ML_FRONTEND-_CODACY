@@ -20,7 +20,6 @@ export class LayoutResolver implements Resolve<boolean> {
 
     return combineLatest([this.store.select(getFooterItems), this.store.select(getSidenavMenuItems), this.store.select(getHeaderItems)]).pipe(
       filter(([footer, menu, header]) => footer.length > 0 && menu.length > 0 && header.length > 0),
-      tap(([footer, menu, header]) => console.log([footer, menu, header])),
       map(([footer, menu, header]) => footer.length > 0 && menu.length > 0 && header.length > 0),
       first(),
     );
