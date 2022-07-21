@@ -13,6 +13,7 @@ import { ViewMoreComponent } from './view-more/view-more.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { FormsModule } from '@angular/forms';
 import { HomepageTemplateComponent } from './homepage-template/homepage-template.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HomepageTemplateComponent } from './homepage-template/homepage-template
     FormsModule,
     MaterialModule,
     NgxExtendedPdfViewerModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule,
   ],
   exports: [
     FooterComponent,

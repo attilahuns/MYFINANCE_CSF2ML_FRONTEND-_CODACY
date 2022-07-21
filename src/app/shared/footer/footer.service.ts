@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { FooterItem } from './footer-item';
 
 @Injectable({
@@ -7,14 +9,12 @@ import { FooterItem } from './footer-item';
 })
 export class FooterService {
 
-  constructor() { }
+  private endpoint = `${environment.cms.endpoint}/api/menus/footer`;
+
+  constructor(private http: HttpClient) { }
 
   getFooterItems(): Observable<FooterItem[]> {
-    return of([
-      { label: 'Welcome page', href: '/welcome' },
-      { label: 'Legals', href: '/legal' },
-      { label: 'Cookies reglementations', href: '' },
-      { label: 'Personal data', href: '' },
-    ]);
+    return this.http.get<FooterItem[]>(this.endpoint);
   }
+
 }

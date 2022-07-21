@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  cms: {
+    endpoint: 'http://drupal.csf2ml.localhost:8000'
+  }
 };
 
 /*

@@ -4,8 +4,7 @@
   </div>
   <div class="footer-items__container">
     <div class="footer-item__container" *ngFor="let item of footerItems">
-      <!-- <a class="footer-item" [ngClass]="{'mat-small': deviceDetector.isMobile()}" [href]="item.href">{{item.label}}</a> -->
-      <a class="footer-item" [href]="item.href">{{item.label}}</a>
+      <a class="footer-item" [href]="item.path">{{item.title}}</a>
     </div>
   </div>
 </footer>

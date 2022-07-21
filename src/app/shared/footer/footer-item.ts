@@ -1,4 +1,4 @@
 export interface FooterItem {
-  label: string;
-  href: string;
+  title: string;
+  path: string;
 }
