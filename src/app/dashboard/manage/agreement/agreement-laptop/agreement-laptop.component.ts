@@ -16,6 +16,7 @@ export class AgreementLaptopComponent implements OnInit, AfterViewInit, OnDestro
   @Input() columns: { name: string, header: string, sortable: boolean, value: CallableFunction }[] = [];
   displayedColumns: string[] = [];
   @Input() dataSource!: MatTableDataSource<Agreement>;
+  @Input() viewAgreementBtnLabel!: string;
   @Output() sortChange = new EventEmitter<MatSort>();
   private sub!: Subscription;
 

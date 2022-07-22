@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Agreement } from '../agreement';
+import { AgreementService } from '../agreement.service';
 import * as AgreementAction from './agreement.actions';
 
 @Injectable({
@@ -37,5 +38,17 @@ export class AgreementEffect {
     )
   });
 
-  constructor(private actions: Actions) { }
+  loadagreementMetadata$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(AgreementAction.loadAgreementMetadata),
+      mergeMap(() => this.agreementService.getMetadata().pipe(
+        map(metadata => AgreementAction.loadAgreementMetadataSuccess({metadata})),
+        catchError(error => {
+          return of(AgreementAction.loadAgreementMetadataFailure({error}))
+        })
+      ))
+    )
+  });
+
+  constructor(private actions: Actions, private agreementService: AgreementService) { }
 }

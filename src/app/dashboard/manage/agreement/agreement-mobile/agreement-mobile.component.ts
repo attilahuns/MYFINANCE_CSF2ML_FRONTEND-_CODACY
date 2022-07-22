@@ -10,6 +10,7 @@ export class AgreementMobileComponent implements OnInit {
 
   @Input() columns: { name: string, header: string, value: CallableFunction }[] = [];
   @Input() dataSource: Agreement[] = [];
+  @Input() viewAgreementBtnLabel!: string;
 
   constructor() { }
 

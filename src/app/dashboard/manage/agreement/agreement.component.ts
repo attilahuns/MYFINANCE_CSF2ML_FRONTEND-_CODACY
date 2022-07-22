@@ -1,14 +1,12 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
+import { combineLatest, filter, map, tap } from 'rxjs';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
-import { Agreement } from './agreement';
+import { Agreement, AgreementMetadata } from './agreement';
 import * as AgreementAction from "./state/agreement.actions";
-import { getAgreements } from './state/agreement.reducer';
-
-const LIMIT_DISPLAYED_ROWS = 5;
+import { getAgreements, getAgreementsMetadata } from './state/agreement.reducer';
 
 @Component({
   selector: 'f2ml-agreement',
@@ -17,65 +15,71 @@ const LIMIT_DISPLAYED_ROWS = 5;
 })
 export class AgreementComponent implements OnInit {
 
-  title = 'Agreements';
-  columns = [
-    {
-      name: 'contactHolder',
-      header: 'Contact Holder',
-      sortable: true,
-      value: (element: Agreement) => `${element.contactHolder}`,
-    },
-    {
-      name: 'vehicule',
-      header: 'Vehicule',
-      sortable: true,
-      value: (element: Agreement) => `${element.vehicule}`,
-    },
-    {
-      name: 'registrationNumber',
-      header: 'Registration Number',
-      sortable: true,
-      value: (element: Agreement) => `${element.registrationNumber}`,
-    },
-    {
-      name: 'financeProduct',
-      header: 'Finance Product',
-      sortable: true,
-      value: (element: Agreement) => `${element.financeProduct}`,
-    },
-    {
-      name: 'agreementNumber',
-      header: 'Agreement Number',
-      sortable: true,
-      value: (element: Agreement) => `${element.agreementNumber}`,
-    },
-    {
-      name: 'agreementStartDate',
-      header: 'Agreement Start Date',
-      sortable: true,
-      value: (element: Agreement) => `${element.agreementStartDate}`,
-    },
-    {
-      name: 'details',
-      header: 'Details',
-      sortable: false,
-      value: (element: Agreement) => '',
-    },
-  ];
+  columns: { name: string, header: string, sortable: boolean, value: CallableFunction }[] = [];
   originalData: Agreement[] = [];
   dataSource = new MatTableDataSource<Agreement>();
-  agreements$ = this.store.select(getAgreements).pipe(
-    tap(agreements => {
+  metadata!: AgreementMetadata;
+  content$ = combineLatest([this.store.select(getAgreements), this.store.select(getAgreementsMetadata)]).pipe(
+    filter(([agreements, metadata]) => agreements.length > 0 && '' !== metadata.title),
+    tap(([agreements, metadata]) => {
+      this.metadata = metadata;
       this.originalData = this.originalData.concat(agreements);
-      this.dataSource = new MatTableDataSource(this.originalData.slice(0, LIMIT_DISPLAYED_ROWS));
+      this.dataSource = new MatTableDataSource(this.originalData.slice(0, metadata.displayedRowsLimit));
+      this.columns = [
+        {
+          name: 'contactHolder',
+          header: metadata.tableMetadata.contactHolderLabel,
+          sortable: true,
+          value: (element: Agreement) => `${element.contactHolder}`,
+        },
+        {
+          name: 'vehicule',
+          header: metadata.tableMetadata.vehiculeLabel,
+          sortable: true,
+          value: (element: Agreement) => `${element.vehicule}`,
+        },
+        {
+          name: 'registrationNumber',
+          header: metadata.tableMetadata.registrationNumberLabel,
+          sortable: true,
+          value: (element: Agreement) => `${element.registrationNumber}`,
+        },
+        {
+          name: 'financeProduct',
+          header: metadata.tableMetadata.financeProductLabel,
+          sortable: true,
+          value: (element: Agreement) => `${element.financeProduct}`,
+        },
+        {
+          name: 'agreementNumber',
+          header: metadata.tableMetadata.agreementNumberLabel,
+          sortable: true,
+          value: (element: Agreement) => `${element.agreementNumber}`,
+        },
+        {
+          name: 'agreementStartDate',
+          header: metadata.tableMetadata.agreementStartDate,
+          sortable: true,
+          value: (element: Agreement) => `${element.agreementStartDate}`,
+        },
+        {
+          name: 'details',
+          header: metadata.tableMetadata.detailsLabel,
+          sortable: false,
+          value: (element: Agreement) => '',
+        },
+      ];
     }),
+    map(([agreements, metadata]) => agreements.length > 0 && '' !== metadata.title),
   );
+
   displayFullData = false;
 
   constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {
-    this.store.dispatch(AgreementAction.loadAgreement())
+    this.store.dispatch(AgreementAction.loadAgreement());
+    this.store.dispatch(AgreementAction.loadAgreementMetadata());
   }
 
   filterChange(filter: string): void {
@@ -88,6 +92,6 @@ export class AgreementComponent implements OnInit {
 
   displayData(displayFullData: boolean) {
     this.displayFullData = displayFullData;
-    this.dataSource.data = !displayFullData ? this.originalData.slice(0, LIMIT_DISPLAYED_ROWS) : this.originalData;
+    this.dataSource.data = !displayFullData ? this.originalData.slice(0, this.metadata.displayedRowsLimit) : this.originalData;
   }
 }

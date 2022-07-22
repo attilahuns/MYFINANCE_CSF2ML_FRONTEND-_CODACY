@@ -1,6 +1,12 @@
 @use 'breakpoints' as device;
 @import 'variables';
 
+.agreement-laptop__container {
+  display: flex;
+}
+.agreement-laptop__table {
+  flex: 1;
+}
 .agreement-table__header {
   color: $color-font-primary-in-filled-background;
   background-color: $color-background-primary;
@@ -45,6 +51,9 @@
   border: 4px solid white;
   // word-break: break-word;
   cursor: default;
+  button {
+    width: 100%;
+  }
   &:hover {
     // background-color: $color-background-highlighter;
     button {

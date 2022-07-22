@@ -1,6 +1,6 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { AppState } from "src/app/state/app.state";
-import { Agreement } from "../agreement";
+import { Agreement, AgreementMetadata } from "../agreement";
 import * as AgreementAction from "./agreement.actions";
 
 export interface State extends AppState {
@@ -8,15 +8,35 @@ export interface State extends AppState {
 }
 export interface AgreementState {
   agreements: Agreement[],
+  metadata: AgreementMetadata,
   error: string;
 }
 export const agreementInitialState: AgreementState = {
   agreements: [],
+  metadata: {
+    title: '',
+    viewAgreementBtnLabel: '',
+    viewLessLabel: '',
+    viewMoreLabel: '',
+    displayedRowsLimit: 5,
+    emptyListMessage: '',
+    tableMetadata: {
+      contactHolderLabel: '',
+      vehiculeLabel: '',
+      registrationNumberLabel: '',
+      financeProductLabel: '',
+      agreementNumberLabel: '',
+      agreementStartDate: '',
+      detailsLabel: '',
+    },
+  },
   error: '',
 }
 
 const getAgreementState = createFeatureSelector<AgreementState>('agreement');
 export const getAgreements = createSelector(getAgreementState, state => state.agreements);
+export const getAgreementsMetadata = createSelector(getAgreementState, state => state.metadata);
+export const getAgreementsError = createSelector(getAgreementState, state => state.error);
 
 export const agreementReducer = createReducer<AgreementState>(
   agreementInitialState,
@@ -31,6 +51,36 @@ export const agreementReducer = createReducer<AgreementState>(
     return {
       ...state,
       agreements: [],
+      error: action.error,
+    }
+  }),
+  on(AgreementAction.loadAgreementMetadataSuccess, (state, action): AgreementState => {
+    return {
+      ...state,
+      metadata: action.metadata,
+      error: '',
+    }
+  }),
+  on(AgreementAction.loadAgreementMetadataFailure, (state, action): AgreementState => {
+    return {
+      ...state,
+      metadata:  {
+        title: '',
+        viewAgreementBtnLabel: '',
+        viewLessLabel: '',
+        viewMoreLabel: '',
+        displayedRowsLimit: 5,
+        emptyListMessage: '',
+        tableMetadata: {
+          contactHolderLabel: '',
+          vehiculeLabel: '',
+          registrationNumberLabel: '',
+          financeProductLabel: '',
+          agreementNumberLabel: '',
+          agreementStartDate: '',
+          detailsLabel: '',
+        },
+      },
       error: action.error,
     }
   }),

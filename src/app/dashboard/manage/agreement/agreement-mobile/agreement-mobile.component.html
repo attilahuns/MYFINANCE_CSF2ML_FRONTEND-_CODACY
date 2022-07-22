@@ -6,7 +6,7 @@
           <td class="agreement-tile__row-label agreement-tile__cell">{{ column.header }}:</td>
           <td class="agreement-tile__row-value agreement-tile__cell" *ngIf="'details' !== column.name">{{ column.value(row) }}</td>
           <td class="agreement-tile__row-value agreement-tile__cell" *ngIf="'details' == column.name">
-            <button mat-raised-button color="primary" routerLink="contract-details/Contract100P0610206">View agreement</button>
+            <button mat-raised-button color="primary" routerLink="contract-details/Contract100P0610206">{{ viewAgreementBtnLabel }}</button>
           </td>
         </tr>
       </table>

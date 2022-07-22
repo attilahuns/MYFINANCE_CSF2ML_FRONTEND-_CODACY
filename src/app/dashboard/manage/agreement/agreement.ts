@@ -7,3 +7,21 @@ export interface Agreement {
   agreementStartDate: string;
   mot: string;
 }
+export interface AgreementMetadata {
+  title: string;
+  viewAgreementBtnLabel: string;
+  viewLessLabel: string;
+  viewMoreLabel: string;
+  displayedRowsLimit: number;
+  emptyListMessage: string;
+  tableMetadata: AgreementMetadataTable;
+}
+export interface AgreementMetadataTable {
+  contactHolderLabel: string;
+  vehiculeLabel: string;
+  registrationNumberLabel: string;
+  financeProductLabel: string;
+  agreementNumberLabel: string;
+  agreementStartDate: string;
+  detailsLabel: string;
+}
