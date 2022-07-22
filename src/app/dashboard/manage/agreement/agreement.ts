@@ -14,6 +14,7 @@ export interface AgreementMetadata {
   viewMoreLabel: string;
   displayedRowsLimit: number;
   emptyListMessage: string;
+  emptyContractListMessage: string,
   tableMetadata: AgreementMetadataTable;
 }
 export interface AgreementMetadataTable {

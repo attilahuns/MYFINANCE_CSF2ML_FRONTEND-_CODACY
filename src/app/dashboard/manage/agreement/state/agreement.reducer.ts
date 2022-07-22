@@ -20,6 +20,7 @@ export const agreementInitialState: AgreementState = {
     viewMoreLabel: '',
     displayedRowsLimit: 5,
     emptyListMessage: '',
+    emptyContractListMessage: '',
     tableMetadata: {
       contactHolderLabel: '',
       vehiculeLabel: '',
@@ -71,6 +72,7 @@ export const agreementReducer = createReducer<AgreementState>(
         viewMoreLabel: '',
         displayedRowsLimit: 5,
         emptyListMessage: '',
+        emptyContractListMessage: '',
         tableMetadata: {
           contactHolderLabel: '',
           vehiculeLabel: '',

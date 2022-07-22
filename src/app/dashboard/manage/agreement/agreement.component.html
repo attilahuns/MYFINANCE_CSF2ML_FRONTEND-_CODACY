@@ -1,29 +1,37 @@
 <f2ml-default-template>
   <f2ml-default-card *ngIf="content$ | async" [title]="metadata.title" main>
     <div class="agreement__container" content>
-      <!--search -->
-      <div class="agreement-search__container">
-        <f2ml-search-input (searchValue)="filterChange($event)"></f2ml-search-input>
-      </div>
+      <ng-template [ngIf]="originalData.length">
+        <!--search -->
+        <div class="agreement-search__container">
+          <f2ml-search-input (searchValue)="filterChange($event)"></f2ml-search-input>
+        </div>
 
-      <!-- Mobile & Tablet -->
-      <ng-template [ngIf]="!deviceDetector.isLaptop()">
-        <f2ml-agreement-mobile [dataSource]="dataSource.filteredData" [columns]="columns" [viewAgreementBtnLabel]="metadata.viewAgreementBtnLabel"></f2ml-agreement-mobile>
+        <!-- Mobile & Tablet -->
+        <ng-template [ngIf]="!deviceDetector.isLaptop()">
+          <f2ml-agreement-mobile [dataSource]="dataSource.filteredData" [columns]="columns" [viewAgreementBtnLabel]="metadata.viewAgreementBtnLabel"></f2ml-agreement-mobile>
+        </ng-template>
+        <!-- Laptop -->
+        <ng-template [ngIf]="deviceDetector.isLaptop()">
+          <f2ml-agreement-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)" [viewAgreementBtnLabel]="metadata.viewAgreementBtnLabel"></f2ml-agreement-laptop>
+        </ng-template>
+
+        <!--View more | less -->
+        <div class="agreement-viewmore__container" *ngIf="dataSource.filteredData.length">
+          <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData" [viewMoreMessage]="metadata.viewMoreLabel" [viewLessMessage]="metadata.viewLessLabel"></f2ml-view-more>
+        </div>
+
+        <!--No data message -->
+        <div class="agreement-nodata__container" *ngIf="!dataSource.filteredData.length">
+          <span class="agreement-nodata__message">{{ metadata.emptyListMessage }}</span>
+        </div>
       </ng-template>
-      <!-- Laptop -->
-      <ng-template [ngIf]="deviceDetector.isLaptop()">
-        <f2ml-agreement-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)" [viewAgreementBtnLabel]="metadata.viewAgreementBtnLabel"></f2ml-agreement-laptop>
+      <ng-template [ngIf]="!originalData.length">
+        <!--No data message -->
+        <div class="agreement-nodata__container">
+          <span class="agreement-nodata__message">{{ metadata.emptyContractListMessage }}</span>
+        </div>
       </ng-template>
-
-      <!--View more | less -->
-      <div class="agreement-viewmore__container" *ngIf="dataSource.filteredData.length">
-        <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData" [viewMoreMessage]="metadata.viewMoreLabel" [viewLessMessage]="metadata.viewLessLabel"></f2ml-view-more>
-      </div>
-
-      <!--No data message -->
-      <div class="agreement-nodata__container" *ngIf="!dataSource.filteredData.length">
-        <span class="agreement-nodata__message">{{ metadata.emptyListMessage }}</span>
-      </div>
     </div>
   </f2ml-default-card>
 </f2ml-default-template>
