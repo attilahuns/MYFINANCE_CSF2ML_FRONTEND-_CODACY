@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Agreement, AgreementMetadata } from '../homepage';
 
 @Component({
   selector: 'f2ml-homepage-agreements',
@@ -7,33 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageAgreementsComponent implements OnInit {
 
-  slideIndex: number = 1;
+  private sliderSubject: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  slider$ = this.sliderSubject.asObservable();
+  @Input() metadata!: AgreementMetadata;
+  @Input() agreements!: Agreement[];
+
   constructor() { }
 
-  ngOnInit(): void {
-    this.showSlides(this.slideIndex);
-  }
+  ngOnInit(): void { }
 
-  plusSlides(n: number) {
-    this.showSlides(this.slideIndex += n);
-  }
-
-  currentSlide(n:number) {
-    this.showSlides(this.slideIndex = n);
-  }
-
- showSlides(n: number) {
-    let slides = document.getElementsByClassName("home__agreements__slider__slide") as HTMLCollectionOf<HTMLElement>;
-    let dots = document.getElementsByClassName("home__agreements__slider__dot") as HTMLCollectionOf<HTMLElement>;
-    if (n > slides.length) { this.slideIndex = 1; }
-    if (n < 1) { this.slideIndex = slides.length; }
-    for (var i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+  nextSlide(): void {
+    const nextSlideIndex = this.sliderSubject.getValue() + 1;
+    if (nextSlideIndex <= this.agreements.length) {
+      this.sliderSubject.next(nextSlideIndex);
     }
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[this.slideIndex-1].style.display = "block";
-    dots[this.slideIndex-1].className += " active";
   }
+  previousSlide(): void {
+    const previousSlideIndex = this.sliderSubject.getValue() - 1;
+    if (previousSlideIndex > 0) {
+      this.sliderSubject.next(previousSlideIndex);
+    }
+  }
+  showSlide(index: number, currentSlide: number) {
+    return ++index === currentSlide;
+  }
+  toSlide(index: number) {
+    this.sliderSubject.next(++index);
+  }
+
 }

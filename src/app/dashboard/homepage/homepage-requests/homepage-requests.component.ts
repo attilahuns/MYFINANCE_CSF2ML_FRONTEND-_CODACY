@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
+import { Request, RequestMetadata, RequestStatus } from '../homepage';
 
 @Component({
   selector: 'f2ml-homepage-requests',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageRequestsComponent implements OnInit {
 
-  constructor() { }
+  @Input() requests!: Request[];
+  @Input() metadata!: RequestMetadata;
 
-  ngOnInit(): void {
+  constructor(public deviceDetector: DeviceDetectorService) { }
+
+  ngOnInit(): void { }
+
+  getRequestStatusClass(status: RequestStatus) {
+    return {
+      'home__requests__dot__progress': status === RequestStatus.IN_PROGRESS,
+      'home__requests__dot__cancelled': status === RequestStatus.CANCELED,
+      'home__requests__dot__completed': status === RequestStatus.COMPLETED,
+    }
   }
 
 }

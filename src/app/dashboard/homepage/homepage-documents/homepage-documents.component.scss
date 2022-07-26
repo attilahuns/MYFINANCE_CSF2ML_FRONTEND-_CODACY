@@ -25,6 +25,7 @@
   img {
     width: 40px;
     margin-top: -5px;
+    cursor: pointer;
   }
 }
 @include device.viewport(tablet) {

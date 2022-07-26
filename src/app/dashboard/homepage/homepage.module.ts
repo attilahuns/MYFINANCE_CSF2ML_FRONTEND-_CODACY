@@ -8,6 +8,10 @@ import { HomepageAgreementsComponent } from './homepage-agreements/homepage-agre
 import { HomepageDocumentsComponent } from './homepage-documents/homepage-documents.component';
 import { HomepageRequestsComponent } from './homepage-requests/homepage-requests.component';
 import { HomepageManageableContentComponent } from './homepage-manageable-content/homepage-manageable-content.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { homepageReducer } from './state/homepage.reducer';
+import { HomepageEffect } from './state/homepage.effects';
 
 
 @NgModule({
@@ -21,7 +25,9 @@ import { HomepageManageableContentComponent } from './homepage-manageable-conten
   imports: [
     SharedModule,
     CommonModule,
-    HomepageRoutingModule
+    HomepageRoutingModule,
+    StoreModule.forFeature('homepage', homepageReducer),
+    EffectsModule.forFeature([HomepageEffect])
   ]
 })
 export class HomepageModule { }

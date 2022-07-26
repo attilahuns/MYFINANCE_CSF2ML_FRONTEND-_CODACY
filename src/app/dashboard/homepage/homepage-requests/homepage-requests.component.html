@@ -1,40 +1,16 @@
-<f2ml-default-card title="Requests">
+<f2ml-default-card [title]="metadata.title">
   <div content class="home__requests">
     <div>
-      <div class="home__requests__element">
+      <div class="home__requests__element" *ngFor="let request of requests">
         <p class="home__requests__element__text">
-          <span class="home__requests__element__title">Request 1</span><br/>
-          <span class="home__requests__element__details">Change my personnal details</span><br/>
-          <span class="home__requests__dot home__requests__mobile home__requests__dot__progress"></span>
-          <span class="home__requests__element__details home__requests__mobile">In progress</span>
+          <span class="home__requests__element__title">{{ request.title }}</span><br/>
+          <span class="home__requests__element__details">{{ request.description }}</span><br/>
+          <span class="home__requests__dot home__requests__mobile" [ngClass]="getRequestStatusClass(request.status)" *ngIf="!deviceDetector.isLaptop()"></span>
+          <span class="home__requests__element__details home__requests__mobile" *ngIf="!deviceDetector.isLaptop()">{{ request.status }}</span>
         </p>
-        <div class="home__requests__desktop">
-          <span class="home__requests__dot home__requests__dot__progress"></span>
-          <span class="home__requests__element__details">In progress</span>
-        </div>
-      </div>
-      <div class="home__requests__element">
-        <p class="home__requests__element__text">
-          <span class="home__requests__element__title">Request 1</span><br/>
-          <span class="home__requests__element__details">Change my personnal details</span><br/>
-          <span class="home__requests__dot home__requests__mobile home__requests__dot__cancelled"></span>
-          <span class="home__requests__element__details home__requests__mobile">Cancelled</span>
-        </p>
-        <div class="home__requests__desktop">
-          <span class="home__requests__dot home__requests__dot__cancelled"></span>
-          <span class="home__requests__element__details">Cancelled</span>
-        </div>
-      </div>
-      <div class="home__requests__element">
-        <p class="home__requests__element__text">
-          <span class="home__requests__element__title">Request 1</span><br/>
-          <span class="home__requests__element__details">Change my personnal details</span><br/>
-          <span class="home__requests__dot home__requests__mobile home__requests__dot__completed"></span>
-          <span class="home__requests__element__details home__requests__mobile">Completed</span>
-        </p>
-        <div class="home__requests__desktop">
-          <span class="home__requests__dot home__requests__dot__completed"></span>
-          <span class="home__requests__element__details">Completed</span>
+        <div class="home__requests__desktop" *ngIf="deviceDetector.isLaptop()">
+          <span class="home__requests__dot" [ngClass]="getRequestStatusClass(request.status)"></span>
+          <span class="home__requests__element__details">{{ request.status }}</span>
         </div>
       </div>
     </div>

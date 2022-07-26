@@ -1,59 +1,32 @@
-<f2ml-default-card title="Agreements">
+<f2ml-default-card [title]="metadata.title">
   <div content class="home__agreements">
-    <div class="home__agreements__slider__container">
-      <div class="home__agreements__slider__slide">
-        <div class="home__agreements__slider__element">
-          <div>
-            <div class="home__agreements__slider__car">
-              <img src="/assets/images/car__details.png"><br/>
-              <span><b>Peugeot<br/>3008</b></span>
+    <div class="home__agreements__container" *ngIf="slider$ | async as currentSlide">
+      <div class="home__agreements__slider__container">
+        <ng-container *ngFor="let agreement of agreements; index as i">
+          <div class="home__agreements__slider__slide" [class.is-active]="showSlide(i, currentSlide)">
+            <div class="home__agreements__slider__element">
+              <div>
+                <div class="home__agreements__slider__car">
+                  <img src="/assets/images/car__details.png"><br/>
+                  <span><b>{{ agreement.brand }}<br/>{{ agreement.model }}</b></span>
+                </div>
+              </div>
+              <div>
+                <p><span class="home__agreements__highlighted__text">{{ metadata.vinLabel}}</span><br>{{ agreement.vin }}</p>
+                <p><span class="home__agreements__highlighted__text">{{ metadata.agreementNumberLabel}}</span><br>{{ agreement.agreementNumber }}</p>
+                <p><span class="home__agreements__highlighted__text">{{ metadata.financialProductLabel}}</span><br>{{ agreement.financialProduct }}</p>
+              </div>
             </div>
           </div>
-          <div>
-            <p><span class="home__agreements__highlighted__text">VIN</span><br>WW-342-Z1</p>
-            <p><span class="home__agreements__highlighted__text">Agreement number</span><br>100SPUG68975</p>
-            <p><span class="home__agreements__highlighted__text">Financial product</span><br>PCP</p>
-          </div>
-        </div>
+        </ng-container>
+        <a class="home__agreements__slider__prev" (click)="previousSlide()"><img src="/assets/images/left.png"/></a>
+        <a class="home__agreements__slider__next" (click)="nextSlide()"><img src="/assets/images/right.png"/></a>
       </div>
-      <div class="home__agreements__slider__slide">
-        <div class="home__agreements__slider__element">
-          <div>
-            <div class="home__agreements__slider__car">
-              <img src="/assets/images/car__details.png"><br/>
-              <span><b>Peugeot<br/>3008</b></span>
-            </div>
-          </div>
-          <div>
-            <p><span class="home__agreements__highlighted__text">VIN</span><br>WW-342-Z1</p>
-            <p><span class="home__agreements__highlighted__text">Agreement number</span><br>100SPUG68975</p>
-            <p><span class="home__agreements__highlighted__text">Financial product</span><br>PCP</p>
-          </div>
-        </div>
+      <br>
+      <div class="home__agreements__slider__dots">
+        <span class="home__agreements__slider__dot" (click)="toSlide(i)" [class.is-active]="showSlide(i, currentSlide)" *ngFor="let agreement of agreements; index as i"></span>
       </div>
-      <div class="home__agreements__slider__slide">
-        <div class="home__agreements__slider__element">
-          <div>
-            <div class="home__agreements__slider__car">
-              <img src="/assets/images/car__details.png"><br/>
-              <span><b>Peugeot<br/>3008</b></span>
-            </div>
-          </div>
-          <div>
-            <p><span class="home__agreements__highlighted__text">VIN</span><br>WW-342-Z1</p>
-            <p><span class="home__agreements__highlighted__text">Agreement number</span><br>100SPUG68975</p>
-            <p><span class="home__agreements__highlighted__text">Financial product</span><br>PCP</p>
-          </div>
-        </div>
-      </div>
-      <a class="home__agreements__slider__prev" (click)="plusSlides(-1)"><img src="/assets/images/left.png"/></a>
-      <a class="home__agreements__slider__next" (click)="plusSlides(1)"><img src="/assets/images/right.png"/></a>
-    </div>
-    <br>
-    <div class="home__agreements__slider__dots">
-      <span class="home__agreements__slider__dot" (click)="currentSlide(1)"></span>
-      <span class="home__agreements__slider__dot" (click)="currentSlide(2)"></span>
-      <span class="home__agreements__slider__dot" (click)="currentSlide(3)"></span>
+
     </div>
   </div>
 </f2ml-default-card>

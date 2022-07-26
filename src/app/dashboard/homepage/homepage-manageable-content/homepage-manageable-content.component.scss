@@ -5,6 +5,51 @@
   max-height: 260px;
   min-height: 260px;
 }
+.manageable_content_picture {
+  width: 100% !important;
+  max-height: 200px;
+  min-height: 150px;
+}
+.manageable_content_video {
+  width: 100% !important;
+  max-height: 260px;
+  min-height: 200px;
+}
+.manageable_content_link {
+  display: flex;
+  margin: 1.6vh 0;
+  align-items: center;
+  .manageable_content_link_label {
+    flex: 2;
+  }
+  span {
+    text-decoration: underline;
+    font-weight: bold;
+    color: $color-primary;
+    cursor: pointer;
+  }
+}
+.manageable_content_cta {
+  display: flex;
+  padding-bottom: 1vw;
+  button {
+    background-color: $color-primary;
+    color: $color-font-primary-in-filled-background;
+    font-size: $font-size-fourth;
+    border: 1px solid $color-primary;
+    cursor: pointer;
+    font-weight: bold;
+    align-self: center;
+    border-radius: 4px;
+    padding: 1vh 2vh;
+    z-index: 1;
+  }
+  button:hover {
+    cursor: pointer;
+    background-color: $color-background-primary;
+    color: $color-font-primary-in-filled-background;
+  }
+}
 @include device.viewport(tablet) {
   .home__manageable__content {
     max-height: 260px;

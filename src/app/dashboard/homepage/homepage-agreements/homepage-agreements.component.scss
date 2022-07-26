@@ -12,6 +12,12 @@
   padding: 15px 0 0 0px;
   height: 90%;
 }
+.home__agreements__slider__slide {
+  display: none;
+  &.is-active {
+    display: block;
+  }
+}
 .home__agreements__slider__element {
   display: flex;
   flex-direction: row;
@@ -61,9 +67,9 @@
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
-}
-.active {
-  background-color: $color-background-edge;
+  &.is-active {
+    background-color: $color-background-edge;
+  }
 }
 @include device.viewport(tablet) {
   .home__agreements {

@@ -1,16 +1,8 @@
-<f2ml-default-card title="Documents">
+<f2ml-default-card [title]="metadata.title">
   <div content class="home__documents">
-    <div class="home__documents__card">
-      <span>Agreement 10SPSJHSHSH009</span>
-      <img src="/assets/images/view.png"/>
-    </div>
-    <div class="home__documents__card">
-      <span>Agreement 10SPSJHSHSH009</span>
-      <img src="/assets/images/view.png"/>
-    </div>
-    <div class="home__documents__card">
-      <span>Agreement 10SPSJHSHSH009</span>
-      <img src="/assets/images/view.png"/>
+    <div class="home__documents__card" *ngFor="let document of documents">
+      <span>Agreement {{ document.agreementNumber }}</span>
+      <img class="home__documents__card__icon" [src]="getViewIconUrl()" routerLink="/dashboard/inbox/documents/detail"/>
     </div>
   </div>
 </f2ml-default-card>

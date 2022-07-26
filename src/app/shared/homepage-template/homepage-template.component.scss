@@ -29,6 +29,7 @@
   "agreement document"
   "request manageable";
   grid-column-gap: 2em;
+  grid-row-gap: 1em;
 }
 
 @include device.viewport(mobile) {
