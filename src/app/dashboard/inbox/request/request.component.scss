@@ -5,13 +5,33 @@
   margin-bottom: 1em;
 }
 
-@include device.viewport(tablet) {
+@include device.viewport(not-laptop) {
   .request-search__container {
     width: 60%;
+  }
+  .request__header__container {
+    display: block;
+    justify-content: space-between;
+  }
+  .request__actions__container {
+    align-self: flex-end;
+    margin-bottom: 4em;
+    button {
+      float: right;
+    }
   }
 }
 @include device.viewport(laptop) {
   .request-search__container {
     width: 40%;
+  }
+  .request__header__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
+    margin: 2em 0;
+  }
+  .request__header__button {
+    padding: 0.5em 2em;
   }
 }
