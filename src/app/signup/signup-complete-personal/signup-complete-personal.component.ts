@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'f2ml-signup-complete-individual',
-  templateUrl: './signup-complete-individual.component.html',
-  styleUrls: ['./signup-complete-individual.component.scss']
+  templateUrl: './signup-complete-personal.component.html',
+  styleUrls: ['./signup-complete-personal.component.scss']
 })
-export class SignupCompleteIndividualComponent implements OnInit {
+export class SignupCompletePersonalComponent implements OnInit {
 
   signupCompleteForm!: FormGroup;
   submitted = false;

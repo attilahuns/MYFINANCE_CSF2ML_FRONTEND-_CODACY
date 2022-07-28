@@ -11,9 +11,10 @@ import { AccountEffect } from './state/account.effects';
 import { AccountCardComponent } from './account-card/account-card.component';
 import { AccountFooterMenuComponent } from './account-footer-menu/account-footer-menu.component';
 import { AccountOtpComponent } from './account-otp/account-otp.component';
-import { AccountOtpNotReceivedComponent } from './account-otp-not-received/account-otp-not-received.component';
+import { AccountOtpNotReceivedPersonalComponent } from './account-otp-not-received-personal/account-otp-not-received-personal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccountOtpInvalidComponent } from './account-otp-invalid/account-otp-invalid.component';
+import { AccountOtpNotReceivedBusinessComponent } from './account-otp-not-received-business/account-otp-not-received-business.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,9 @@ import { AccountOtpInvalidComponent } from './account-otp-invalid/account-otp-in
     AccountCardComponent,
     AccountFooterMenuComponent,
     AccountOtpComponent,
-    AccountOtpNotReceivedComponent,
+    AccountOtpNotReceivedPersonalComponent,
     AccountOtpInvalidComponent,
+    AccountOtpNotReceivedBusinessComponent,
   ],
   imports: [
     SharedModule,
@@ -37,8 +39,9 @@ import { AccountOtpInvalidComponent } from './account-otp-invalid/account-otp-in
     AccountCardComponent,
     AccountFooterMenuComponent,
     AccountOtpComponent,
-    AccountOtpNotReceivedComponent,
+    AccountOtpNotReceivedPersonalComponent,
     AccountOtpInvalidComponent,
+    AccountOtpNotReceivedBusinessComponent,
   ]
 })
 export class AccountModule { }

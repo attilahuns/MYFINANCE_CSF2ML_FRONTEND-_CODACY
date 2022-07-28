@@ -1,0 +1,44 @@
+<f2ml-account-card>
+  <div class="account-otp-not-received-business__container" content>
+
+    <div class="account-otp-not-received-business__feedback-message__container" *ngIf="submitted">
+      <span class="account-otp-not-received-business__feedback-message">Your request has been sent to the Customer service. You will be contacted soon.</span>
+    </div>
+
+    <div class="account-otp-not-received-business__form__wrapper" *ngIf="!submitted">
+      <div class="account-otp-not-received-business__form__container">
+        <div class="account-otp-not-received-business__legend__container">
+          <span class="account-otp-not-received-business__legend">Please fill in the fields to contact the Customer service :</span>
+        </div>
+        <form class="account-otp-not-received-business__form" novalidate (ngSubmit)="submit()" [formGroup]="otpNotReceivedForm">
+          <div class="account-otp-not-received-business__phone__container account-otp-not-received-business__input__container">
+            <mat-label class="account-otp-not-received-business__phone__label account-otp-not-received-business__input__label">Did you change your phone number ? If yes, enter your new phone number :</mat-label>
+            <mat-form-field class="account-otp-not-received-business__phone__input account-otp-not-received-business__input" appearance="legacy" [hideRequiredMarker]="true">
+              <mat-label></mat-label>
+              <input formControlName="phone" type="phone" matInput placeholder="XXXXXXXXX" />
+              <mat-error>
+                <p ngxError="pattern">Phone not valid</p>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="account-otp-not-received-business__nif__container account-otp-not-received-business__input__container">
+            <mat-label class="account-otp-not-received-business__nif__label account-otp-not-received-business__input__label">Enter your PIVA *</mat-label>
+            <mat-form-field class="account-otp-not-received-business__nif__input account-otp-not-received-business__input" appearance="legacy" [hideRequiredMarker]="true">
+              <mat-label></mat-label>
+              <input formControlName="piva" type="text" matInput placeholder="XXXXXXXXX" />
+              <mat-error>
+                <p ngxError="pattern">PIVA not valid</p>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="account-otp-not-received-business__submit__container">
+            <button class="account-otp-not-received-business__submit__button" mat-raised-button color="primary" type="submit" [disabled]="!otpNotReceivedForm.valid">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</f2ml-account-card>

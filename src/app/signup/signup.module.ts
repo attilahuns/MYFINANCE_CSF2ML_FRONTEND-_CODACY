@@ -6,13 +6,13 @@ import { SignupComponent } from './signup.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccountModule } from '../account/account.module';
-import { SignupCompleteIndividualComponent } from './signup-complete-individual/signup-complete-individual.component';
+import { SignupCompletePersonalComponent } from './signup-complete-personal/signup-complete-personal.component';
 import { SignupCompleteBusinessComponent } from './signup-complete-business/signup-complete-business.component';
 
 @NgModule({
   declarations: [
     SignupComponent,
-    SignupCompleteIndividualComponent,
+    SignupCompletePersonalComponent,
     SignupCompleteBusinessComponent,
   ],
   imports: [

@@ -20,8 +20,9 @@ export class SigninComponent implements OnInit {
   }
 
   submit() {
+    // the query param was added statically for demo purpose, it will be dynamic later
     if (this.signinForm.valid) {
-      this.router.navigate(['/signin/otp']);
+      this.router.navigate(['/signin/otp'], { queryParams: { 'account' : 'business' }});
     }
   }
 

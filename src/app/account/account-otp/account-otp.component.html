@@ -18,7 +18,8 @@
               </mat-error>
             </mat-form-field>
             <div class="account-otp__not-received__container">
-              <a class="account-otp__not-received__link" [routerLink]="'../otp-not-received'">I did not receive a SMS OTP</a>
+              <a class="account-otp__not-received__link" [routerLink]="'../otp-not-received-personal'" *ngIf="accountType == 'personal'">I did not receive a SMS OTP</a>
+              <a class="account-otp__not-received__link" [routerLink]="'../otp-not-received-business'" *ngIf="accountType == 'business'">I did not receive a SMS OTP</a>
             </div>
           </div>
 

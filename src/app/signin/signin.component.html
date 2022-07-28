@@ -34,8 +34,8 @@
         </div>
 
         <div class="signin-redirect__button__conrainer">
-          <button class="signin-redirect__button" mat-raised-button color="primary" [routerLink]="'/signup'">Personal</button>
-          <button class="signin-redirect__button" mat-raised-button color="primary" [routerLink]="'/signup'">Business</button>
+          <button class="signin-redirect__button" mat-raised-button color="primary" [routerLink]="'/signup'" [queryParams]="{account: 'personal'}">Personal</button>
+          <button class="signin-redirect__button" mat-raised-button color="primary" [routerLink]="'/signup'" [queryParams]="{account: 'business'}">Business</button>
         </div>
       </div>
     </div>

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'f2ml-account-otp-not-received',
-  templateUrl: './account-otp-not-received.component.html',
-  styleUrls: ['./account-otp-not-received.component.scss']
+  selector: 'f2ml-account-otp-not-received-business',
+  templateUrl: './account-otp-not-received-business.component.html',
+  styleUrls: ['./account-otp-not-received-business.component.scss']
 })
-export class AccountOtpNotReceivedComponent implements OnInit {
+export class AccountOtpNotReceivedBusinessComponent implements OnInit {
 
   otpNotReceivedForm!: FormGroup;
   submitted = false;
@@ -16,7 +16,7 @@ export class AccountOtpNotReceivedComponent implements OnInit {
   ngOnInit(): void {
     this.otpNotReceivedForm = this.formBuilder.group({
       phone: ['', [ Validators.required, Validators.pattern('^[0-9]{10}$') ] ],
-      nif: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9]{16}$') ] ],
+      piva: ['', [ Validators.required, Validators.pattern('^[0-9]{11}$') ] ],
     });
   }
   submit() {

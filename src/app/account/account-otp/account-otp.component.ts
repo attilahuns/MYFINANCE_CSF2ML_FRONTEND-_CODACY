@@ -11,6 +11,7 @@ export class AccountOtpComponent implements OnInit {
 
   otpForm!: FormGroup;
   submitted = false;
+  accountType!: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
@@ -18,6 +19,10 @@ export class AccountOtpComponent implements OnInit {
     this.otpForm = this.formBuilder.group({
       otp: ['', [ Validators.required, Validators.pattern('^[0-9]{6}$')] ],
     });
+    this.accountType = this.route.snapshot.queryParamMap.get('account') as string;
+    if (!['business','personal'].includes(this.accountType)) {
+      this.router.navigate(['/page-not-found']);
+    }
   }
 
   submit(): void {
