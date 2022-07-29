@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
+import { combineLatest, filter, map, tap } from 'rxjs';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
-import { Document } from './document';
-
+import { Document, DocumentMetadata } from './document';
 import * as DocumentAction from "./state/document.actions";
-import { getdocuments } from './state/document.reducer';
+import { getdocuments, getDocumentsMetadata } from './state/document.reducer';
+import { environment } from 'src/environments/environment';
 
 const LIMIT_DISPLAYED_ROWS = 5;
 @Component({
@@ -17,71 +17,82 @@ const LIMIT_DISPLAYED_ROWS = 5;
 })
 export class DocumentComponent implements OnInit {
 
-  title = 'Documents';
-  columns = [
-    {
-      name: 'documentType',
-      header: 'Document Type',
-      sortable: true,
-      value: (element: Document) => `${element.documentType}`,
-    },
-    {
-      name: 'date',
-      header: 'date',
-      sortable: true,
-      value: (element: Document) => `${element.date}`,
-    },
-    {
-      name: 'financeProduct',
-      header: 'Finance product',
-      sortable: true,
-      value: (element: Document) => `${element.financeProduct}`,
-    },
-    {
-      name: 'contract',
-      header: 'Contract',
-      sortable: true,
-      value: (element: Document) => `${element.contract}`,
-    },
-    {
-      name: 'vehicle',
-      header: 'Vehicle',
-      sortable: true,
-      value: (element: Document) => `${element.vehicle}`,
-    },
-    {
-      name: 'registrationNumber',
-      header: 'Regitration number',
-      sortable: true,
-      value: (element: Document) => `${element.registrationNumber}`,
-    },
-    {
-      name: 'download',
-      header: 'Download',
-      sortable: false,
-      value: (element: Document) => '../../.././../../assets/images/download_icon.png',
-    },
-    {
-      name: 'view',
-      header: 'View',
-      sortable: false,
-      value: (element: Document) => '../../.././../../assets/images/view_icon.png',
-    },
-  ];
+  columns: { name: string, header: string, sortable: boolean, value: CallableFunction, metadata?: any }[] = [];
   originalData: Document[] = [];
   dataSource = new MatTableDataSource<Document>();
-  documents$ = this.store.select(getdocuments).pipe(
-    tap(documents => {
+  metadata!: DocumentMetadata;
+  content$ = combineLatest([this.store.select(getdocuments), this.store.select(getDocumentsMetadata)]).pipe(
+    filter(([documents, metadata]) => '' !== metadata.title),
+    tap(([documents, metadata]) => {
+      this.metadata = metadata;
       this.originalData = this.originalData.concat(documents);
-      this.dataSource = new MatTableDataSource(this.originalData.slice(0, LIMIT_DISPLAYED_ROWS));
+      this.dataSource = new MatTableDataSource(this.originalData.slice(0, metadata.displayedRowsLimit));
+      this.columns = [
+        {
+          name: 'documentType',
+          header: metadata.tableMetadata.documentTypeLabel,
+          sortable: true,
+          value: (element: Document) => `${element.documentType}`,
+        },
+        {
+          name: 'date',
+          header: metadata.tableMetadata.dateLabel,
+          sortable: true,
+          value: (element: Document) => `${element.date}`,
+        },
+        {
+          name: 'financeProduct',
+          header: metadata.tableMetadata.financeProductLabel,
+          sortable: true,
+          value: (element: Document) => `${element.financeProduct}`,
+        },
+        {
+          name: 'contract',
+          header: metadata.tableMetadata.contractLabel,
+          sortable: true,
+          value: (element: Document) => `${element.contract}`,
+        },
+        {
+          name: 'vehicle',
+          header: metadata.tableMetadata.vehicleLabel,
+          sortable: true,
+          value: (element: Document) => `${element.vehicle}`,
+        },
+        {
+          name: 'registrationNumber',
+          header: metadata.tableMetadata.registrationNumberLabel,
+          sortable: true,
+          value: (element: Document) => `${element.registrationNumber}`,
+        },
+        {
+          name: 'download',
+          header: metadata.tableMetadata.downloadColumn.label,
+          sortable: false,
+          value: (element: Document) => this.getIcon(metadata.tableMetadata.downloadColumn.picto),
+          metadata: {
+            alt: metadata.tableMetadata.downloadColumn.alt
+          }
+        },
+        {
+          name: 'view',
+          header: metadata.tableMetadata.viewColumn.label,
+          sortable: false,
+          value: (element: Document) => this.getIcon(metadata.tableMetadata.viewColumn.picto),
+          metadata: {
+            alt: metadata.tableMetadata.viewColumn.alt
+          }
+        },
+      ];
     }),
+    map(([documents, metadata]) => '' !== metadata.title),
   );
   displayFullData = false;
 
   constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {
-    this.store.dispatch(DocumentAction.loadDocument())
+    this.store.dispatch(DocumentAction.loadDocument());
+    this.store.dispatch(DocumentAction.loadDocumentMetadata());
   }
 
   filterChange(filter: string): void {
@@ -94,7 +105,10 @@ export class DocumentComponent implements OnInit {
 
   displayData(displayFullData: boolean) {
     this.displayFullData = displayFullData;
-    this.dataSource.data = !displayFullData ? this.originalData.slice(0, LIMIT_DISPLAYED_ROWS) : this.originalData;
+    this.dataSource.data = !displayFullData ? this.originalData.slice(0, this.metadata.displayedRowsLimit) : this.originalData;
   }
 
+  getIcon(url: string): string {
+    return environment.cms.endpoint + url;
+  }
 }

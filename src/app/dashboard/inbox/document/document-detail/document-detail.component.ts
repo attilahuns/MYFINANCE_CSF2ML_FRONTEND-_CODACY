@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { getDocumentDetailMetadata } from '../state/document.reducer';
+import * as DocumentAction from "../state/document.actions";
 
 @Component({
   selector: 'f2ml-document-detail',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentDetailComponent implements OnInit {
 
-  constructor() { }
+  metadata$ = this.store.select(getDocumentDetailMetadata)
+
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.store.dispatch(DocumentAction.loadDocumentMetadata());
   }
 
 }

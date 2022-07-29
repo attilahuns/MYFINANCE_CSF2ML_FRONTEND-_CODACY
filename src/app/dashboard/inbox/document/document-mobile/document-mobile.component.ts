@@ -8,7 +8,7 @@ import { Document } from '../document';
 })
 export class DocumentMobileComponent implements OnInit {
 
-  @Input() columns: { name: string, header: string, value: CallableFunction }[] = [];
+  @Input() columns: { name: string, header: string, value: CallableFunction, metadata?: any }[] = [];
   @Input() dataSource: Document[] = [];
 
   constructor() { }

@@ -1,17 +1,15 @@
 @use 'variables' as v;
 
-.detail-document{
+.detail-document {
   margin: 20px;
   background-color: v.$color-font-primary-in-filled-background;
   border-left: 4px solid v.$color-background-edge;
   border-radius: 0 10px 10px 0;
 }
-
-.btnContainer{
+.btnContainer {
   display: flex;
   flex-direction: row-reverse;
-
-  button{
+  button {
     background-color: v.$color-primary;
     color: v.$color-font-primary-in-filled-background;
     padding: 4px 25px;
@@ -21,9 +19,12 @@
 
     margin: 20px 10px 10px 0;
   }
+  button:hover {
+    background-color: v.$color-background-primary;
+    color: v.$color-font-primary-in-filled-background;
+  }
 }
-
-.pdf-container{
+.pdf-container {
   padding: 10px;
   margin: 0 auto;
   height: 700px

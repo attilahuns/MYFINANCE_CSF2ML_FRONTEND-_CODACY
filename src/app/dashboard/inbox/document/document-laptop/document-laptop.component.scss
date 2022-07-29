@@ -1,6 +1,12 @@
 @use 'breakpoints' as device;
 @import 'variables';
 
+.document-laptop__container {
+  display: flex;
+}
+.document-laptop__table {
+  flex: 1;
+}
 .document-table__header {
   color: $color-font-primary-in-filled-background;
   background-color: $color-background-primary;
@@ -52,12 +58,13 @@
   &:last-child {
     padding: 0 0.25em !important;
   }
-  .center-image{
+  .center-image {
     text-align: center;
   }
-  img{
-    width: 50%;
+  img {
+    width: 40%;
     text-align: center;
+    cursor: pointer;
   }
 }
 .mat-row.is-highlited td

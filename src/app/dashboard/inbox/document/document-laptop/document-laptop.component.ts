@@ -14,7 +14,7 @@ export class DocumentLaptopComponent implements OnInit, AfterViewInit, OnDestroy
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  @Input() columns: { name: string, header: string, sortable: boolean, value: CallableFunction }[] = [];
+  @Input() columns: { name: string, header: string, sortable: boolean, value: CallableFunction, metadata?: any }[] = [];
   displayedColumns: string[] = [];
   @Input() dataSource!: MatTableDataSource<Document>;
   @Output() sortChange = new EventEmitter<MatSort>();
@@ -36,4 +36,5 @@ export class DocumentLaptopComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
+
 }

@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Document } from '../document';
 import * as DocumentAction from './document.actions';
+import { DocumentService } from '../document.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,17 @@ export class DocumentEffect {
     )
   });
 
-  constructor(private actions: Actions) { }
+  loaddocumentMetadata$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(DocumentAction.loadDocumentMetadata),
+      mergeMap(() => this.documentService.getMetadata().pipe(
+        map(metadata => DocumentAction.loadDocumentMetadataSuccess({metadata})),
+        catchError(error => {
+          return of(DocumentAction.loadDocumentMetadataFailure({error}))
+        })
+      ))
+    )
+  });
+
+  constructor(private actions: Actions, private documentService: DocumentService) { }
 }

@@ -36,8 +36,8 @@
       background-color: $color-background-primary;
     }
   }
-  img{
-    width: 24%;
+  img {
+    width: 40px;
   }
 }
 .document-tile__row-value {
@@ -53,9 +53,9 @@
     display: flex;
     flex-direction: column;
   }
-  .document-tile__cell{
-    img{
-      width: 20%;
+  .document-tile__cell {
+    img {
+      width: 40px;
     }
   }
 }

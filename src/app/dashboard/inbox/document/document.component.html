@@ -1,30 +1,38 @@
-<f2ml-default-template *ngIf="(documents$ | async)?.length as documents">
-  <f2ml-default-card [title]="title" main>
+<f2ml-default-template>
+  <f2ml-default-card *ngIf="content$ | async" [title]="metadata.title" main>
     <div class="document__container" content>
-      <!--search -->
-      <div class="document-search__container">
-        <f2ml-search-input (searchValue)="filterChange($event)"></f2ml-search-input>
-      </div>
+      <ng-template [ngIf]="originalData.length">
+        <!--search -->
+        <div class="document-search__container">
+          <f2ml-search-input (searchValue)="filterChange($event)"></f2ml-search-input>
+        </div>
 
-      <!-- Laptop -->
-      <ng-template [ngIf]="deviceDetector.isLaptop()">
-        <f2ml-document-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)"></f2ml-document-laptop>
+        <!-- Mobile & Tablet -->
+        <ng-template [ngIf]="!deviceDetector.isLaptop()">
+          <f2ml-document-mobile [dataSource]="dataSource.filteredData" [columns]="columns"></f2ml-document-mobile>
+        </ng-template>
+
+        <!-- Laptop -->
+        <ng-template [ngIf]="deviceDetector.isLaptop()">
+          <f2ml-document-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)"></f2ml-document-laptop>
+        </ng-template>
+
+        <!--View more | less -->
+        <div class="document-viewmore__container" *ngIf="dataSource.filteredData.length">
+          <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData" [viewMoreMessage]="metadata.viewMoreLabel" [viewLessMessage]="metadata.viewLessLabel"></f2ml-view-more>
+        </div>
+
+        <!--No data message -->
+        <div class="document-nodata__container" *ngIf="!dataSource.filteredData.length">
+          <span class="document-nodata__message">{{ metadata.emptyDocumentListMessage }}</span>
+        </div>
       </ng-template>
-
-      <!-- Mobile & Tablet -->
-       <ng-template [ngIf]="!deviceDetector.isLaptop()">
-        <f2ml-document-mobile [dataSource]="dataSource.filteredData" [columns]="columns"></f2ml-document-mobile>
+      <ng-template [ngIf]="!originalData.length">
+        <!--No data message -->
+        <div class="document-nodata__container">
+          <span class="document-nodata__message">{{ metadata.documentListNotFound }}</span>
+        </div>
       </ng-template>
-
-      <!--View more | less -->
-      <div class="document-viewmore__container" *ngIf="dataSource.filteredData.length">
-        <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData"></f2ml-view-more>
-      </div>
-
-      <!--No data message -->
-      <div class="document-nodata__container" *ngIf="!dataSource.filteredData.length">
-        <span class="document-nodata__message">NO DATA TO DISPLAY</span>
-      </div>
     </div>
   </f2ml-default-card>
 </f2ml-default-template>

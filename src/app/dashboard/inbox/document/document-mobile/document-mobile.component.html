@@ -5,9 +5,9 @@
       <table class="document-tile__table">
         <tr class="document-tile__row" *ngFor="let column of columns" >
           <td class="document-tile__row-label document-tile__cell">{{ column.header }}:</td>
-          <td class="document-tile__row-value document-tile__cell" *ngIf="'download' !== column.name && 'view' !== column.name">{{ column.value(row) }}</td>
-          <td class="document-tile__row-value document-tile__cell" *ngIf="'download' == column.name || 'view' == column.name">
-            <img routerLink="detail" src="{{column.value(row)}}"/>
+          <td class="document-tile__row-value document-tile__cell" *ngIf="!['download', 'view'].includes(column.name)">{{ column.value(row) }}</td>
+          <td class="document-tile__row-value document-tile__cell" *ngIf="['download', 'view'].includes(column.name)">
+            <img routerLink="detail" [alt]="column.metadata.alt" [src]="column.value(row)"/>
           </td>
         </tr>
       </table>
