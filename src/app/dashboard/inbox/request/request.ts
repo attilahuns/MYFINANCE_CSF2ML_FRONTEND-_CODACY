@@ -9,6 +9,24 @@ export interface Request {
   status: RequestStatus;
   date: string;
 }
+
+export interface RequestMetadata {
+  title: string;
+  ctaNewRequest: {
+    label: string;
+    url: string;
+  },
+  requestsLabel: string;
+  requestDetailsLabel: string;
+  statusLabel: string;
+  dateSubmittedLabel: string;
+  viewLessLabel: string;
+  viewMoreLabel: string;
+  displayedRowsLimit: number;
+  emptyRequestListMessage: string;
+  emptyListMessage: string;
+}
+
 export interface RequestForm {
   id: number;
   title: string;

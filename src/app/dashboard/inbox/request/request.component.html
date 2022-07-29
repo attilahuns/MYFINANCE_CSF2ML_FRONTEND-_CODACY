@@ -1,29 +1,37 @@
-<f2ml-default-template *ngIf="(requests$ | async)?.length as requests">
-  <f2ml-default-card [title]="title" main>
+<f2ml-default-template>
+  <f2ml-default-card *ngIf="content$ | async" [title]="metadata.title" main>
     <div class="request__container" content>
-      <!--search -->
-      <div class="request__header__container">
-        <f2ml-search-input class="request-search__container" (searchValue)="filterChange($event)"></f2ml-search-input>
-        <div class="request__actions__container">
-          <button class="request__header__button" mat-raised-button color="primary" [routerLink]="'new'">Make a new request</button>
+      <ng-template [ngIf]="originalData.length">
+        <!--search -->
+        <div class="request__header__container">
+          <f2ml-search-input class="request-search__container" (searchValue)="filterChange($event)"></f2ml-search-input>
+          <div class="request__actions__container">
+            <button class="request__header__button" mat-raised-button color="primary" [routerLink]="'new'">{{ metadata.ctaNewRequest.label }}</button>
+          </div>
         </div>
-      </div>
-      <!-- Laptop -->
-      <ng-template [ngIf]="deviceDetector.isLaptop()">
-        <f2ml-request-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)"></f2ml-request-laptop>
+        <!-- Laptop -->
+        <ng-template [ngIf]="deviceDetector.isLaptop()">
+          <f2ml-request-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)"></f2ml-request-laptop>
+        </ng-template>
+        <!-- Mobile & Tablet -->
+        <ng-template [ngIf]="!deviceDetector.isLaptop()">
+          <f2ml-request-mobile [dataSource]="dataSource.filteredData" [columns]="columns"></f2ml-request-mobile>
+        </ng-template>
+        <!--View more | less -->
+        <div class="request-viewmore__container" *ngIf="dataSource.filteredData.length">
+          <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData" [viewMoreMessage]="metadata.viewMoreLabel" [viewLessMessage]="metadata.viewLessLabel"></f2ml-view-more>
+        </div>
+        <!--No data message -->
+        <div class="request-nodata__container" *ngIf="!dataSource.filteredData.length">
+          <span class="request-nodata__message">{{ metadata.emptyListMessage }}</span>
+        </div>
       </ng-template>
-      <!-- Mobile & Tablet -->
-      <ng-template [ngIf]="!deviceDetector.isLaptop()">
-        <f2ml-request-mobile [dataSource]="dataSource.filteredData" [columns]="columns"></f2ml-request-mobile>
+      <ng-template [ngIf]="!originalData.length">
+        <!--No data message -->
+        <div class="request-nodata__container">
+          <span class="request-nodata__message">{{ metadata.emptyRequestListMessage }}</span>
+        </div>
       </ng-template>
-      <!--View more | less -->
-      <div class="request-viewmore__container" *ngIf="dataSource.filteredData.length">
-        <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData"></f2ml-view-more>
-      </div>
-      <!--No data message -->
-      <div class="request-nodata__container" *ngIf="!dataSource.filteredData.length">
-        <span class="request-nodata__message">NO DATA TO DISPLAY</span>
-      </div>
     </div>
   </f2ml-default-card>
 </f2ml-default-template>

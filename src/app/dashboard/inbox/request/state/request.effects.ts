@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Request, RequestForm, RequestStatus } from '../request';
+import { RequestService } from '../request.service';
 import * as RequestAction from './request.actions';
 
 @Injectable({
@@ -81,5 +82,17 @@ export class RequestEffect {
     )
   });
 
-  constructor(private actions: Actions) { }
+  loadRequestMetadata$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(RequestAction.loadRequestMetadata),
+      mergeMap(() => this.requestService.getMetadata().pipe(
+        map(metadata => RequestAction.loadRequestMetadataSuccess({metadata})),
+        catchError(error => {
+          return of(RequestAction.loadRequestMetadataFailure({error}))
+        })
+      ))
+    )
+  });
+
+  constructor(private actions: Actions, private requestService: RequestService) { }
 }
