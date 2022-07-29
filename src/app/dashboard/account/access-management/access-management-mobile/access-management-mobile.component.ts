@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MatInput } from '@angular/material/input';
-import { AccessManagement } from '../access-management';
+import { environment } from 'src/environments/environment';
+import { AccessManagement, AccessManagementMetadata } from '../access-management';
 import { AccessManagementBaseComponent } from '../access-management-base.component';
 
 @Component({
@@ -14,9 +15,14 @@ export class AccessManagementMobileComponent extends AccessManagementBaseCompone
 
   @Input() columns: { name: string, header: string, value: CallableFunction }[] = [];
   @Input() dataSource: AccessManagement[] = [];
+  @Input() metadata!: AccessManagementMetadata;
 
   override ngOnInit(): void {
     this.columns = this.columns.slice(0, this.columns.length - 1);
     super.ngOnInit();
+  }
+
+  getIconUrl(icon: string) {
+    return environment.cms.endpoint + icon;
   }
 }

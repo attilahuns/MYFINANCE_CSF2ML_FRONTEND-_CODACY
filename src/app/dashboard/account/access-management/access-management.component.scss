@@ -9,6 +9,9 @@
 }
 .access-management__header__button {
   padding: 0.5em 2em;
+  &:hover:enabled{
+    background-color: $color-background-primary;
+  }
 }
 
 .access-management__footer__container {
@@ -23,6 +26,9 @@
 }
 .access-management__footer__button-update {
   padding: 0.5em 2em;
+  &:hover:enabled{
+    background-color: $color-background-primary;
+  }
 }
 
 @include device.viewport(mobile) {

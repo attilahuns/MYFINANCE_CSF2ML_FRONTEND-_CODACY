@@ -13,10 +13,10 @@
       </table>
       <div class="access-management-tile__row-value access-management-tile__cell">
         <div class="access-management-tile__actions__container">
-          <mat-icon class="access-management-tile__action" (click)="editRow(row)" *ngIf="!isOnEdit(onEditElement, row)">edit</mat-icon>
-          <mat-icon class="access-management-tile__action" (click)="deleteRow(row)" *ngIf="!isOnEdit(onEditElement, row)">delete</mat-icon>
-          <mat-icon class="access-management-tile__action" (click)="saveRow(row)" *ngIf="isOnEdit(onEditElement, row)">check</mat-icon>
-          <mat-icon class="access-management-tile__action" (click)="cancelRow(row)" *ngIf="isOnEdit(onEditElement, row)">close</mat-icon>
+          <img class="access-management-table__action" [src]="getIconUrl(metadata.tableMetadata.editIcon)" (click)="editRow(row)" *ngIf="!isOnEdit(onEditElement, row)"/>
+          <img class="access-management-table__action" [src]="getIconUrl(metadata.tableMetadata.deleteIcon)" (click)="deleteRow(row)" *ngIf="!isOnEdit(onEditElement, row)"/>
+          <img class="access-management-table__action" [src]="getIconUrl(metadata.tableMetadata.validateIcon)" (click)="saveRow(row)" *ngIf="isOnEdit(onEditElement, row)"/>
+          <img class="access-management-table__action" [src]="getIconUrl(metadata.tableMetadata.discardIcon)" (click)="cancelRow(row)" *ngIf="isOnEdit(onEditElement, row)"/>
         </div>
       </div>
     </div>

@@ -3,7 +3,8 @@ import { MatInput } from '@angular/material/input';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { AccessManagement } from '../access-management';
+import { environment } from 'src/environments/environment';
+import { AccessManagement, AccessManagementMetadata } from '../access-management';
 import { AccessManagementBaseComponent } from '../access-management-base.component';
 
 @Component({
@@ -20,6 +21,7 @@ export class AccessManagementLaptopComponent  extends AccessManagementBaseCompon
   displayedColumns: string[] = [];
   @Input() dataSource!: MatTableDataSource<AccessManagement>;
   @Output() sortChange = new EventEmitter<MatSort>();
+  @Input() metadata!: AccessManagementMetadata;
 
   private sub!: Subscription;
 
@@ -38,6 +40,10 @@ export class AccessManagementLaptopComponent  extends AccessManagementBaseCompon
   override ngOnDestroy(): void {
     this.sub.unsubscribe();
     super.ngOnDestroy();
+  }
+
+  getIconUrl(icon: string) {
+    return environment.cms.endpoint + icon;
   }
 
 }

@@ -1,12 +1,16 @@
-<f2ml-default-template *ngIf="(accessManagementItems$ | async)?.length as accessManagementItems">
-  <f2ml-default-card [title]="title" main>
+<f2ml-default-template *ngIf="content$ | async">
+  <f2ml-default-card [title]="metadata.title" main>
     <div class="access-management__container" content>
       <div class="access-management__header__container">
         <div class="access-management__header__title-container">
-          <h3 class="access-management__header__title">Who do you want to give access to ?</h3>
+          <h3 class="access-management__header__title">{{ metadata.accessQuestionLabel }}</h3>
         </div>
         <div class="access-management__actions__container">
-          <button class="access-management__header__button" mat-raised-button color="primary" (click)="addRow()">Add new access</button>
+          <div [matTooltip]="dataSource.filteredData.length >= metadata.tableMetadata.maxAccessNumber ? metadata.maxAccessExceededLabel : ''" matTooltipPosition="above">
+            <button class="access-management__header__button" mat-raised-button color="primary" (click)="addRow()" [disabled]="dataSource.filteredData.length >= metadata.tableMetadata.maxAccessNumber">
+              {{ metadata.newAccessLabel }}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -15,6 +19,7 @@
         <f2ml-access-management-mobile
           [dataSource]="dataSource.filteredData"
           [columns]="columns"
+          [metadata]="metadata"
           [onEdit$]="onEdit$"
           [onCancelEdit$]="onCancelEdit$"
           (editAccessManagement)="editRow($event)"
@@ -30,6 +35,7 @@
         <f2ml-access-management-laptop
           [dataSource]="dataSource"
           [columns]="columns"
+          [metadata]="metadata"
           (sortChange)="sortChange($event)"
           [onEdit$]="onEdit$"
           [onCancelEdit$]="onCancelEdit$"
@@ -43,8 +49,8 @@
       </ng-template>
 
       <div class="access-management__footer__container">
-        <p class="access-management__footer__warning-text">Be careful who you give access to, because the manager will access all information in the space including modifying the contract payment</p>
-        <button class="access-management__footer__button-update" mat-raised-button color="primary">Update</button>
+        <p class="access-management__footer__warning-text">{{ metadata.accessWarningLabel }}</p>
+        <button class="access-management__footer__button-update" mat-raised-button color="primary">{{ metadata.updateAccessLabel }}</button>
      </div>
     </div>
   </f2ml-default-card>

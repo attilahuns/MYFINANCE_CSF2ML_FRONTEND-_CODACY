@@ -73,6 +73,7 @@
 }
 .access-management-table__action {
   cursor: pointer;
+  width: 30px;
 }
 
 :host::ng-deep.access-management-input__input.mat-form-field .mat-input-element {
