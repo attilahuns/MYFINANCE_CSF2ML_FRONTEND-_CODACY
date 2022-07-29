@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { Request, RequestStatus } from '../request';
+import { Request, RequestForm, RequestStatus } from '../request';
 import * as RequestAction from './request.actions';
 
 @Injectable({
@@ -30,6 +30,34 @@ export class RequestEffect {
 
   ];
 
+  forms: RequestForm[] = [
+    {
+      id: 1,
+      title: 'Modify your personal details',
+    },
+    {
+      id: 2,
+      title: 'Modify your bank details',
+    },
+    {
+      id: 3,
+      title: 'Report an accident',
+    },
+    {
+      id: 4,
+      title: 'Rent transfer toward a company',
+    },
+    {
+      id: 5,
+      title: 'Rent transfer toward a client',
+    },
+    {
+      id: 6,
+      title: 'Questions - Make contact',
+    },
+
+  ];
+
   loadrequestItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(RequestAction.loadRequest),
@@ -37,6 +65,17 @@ export class RequestEffect {
         map(requests => RequestAction.loadRequestSuccess({requests})),
         catchError(error => {
           return of(RequestAction.loadRequestFailure({error}))
+        })
+      ))
+    )
+  });
+  loadrequestForms$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(RequestAction.loadRequestForms),
+      mergeMap(() => of(this.forms).pipe(
+        map(requestForms => RequestAction.loadRequestFormsSuccess({requestForms})),
+        catchError(error => {
+          return of(RequestAction.loadRequestFormsFailure({error}))
         })
       ))
     )

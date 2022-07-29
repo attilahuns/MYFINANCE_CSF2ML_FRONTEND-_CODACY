@@ -9,3 +9,7 @@ export interface Request {
   status: RequestStatus;
   date: string;
 }
+export interface RequestForm {
+  id: number;
+  title: string;
+}

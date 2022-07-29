@@ -10,16 +10,20 @@ import { requestReducer } from './state/request.reducer';
 import { RequestEffect } from './state/request.effects';
 import { RequestLaptopComponent } from './request-laptop/request-laptop.component';
 import { RequestMobileComponent } from './request-mobile/request-mobile.component';
+import { NewRequestComponent } from './new-request/new-request.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     RequestComponent,
     RequestLaptopComponent,
-    RequestMobileComponent
+    RequestMobileComponent,
+    NewRequestComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RequestRoutingModule,
     SharedModule,
     StoreModule.forFeature('request', requestReducer),

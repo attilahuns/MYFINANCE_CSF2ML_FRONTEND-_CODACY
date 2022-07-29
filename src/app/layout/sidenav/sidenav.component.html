@@ -26,7 +26,6 @@
             <mat-list-item class="menu-navlist__item is-sub"
               [routerLink]="subItem.path"
               routerLinkActive="is-active"
-              [routerLinkActiveOptions]="{exact: true}"
               (click)="!deviceDetector.isLaptop() && close()"
               *ngFor="let subItem of item.subMenu"
             >

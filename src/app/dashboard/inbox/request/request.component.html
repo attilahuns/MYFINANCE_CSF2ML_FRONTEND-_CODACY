@@ -5,7 +5,7 @@
       <div class="request__header__container">
         <f2ml-search-input class="request-search__container" (searchValue)="filterChange($event)"></f2ml-search-input>
         <div class="request__actions__container">
-          <button class="request__header__button" mat-raised-button color="primary">Make a new request</button>
+          <button class="request__header__button" mat-raised-button color="primary" [routerLink]="'new'">Make a new request</button>
         </div>
       </div>
       <!-- Laptop -->

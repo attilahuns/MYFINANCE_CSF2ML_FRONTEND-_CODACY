@@ -1,0 +1,55 @@
+<f2ml-default-template>
+  <div class="new-request__container" main>
+    <div class="new-request__title__container">
+      <h1 class="new-request__title">New request ?</h1>
+      <h2 class="new-request__subtitle">Make a request page.</h2>
+    </div>
+    <div class="new-request__card__container" *ngIf="displayedForm$ | async as displayedFormId">
+      <f2ml-default-card [title]="title">
+        <div class="new-request__content__container" *ngIf="forms$ | async as forms" content>
+          <div class="new-request__cta-block__container">
+            <div class="new-request__cta-list__container">
+              <div class="new-request__cta__container" *ngFor="let form of forms">
+                <button class="new-request__cta" (click)="displayForm(form.id)" [class.is-active]="form.id === displayedFormId" mat-flat-button>{{ form.title }}</button>
+              </div>
+            </div>
+          </div>
+          <div class="new-request__form__container">
+            <div class="new-request__form-block__container" [class.is-active]="form.id === displayedFormId" *ngFor="let form of forms">
+              <div class="new-request__legend__container">
+                <span class="new-request__legend">{{ form.title }}</span>
+              </div>
+              <form class="new-request__form" novalidate (ngSubmit)="submit()" [formGroup]="exampleForm">
+                <div class="new-request__bank-name__container new-request__input__container">
+                  <mat-label class="new-request__bank-name__label new-request__input__label">Bank name</mat-label>
+                  <mat-form-field class="new-request__bank-name__input new-request__input" appearance="legacy" [hideRequiredMarker]="true">
+                    <mat-label></mat-label>
+                    <input formControlName="bankName" type="text" matInput placeholder="XXXXXXXXX" />
+                    <mat-error>
+                      <p ngxError="pattern">Bank name not valid</p>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="new-request__bank-certificate__container new-request__input__container">
+                  <mat-label class="new-request__bank-certificate__label new-request__input__label">Bank certificate</mat-label>
+                  <mat-form-field class="new-request__bank-certificate__input new-request__input" appearance="legacy" [hideRequiredMarker]="true">
+                    <mat-label></mat-label>
+                    <input formControlName="bankCertificate" type="text" matInput placeholder="XXXXXXXXX" />
+                    <mat-error>
+                      <p ngxError="pattern">Bank certificate not valid</p>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="new-request__submit__container">
+                  <button class="new-request__submit__button" mat-raised-button color="primary" type="submit" [disabled]="!exampleForm.valid">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </f2ml-default-card>
+    </div>
+  </div>
+</f2ml-default-template>
