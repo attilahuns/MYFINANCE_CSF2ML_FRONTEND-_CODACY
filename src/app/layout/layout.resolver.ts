@@ -17,6 +17,7 @@ export class LayoutResolver implements Resolve<boolean> {
     this.store.dispatch(LayoutAction.loadHeaderItems());
     this.store.dispatch(LayoutAction.loadFooterItems());
     this.store.dispatch(LayoutAction.loadSidenavMenuItems());
+    this.store.dispatch(LayoutAction.loadBannerItems());
 
     return combineLatest([this.store.select(getFooterItems), this.store.select(getSidenavMenuItems), this.store.select(getHeaderItems)]).pipe(
       filter(([footer, menu, header]) => footer.length > 0 && menu.length > 0 && header.length > 0),

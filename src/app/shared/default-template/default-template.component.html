@@ -1,13 +1,15 @@
-<div class="template__container">
-  <f2ml-breadcrumb class="breadcrumb__container"></f2ml-breadcrumb>
-  <div class="template__grid">
-    <div class="template__main">
-      <ng-content select="[main]"></ng-content>
-    </div>
-    <div class="template__side" *ngIf="!hiddenSideFaq">
-      <f2ml-faq-tile></f2ml-faq-tile>
-      <f2ml-communication-tile *ngIf="deviceDetector.isLaptop()"></f2ml-communication-tile>
+<div class="default-template__container">
+  <div class="template__container">
+    <f2ml-breadcrumb class="breadcrumb__container"></f2ml-breadcrumb>
+    <div class="template__grid">
+      <div class="template__main">
+        <ng-content select="[main]"></ng-content>
+      </div>
+      <div class="template__side" *ngIf="!hiddenSideFaq">
+        <f2ml-faq-tile></f2ml-faq-tile>
+        <f2ml-communication-tile *ngIf="deviceDetector.isLaptop()"></f2ml-communication-tile>
+      </div>
     </div>
   </div>
+  <f2ml-communication-tile *ngIf="!deviceDetector.isLaptop()"></f2ml-communication-tile>
 </div>
-<f2ml-communication-tile *ngIf="!deviceDetector.isLaptop()"></f2ml-communication-tile>

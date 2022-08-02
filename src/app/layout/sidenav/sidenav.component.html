@@ -44,6 +44,7 @@
       <div class="menu-sidenav__content-container">
           <!-- Main content -->
           <main class="menu-sidenav__content">
+            <f2ml-banner [banners]="banners" *ngIf="banners$ | async as banners"></f2ml-banner>
             <router-outlet></router-outlet>
           </main>
           <div class="menu-sidenav__content-footer" *ngIf="footerItems$ | async as footerItems">

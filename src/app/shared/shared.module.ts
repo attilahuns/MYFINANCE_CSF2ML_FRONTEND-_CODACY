@@ -14,6 +14,7 @@ import { SearchInputComponent } from './search-input/search-input.component';
 import { FormsModule } from '@angular/forms';
 import { HomepageTemplateComponent } from './homepage-template/homepage-template.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BannerComponent } from './banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommunicationTileComponent,
     ViewMoreComponent,
     SearchInputComponent,
-    HomepageTemplateComponent
+    HomepageTemplateComponent,
+    BannerComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     NgxExtendedPdfViewerModule,
     CommunicationTileComponent,
-    HomepageTemplateComponent
+    HomepageTemplateComponent,
+    BannerComponent
   ]
 })
 export class SharedModule { }

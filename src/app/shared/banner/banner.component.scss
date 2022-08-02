@@ -1,0 +1,58 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.banner__container {
+  display: flex;
+  min-height: 64px;
+}
+.banner__content {
+  flex: 1;
+  display: flex;
+  background-color: $color-background-block;
+}
+.banner__messages__container {
+  flex: 1;
+  display: flex
+}
+.banner__message__container {
+  flex: 1;
+  display: flex;
+}
+.banner__message__block {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 1em;
+  gap: 1em;
+}
+.banner__message {
+  color: $color-font-sub-title;
+  font-size: $font-size-fourth;
+  font-weight: bold;
+  margin: 0;
+}
+.banner__action__button {
+  &:hover {
+    background-color: $color-background-primary;
+  }
+}
+.banner__icon__container {
+  display: flex;
+  background-color: $color-background-edge;
+  height: 100%;
+  padding: 1em 0.5em;
+}
+.banner__close__container {
+  margin-left: auto;
+}
+.banner__close__icon {
+  cursor: pointer;
+}
+
+@include device.viewport(mobile) {
+  .banner__message__block {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}

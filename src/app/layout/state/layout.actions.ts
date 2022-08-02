@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { Banner } from "src/app/shared/banner/banner";
 import { FooterItem } from "../../shared/footer/footer-item";
 import { HeaderMenuItem } from "../header/header-menu-item";
 import { SidenavMenuItem } from "../sidenav/sidenav-menu-item";
@@ -19,3 +20,6 @@ export const openSidenavMenu = createAction('[SIDENAV MENU] OPEN SIDENAV MENU');
 export const closeSidenavMenu = createAction('[SIDENAV MENU] CLOSE SIDENAV MENU');
 export const toggleSidenavMenu = createAction('[SIDENAV MENU] TOGGLE SIDENAV MENU');
 
+export const loadBannerItems = createAction('[BANNER] LOAD ITEMS');
+export const loadBannerItemsSuccess = createAction('[BANNER] LOAD ITEMS SUCCESS', props<{bannerItems: Banner[]}>());
+export const loadBannerItemsFailure = createAction('[BANNER] LOAD ITEMS FAILURE', props<{error: string}>());

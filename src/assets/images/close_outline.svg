@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_407" data-name="Rectangle 407" width="32" height="32" fill="#fff" opacity="0"/>
+    </clipPath>
+  </defs>
+  <g id="_0001_Close_Outline" data-name="0001_Close_Outline" clip-path="url(#clip-path)">
+    <path id="Tracé_34" data-name="Tracé 34" d="M25.14,7.54l-.68-.68L16,15.32,7.54,6.86l-.68.68L15.32,16,6.86,24.46l.68.68L16,16.68l8.46,8.46.68-.68L16.68,16Z" fill="#fff"/>
+  </g>
+</svg>

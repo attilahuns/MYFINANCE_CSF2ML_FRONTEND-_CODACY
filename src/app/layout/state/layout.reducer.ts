@@ -1,4 +1,5 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
+import { Banner } from "src/app/shared/banner/banner";
 import { AppState } from "src/app/state/app.state";
 import { FooterItem } from "../../shared/footer/footer-item";
 import { HeaderMenuItem } from "../header/header-menu-item";
@@ -13,6 +14,7 @@ export interface layoutState {
   sidenavMenuItems: SidenavMenuItem[],
   headerItems: HeaderMenuItem[],
   footerItems: FooterItem[],
+  bannerItems: Banner[],
   error: string;
 }
 export const LayoutInitialState: layoutState = {
@@ -20,6 +22,7 @@ export const LayoutInitialState: layoutState = {
   sidenavMenuItems: [],
   headerItems: [],
   footerItems: [],
+  bannerItems: [],
   error: '',
 }
 
@@ -27,6 +30,7 @@ const getLayoutState = createFeatureSelector<layoutState>('layout');
 export const getHeaderItems = createSelector(getLayoutState, state => state.headerItems);
 export const getFooterItems = createSelector(getLayoutState, state => state.footerItems);
 export const getSidenavMenuItems = createSelector(getLayoutState, state => state.sidenavMenuItems);
+export const getBannerItems = createSelector(getLayoutState, state => state.bannerItems);
 export const getSidenavToggle = createSelector(getLayoutState, state => state.sidenavToggle);
 export const getError = createSelector(getLayoutState, state => state.error);
 
@@ -90,6 +94,20 @@ export const layoutReducer = createReducer<layoutState>(
     return {
       ...state,
       sidenavToggle: !state.sidenavToggle,
+    }
+  }),
+  on(LayoutAction.loadBannerItemsSuccess, (state, action): layoutState => {
+    return {
+      ...state,
+      bannerItems: action.bannerItems,
+      error: '',
+    }
+  }),
+  on(LayoutAction.loadFooterItemsFailure, (state, action): layoutState => {
+    return {
+      ...state,
+      bannerItems: [],
+      error: action.error,
     }
   }),
 )

@@ -1,0 +1,20 @@
+<div class="banner__container" *ngIf="display && banners.length">
+  <div class="banner__content" *ngIf="timer$ | async as currentIndex">
+    <div class="banner__info__container banner__icon__container">
+      <img class="banner__info__icon  banner__icon" src="/assets/images/info_outline.svg" alt="Notification">
+    </div>
+    <div class="banner__messages__container">
+      <ng-container *ngFor="let banner of banners; let i = index">
+        <div class="banner__message__container" *ngIf="currentIndex === i + 1">
+          <div @slideIn class="banner__message__block">
+            <p class="banner__message">{{ banner.message }}</p>
+            <button class="banner__action__button" mat-raised-button color="primary" [routerLink]="banner.cta.path" *ngIf="banner.cta">{{ banner.cta.title }}</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="banner__close__container banner__icon__container">
+      <img class="banner__close__icon banner__icon" src="/assets/images/close_outline.svg" alt="Close" (click)="close()">
+    </div>
+  </div>
+</div>
