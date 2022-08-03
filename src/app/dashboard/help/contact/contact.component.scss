@@ -2,24 +2,26 @@
 @import 'variables';
 
 .contact__card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 4em; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4em;
 }
 
 .contact__card__content {
-    margin-top: 2em;
-    text-align: center;
-    .title {
-        font-size: $font-size-fourth;
-        color: $color-font-subtitle;
-        font-weight: bold;
-        line-height: 0;
-    }
-    .is-link {
-        color: $color-primary;
-        font-weight: bold;
-    }
+  margin-top: 2em;
+  text-align: center;
+  .title {
+    font-size: $font-size-fourth;
+    color: $color-font-subtitle;
+    font-weight: bold;
+    line-height: 0;
+  }
 }
 
+::ng-deep .contact__wysiwyg {
+  a {
+    color: $color-primary;
+    font-weight: bold;
+  }
+}

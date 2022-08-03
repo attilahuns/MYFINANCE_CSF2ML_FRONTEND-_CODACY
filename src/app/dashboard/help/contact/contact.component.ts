@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, tap, map, filter } from 'rxjs';
+import { ContactMetadata } from './contact';
+import * as ContactAction from "./state/contact.actions";
+import { getContactMetadata } from './state/contact.reducer';
 
 @Component({
   selector: 'f2ml-contact',
@@ -7,9 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  contact$ = this.store.select(getContactMetadata).pipe(
+    filter(metadata => '' !== metadata.title),
+  )
+
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.store.dispatch(ContactAction.loadContactMetadataItems())
   }
 
 }
