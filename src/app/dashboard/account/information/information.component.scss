@@ -12,7 +12,7 @@
   font-size: $font-size-fourth;
   font-weight: bold;
   text-align: center;
-  .is-link {
+  ::ng-deep.information__wysiwyg-displayer a {
     color: $color-primary;
   }
 }

@@ -1,5 +1,5 @@
-<f2ml-default-template *ngIf="informations$ | async as informations">
-  <f2ml-default-card main [title]="title">
+<f2ml-default-template>
+  <f2ml-default-card *ngIf="content$ | async" [title]="metadata.title" main>
     <div class="information__card" content>
       <div class="information__card__content">
         <div class="information__tile__container">
@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="information__card__footer">
-        <p>Need to update your personal information ? <span class="is-link">Fill a form</span></p>
+        <f2ml-wysiwyg-displayer class="information__wysiwyg-displayer" [html]="metadata.updateInformation"></f2ml-wysiwyg-displayer>
       </div>
     </div>
   </f2ml-default-card>

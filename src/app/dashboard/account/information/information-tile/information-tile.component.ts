@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Information, InformationData } from '../information';
+import { Information, InformationItem } from '../information';
 
 @Component({
   selector: 'f2ml-information-tile',
@@ -18,10 +18,10 @@ export class InformationTileComponent implements OnInit {
   hash(value: string): string {
     return value.replace(/./gi, 'X');
   }
-  isVisible(data: InformationData): boolean {
+  isVisible(data: InformationItem): boolean {
     return this.dataVisibility.some(el => el.label === data.label)
   }
-  toggleVisibility(data: InformationData): void {
+  toggleVisibility(data: InformationItem): void {
     if (this.isVisible(data)) {
       this.dataVisibility = this.dataVisibility.filter(el => el.label !== data.label);
       return;
