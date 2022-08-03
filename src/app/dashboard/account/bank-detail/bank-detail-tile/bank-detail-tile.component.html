@@ -1,0 +1,17 @@
+<div class="bank-detail-tile__container">
+  <div class="bank-detail-tile">
+    <div class="bank-detail-tile__content">
+      <table class="bank-detail-tile__table">
+        <tr class="bank-detail-tile__row" *ngFor="let column of columns">
+          <td class="bank-detail-tile__row-label bank-detail-tile__cell">{{ column.label }}:</td>
+          <td class="bank-detail-tile__row-value bank-detail-tile__cell" *ngIf="!column.isSecrect">{{ column.value }}</td>
+          <td class="bank-detail-tile__row-value bank-detail-tile__cell" *ngIf="column.isSecrect">{{ isVisible(column.value)? column.value : hash(column.value) }}</td>
+          <td class="bank-detail-tile__row-icon bank-detail-tile__cell">
+            <mat-icon *ngIf="column.isSecrect && !isVisible(column.value)" (click)="toggleVisibility(column.value)">visibility_outline</mat-icon>
+            <mat-icon *ngIf="column.isSecrect && isVisible(column.value)" (click)="toggleVisibility(column.value)">visibility_off_outline</mat-icon>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

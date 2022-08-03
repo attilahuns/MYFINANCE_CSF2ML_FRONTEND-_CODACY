@@ -1,111 +1,22 @@
 @use 'breakpoints' as device;
 @import 'variables';
 
-@include device.viewport(laptop){
-  .bank-container{
-    padding-top: 10px;
-    height: 100%;
-    .title{
-      padding-top: 5vh;
-      padding-left: 5vh;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .form-container{
-      padding-top: 5vh;
-      font-size: $font-size-fourth;
-      .example-container .mat-form-field + .mat-form-field {
-        margin-left: 8px;
-      }
-      .label{
-        color: #999999;
-      }
-      .data{
-        color: $color-font-primary;
-      }
-    }
-    .link{
-      font-weight: bold;
-      color: $color-font-primary;
-      padding-top: 8vh;
-      text-align: center;
-    }
-    .link-form{
-      color: $color-primary;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
-}
-@include device.viewport(tablet){
-  .bank-container{
-    .title{
-      padding-top: 5vh;
-      padding-left: 5vh;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .form-container{
-      padding-top: 5vh;
-      font-size: $font-size-fourth;
-      .example-container .mat-form-field + .mat-form-field {
-        margin-left: 8px;
-      }
-      .label{
-        color: #999999;
-      }
-      .data{
-        color: $color-font-primary;
-      }
-    }
-    .link{
-      font-weight: bold;
-      color: $color-font-primary;
-      padding-top: 8vh;
-      text-align: center;
-    }
-    .link-form{
-      color: $color-primary;
-      text-decoration: underline;
-      cursor: pointer;
-    }
+.bank-detail__card__footer {
+  margin-top: 5em;
+  align-self: center;
+  color: $color-font-subtitle;
+  font-size: $font-size-fourth;
+  font-weight: bold;
+  text-align: center;
+  ::ng-deep.bank-detail__wysiwyg-displayer a {
+    color: $color-primary;
   }
 }
 
-.bank-container-mobile{
-  padding: 10px;
-  height: 100%;
-  .title{
-    padding: 2vh;
-    text-align: left;
-    color: $color-font-primary;
-    opacity: 1;
-    font-weight: bold;
-    font-size: $font-size-second;
-  }
-  .form-container{
-    padding-top: 5vh;
-    font-size: $font-size-fourth;
-    .label{
-      color: #999999;
-      float: left;
-      margin: 0;
-    }
-    .data{
-      color: $color-font-primary;
-      margin: 0;
-      padding-left: 50px;
-    }
-  }
-  .link{
-    font-weight: bold;
-    color: $color-font-primary;
-    padding-top: 8vh;
-    text-align: center;
-  }
-  .link-form{
-    color: $color-primary;
-    text-decoration: underline;
-    cursor: pointer;
+@include device.viewport(laptop) {
+  .bank-detail__card__container {
+    padding-top: 10px;
+    height: 100%;
+    margin: 0 20%;
   }
 }

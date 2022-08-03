@@ -1,0 +1,51 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.bank-detail-tile__container {
+  display: flex;
+  flex-direction: column;
+}
+.bank-detail-tile {
+  flex-grow: 1;
+}
+.bank-detail-tile__content {
+  display: flex;
+}
+.bank-detail-tile__title {
+  color: $color-font-subtitle;
+  font-size: $font-size-third;
+  font-weight: bold;
+}
+.bank-detail-tile__table {
+  flex-grow: 1;
+}
+.bank-detail-tile__row {
+  &:first-child {
+    .bank-detail-tile__cell {
+      padding-top: 1em;
+    }
+  }
+}
+.bank-detail-tile__row-label {
+  font-size: $font-size-fourth;
+  color: $color-font-divider;
+}
+.bank-detail-tile__row-value {
+  font-size: $font-size-fourth;
+  color: $color-font-primary;
+  font-weight: 500;
+  word-break: break-all;
+}
+.bank-detail-tile__row-icon {
+  color: $color-font-welcome;
+  text-align: right;
+  overflow: hidden;
+  cursor: pointer;
+}
+.bank-detail-tile__cell {
+  vertical-align: top;
+  padding-top: 2em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid $color-font-welcome;
+}
+
