@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { HomepageTemplateComponent } from './homepage-template/homepage-template.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BannerComponent } from './banner/banner.component';
+import { WysiwygDisplayerComponent } from './wysiwyg-displayer/wysiwyg-displayer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BannerComponent } from './banner/banner.component';
     ViewMoreComponent,
     SearchInputComponent,
     HomepageTemplateComponent,
-    BannerComponent
+    BannerComponent,
+    WysiwygDisplayerComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { BannerComponent } from './banner/banner.component';
     NgxExtendedPdfViewerModule,
     CommunicationTileComponent,
     HomepageTemplateComponent,
-    BannerComponent
+    BannerComponent,
+    WysiwygDisplayerComponent
   ]
 })
 export class SharedModule { }
