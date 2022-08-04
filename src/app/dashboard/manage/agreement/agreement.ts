@@ -18,7 +18,7 @@ export interface AgreementMetadata {
   tableMetadata: AgreementMetadataTable;
 }
 export interface AgreementMetadataTable {
-  contactHolderLabel: string;
+  contractHolderLabel: string;
   vehiculeLabel: string;
   registrationNumberLabel: string;
   financeProductLabel: string;
