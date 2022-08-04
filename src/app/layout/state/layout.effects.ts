@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { Banner } from 'src/app/shared/banner/banner';
+import { BannerService } from 'src/app/shared/banner/banner.service';
 import { FooterService } from 'src/app/shared/footer/footer.service';
 import { LayoutService } from '../layout.service';
 import * as LayoutActions from './layout.actions';
@@ -11,21 +11,7 @@ import * as LayoutActions from './layout.actions';
   providedIn: 'root'
 })
 export class LayoutEffect {
-  private banners: Banner[] = [
-    {
-      message: "You have an overdue payment of £282.",
-      cta: {
-        title: "New Request",
-        path: "/dashboard/inbox/requests/new",
-      }
-    },
-    {
-      message: "Message Banner 1.",
-    },
-    {
-      message: "Message Banner 2.",
-    }
-  ];
+
   loadheaderItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(LayoutActions.loadHeaderItems),
@@ -65,7 +51,7 @@ export class LayoutEffect {
   loadBannerItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(LayoutActions.loadBannerItems),
-      mergeMap(() => of(this.banners).pipe(
+      mergeMap(() => this.bannerService.getBannerItems().pipe(
         map(bannerItems => LayoutActions.loadBannerItemsSuccess({bannerItems})),
         catchError(error => {
           return of(LayoutActions.loadBannerItemsFailure({error}))
@@ -74,5 +60,5 @@ export class LayoutEffect {
     )
   });
 
-  constructor(private actions: Actions, private footerService: FooterService, private layoutService: LayoutService) { }
+  constructor(private actions: Actions, private footerService: FooterService, private layoutService: LayoutService, private bannerService: BannerService) { }
 }

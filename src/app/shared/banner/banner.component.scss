@@ -48,7 +48,9 @@
 .banner__close__icon {
   cursor: pointer;
 }
-
+::ng-deep.mat-tooltip.mat-tooltip-show {
+  max-width: 300px;
+}
 @include device.viewport(mobile) {
   .banner__message__block {
     flex-direction: column;

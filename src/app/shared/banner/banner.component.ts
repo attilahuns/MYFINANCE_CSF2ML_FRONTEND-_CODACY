@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { interval, map, Observable, Subscription, tap, timer } from 'rxjs';
+import { map, Observable, tap, timer } from 'rxjs';
 import { Banner } from './banner';
 
 @Component({
@@ -18,10 +18,13 @@ export class BannerComponent implements OnInit {
 
   static readonly timeInterval = 10000;
 
-  @Input() banners: Banner[] = []
+  @Input() banners: Banner[] = [];
+  tooltipContent = '';
   display = true;
   timer$: Observable<number> = timer(0, BannerComponent.timeInterval).pipe(
-    map(n => 1 + (n % this.banners.length)),
+    map(n => n % this.banners.length),
+    tap(n => this.tooltipContent = this.banners[n].moreInformation),
+    map(n => n + 1),
   );
 
   constructor() { }

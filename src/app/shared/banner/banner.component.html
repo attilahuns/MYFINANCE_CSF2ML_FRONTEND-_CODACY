@@ -1,7 +1,7 @@
 <div class="banner__container" *ngIf="display && banners.length">
   <div class="banner__content" *ngIf="timer$ | async as currentIndex">
-    <div class="banner__info__container banner__icon__container">
-      <img class="banner__info__icon  banner__icon" src="/assets/images/info_outline.svg" alt="Notification">
+    <div class="banner__info__container banner__icon__container" [matTooltip]="tooltipContent">
+      <img class="banner__info__icon  banner__icon" src="/assets/images/info_outline.svg" alt="More information">
     </div>
     <div class="banner__messages__container">
       <ng-container *ngFor="let banner of banners; let i = index">
