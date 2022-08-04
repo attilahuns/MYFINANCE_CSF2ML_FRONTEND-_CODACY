@@ -74,7 +74,7 @@ export const agreementReducer = createReducer<AgreementState>(
         emptyListMessage: '',
         emptyContractListMessage: '',
         tableMetadata: {
-          contactHolderLabel: '',
+          contractHolderLabel: '',
           vehiculeLabel: '',
           registrationNumberLabel: '',
           financeProductLabel: '',
