@@ -28,7 +28,7 @@ export class AgreementComponent implements OnInit {
       this.columns = [
         {
           name: 'contactHolder',
-          header: metadata.tableMetadata.contactHolderLabel,
+          header: metadata.tableMetadata.contractHolderLabel,
           sortable: true,
           value: (element: Agreement) => `${element.contactHolder}`,
         },
