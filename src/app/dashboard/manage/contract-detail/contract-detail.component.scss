@@ -39,6 +39,9 @@
   .contract__card__border {
     border-left: 2px solid $color-font-welcome;
   }
+  .contract__padding__left {
+    padding-left: 15px;
+  }
   table {
     width: 100%;
   }
@@ -56,6 +59,7 @@
     position: relative;
     display: block;
     text-align: right;
+    grid-column: span 2;
   }
   .contract__responsive__display {
     display: none;
@@ -100,6 +104,21 @@
       width: 40px;
     }
   }
+  .contract__display__desktop__mobile {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .contract__wrapper__header, .contract__service__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;
+  }
+  .contract__service__wrapper {
+    margin-top: 10px;
+  }
+  .contract__service__details__span {
+    grid-column: span 2;
+  }
   @include device.viewport(tablet) {
     .contract__responsive__display {
       display: block;
@@ -109,9 +128,6 @@
     }
     .contract__only__for__mobile, .contract__desktop__display {
       display: none;
-    }
-    .contract__card__details .col-lg-3 ,.contract__card__details .col-lg-2, .contract__card__details .col-lg-8 {
-      margin-top: 20px;
     }
     .contract__card__border {
       border: none !important;
@@ -160,9 +176,6 @@
         width: 40px;
       }
     }
-    .contract__card__details .col-lg-3, .contract__card__details .col-lg-2 {
-      margin-top: 20px;
-    }
     .contract__card__border {
       border: none !important;
     }
@@ -189,6 +202,15 @@
     }
     .contract__display__desktop__mobile {
       display: block;
+    }
+    .contract__wrapper__header, .contract__service__wrapper {
+      grid-template-columns: 1fr !important;
+    }
+    .contract__padding__left {
+      padding-left: 0px !important;
+    }
+    .contract__service__details__span {
+      grid-column: span 1;
     }
   }
 }
