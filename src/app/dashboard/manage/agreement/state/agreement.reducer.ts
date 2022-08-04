@@ -22,7 +22,7 @@ export const agreementInitialState: AgreementState = {
     emptyListMessage: '',
     emptyContractListMessage: '',
     tableMetadata: {
-      contactHolderLabel: '',
+      contractHolderLabel: '',
       vehiculeLabel: '',
       registrationNumberLabel: '',
       financeProductLabel: '',
