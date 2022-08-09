@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Payment } from '../payment';
+import { environment } from 'src/environments/environment';
+import { Payment, PaymentMetadata } from '../payment';
 
 @Component({
   selector: 'f2ml-payment-history-mobile',
@@ -10,10 +11,15 @@ export class PaymentHistoryMobileComponent implements OnInit {
 
   @Input() columns: { name: string, header: string, value: CallableFunction }[] = [];
   @Input() dataSource: Payment[] = [];
+  @Input() metadata!: PaymentMetadata;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getIconUrl(icon: string) {
+    return environment.cms.endpoint + icon;
   }
 
 }

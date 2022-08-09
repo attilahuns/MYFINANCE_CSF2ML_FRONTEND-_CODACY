@@ -7,17 +7,25 @@
   font-weight: bold;
   margin-bottom: 1em;
 }
-.cta__btn__container{
+.cta__btn__container {
   position: relative;
   display: block;
   text-align: right;
 }
-.cta__btn{
+.cta__btn {
   background-color: $color-primary;
   color: $color-font-primary-in-filled-background;
   font-weight: 500;
   height: 50px;
   padding: 0 30px;
   margin-left: 15px;
-
+}
+.payment-history__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+@include device.viewport(mobile) {
+  .payment-history__wrapper {
+    grid-template-columns: 1fr;
+  }
 }

@@ -6,7 +6,7 @@
           <td class="payment-tile__row-label payment-tile__cell">{{ column.header }}:</td>
           <td class="payment-tile__row-value payment-tile__cell" *ngIf="'View' !== column.name">{{ column.value(row) }}</td>
           <td class="payment-tile__row-value payment-tile__cell" *ngIf="'View' == column.name">
-            <img mat-raised-button matTooltip="View" [matTooltipPosition]="'right'" src="{{column.value(row)}}"/>
+            <img mat-raised-button matTooltip="View" [matTooltipPosition]="'right'" [alt]="metadata.tableMetadata.viewColumn.alt" [src]="getIconUrl(metadata.tableMetadata.viewColumn.icon)"/>
           </td>
         </tr>
       </table>

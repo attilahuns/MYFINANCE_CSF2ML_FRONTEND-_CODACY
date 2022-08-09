@@ -1,27 +1,26 @@
-
-<f2ml-default-template *ngIf="(payments$ | async)?.length as payment">
-  <f2ml-default-card main>
+<f2ml-default-template >
+  <f2ml-default-card *ngIf="content$ | async" main>
     <div content>
-      <div class="row">
-        <div class="col-lg-5"><h1 class="default-card__title" *ngIf="title">{{title}}</h1></div>
-        <div class="col-lg-7 cta__btn__container">
-          <button mat-flat-button class="cta__btn" *ngIf="cta">{{cta}}</button>
+      <div class="payment-history__wrapper">
+        <div><h1 class="default-card__title">{{ metadata.title }}</h1></div>
+        <div class="cta__btn__container">
+          <button mat-flat-button class="cta__btn">{{ metadata.downloadBtnLabel }}</button>
         </div>
       </div>
 
       <!-- Laptop -->
       <ng-template [ngIf]="deviceDetector.isLaptop()">
-        <f2ml-payment-history-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)"></f2ml-payment-history-laptop>
+        <f2ml-payment-history-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)" [metadata]="metadata"></f2ml-payment-history-laptop>
       </ng-template>
 
       <!-- Mobile & Tablet -->
       <ng-template [ngIf]="!deviceDetector.isLaptop()">
-        <f2ml-payment-history-mobile [dataSource]="dataSource.filteredData" [columns]="columns"></f2ml-payment-history-mobile>
+        <f2ml-payment-history-mobile [dataSource]="dataSource.filteredData" [columns]="columns" [metadata]="metadata"></f2ml-payment-history-mobile>
       </ng-template>
 
       <!--View more | less -->
       <div class="agreement-viewmore__container" *ngIf="dataSource.filteredData.length">
-        <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData"></f2ml-view-more>
+        <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData" [viewMoreMessage]="metadata.tableMetadata.viewMoreLabel" [viewLessMessage]="metadata.tableMetadata.viewLessLabel"></f2ml-view-more>
       </div>
     </div>
   </f2ml-default-card>

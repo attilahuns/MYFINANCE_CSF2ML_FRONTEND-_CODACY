@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Payment } from '../payment';
+import { PaymentHistoryService } from '../payment-history.service';
 import * as PaymentAction from './payment.actions';
 
 @Injectable({
@@ -31,5 +32,17 @@ export class PaymentEffect {
     )
   });
 
-  constructor(private actions: Actions) { }
+  loadpaymentMetadata$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(PaymentAction.loadPaymentMetadata),
+      mergeMap(() => this.paymentService.getMetadata().pipe(
+        map(metadata => PaymentAction.loadPaymentMetadataSuccess({metadata})),
+        catchError(error => {
+          return of(PaymentAction.loadPaymentMetadataFailure({error}))
+        })
+      ))
+    )
+  });
+
+  constructor(private actions: Actions, private paymentService: PaymentHistoryService) { }
 }

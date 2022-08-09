@@ -1,6 +1,6 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { AppState } from "src/app/state/app.state";
-import { Payment } from "../payment";
+import { Payment, PaymentMetadata } from "../payment";
 import * as PaymentAction from "./payment.actions";
 
 export interface State extends AppState {
@@ -8,15 +8,34 @@ export interface State extends AppState {
 }
 export interface PaymentState {
   payments: Payment[],
+  metadata: PaymentMetadata,
   error: string;
 }
 export const paymentInitialState: PaymentState = {
   payments: [],
+  metadata: {
+    title: '',
+    downloadBtnLabel: '',
+    tableMetadata: {
+      dueAmountLabel: '',
+      statusLabel: '',
+      dueDatelabelLabel: '',
+      viewColumn: {
+        label: '',
+        icon: '',
+        alt: ''
+      },
+      viewMoreLabel: '',
+      viewLessLabel: '',
+      displayedRowsLimit: 5
+    }
+  },
   error: '',
 }
 
 const getPaymentState = createFeatureSelector<PaymentState>('payment');
 export const getPayments = createSelector(getPaymentState, state => state.payments);
+export const getPaymentMetadata = createSelector(getPaymentState, state => state.metadata);
 
 export const paymentReducer = createReducer<PaymentState>(
   paymentInitialState,
@@ -31,6 +50,36 @@ export const paymentReducer = createReducer<PaymentState>(
     return {
       ...state,
       payments: [],
+      error: action.error,
+    }
+  }),
+  on(PaymentAction.loadPaymentMetadataSuccess, (state, action): PaymentState => {
+    return {
+      ...state,
+      metadata: action.metadata,
+      error: '',
+    }
+  }),
+  on(PaymentAction.loadPaymentMetadataFailure, (state, action): PaymentState => {
+    return {
+      ...state,
+      metadata: {
+        title: '',
+        downloadBtnLabel: '',
+        tableMetadata: {
+          dueAmountLabel: '',
+          statusLabel: '',
+          dueDatelabelLabel: '',
+          viewColumn: {
+            label: '',
+            icon: '',
+            alt: ''
+          },
+          viewMoreLabel: '',
+          viewLessLabel: '',
+          displayedRowsLimit: 5
+        }
+      },
       error: action.error,
     }
   }),

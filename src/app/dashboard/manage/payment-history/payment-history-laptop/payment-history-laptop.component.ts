@@ -2,7 +2,8 @@ import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Outpu
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { Payment } from '../payment';
+import { environment } from 'src/environments/environment';
+import { Payment, PaymentMetadata } from '../payment';
 
 @Component({
   selector: 'f2ml-payment-history-laptop',
@@ -17,6 +18,7 @@ export class PaymentHistoryLaptopComponent implements OnInit,  AfterViewInit, On
   @Input() dataSource!: MatTableDataSource<Payment>;
   @Output() sortChange = new EventEmitter<MatSort>();
   private sub!: Subscription;
+  @Input() metadata!: PaymentMetadata;
   constructor() { }
 
   ngOnInit(): void {
@@ -28,6 +30,10 @@ export class PaymentHistoryLaptopComponent implements OnInit,  AfterViewInit, On
     this.sub = this.sort.sortChange.subscribe(value => {
       this.sortChange.emit(this.sort);
     })
+  }
+
+  getIconUrl(icon: string) {
+    return environment.cms.endpoint + icon;
   }
 
   ngOnDestroy(): void {

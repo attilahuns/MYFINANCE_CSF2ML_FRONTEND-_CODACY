@@ -14,7 +14,7 @@
       </ng-template>
       <ng-template [ngIf]="'View' === column.name">
         <td mat-cell *matCellDef="let row" class="payment-table__data">
-          <div class="center-image"><img class="tooltipe" mat-raised-button matTooltip="View" [matTooltipPosition]="'right'" src="{{column.value(row)}}"/></div>
+          <div class="center-image"><img class="tooltipe" mat-raised-button matTooltip="View" [matTooltipPosition]="'right'" [alt]="metadata.tableMetadata.viewColumn.alt" [src]="getIconUrl(metadata.tableMetadata.viewColumn.icon)"/></div>
         </td>
       </ng-template>
     </ng-container>
