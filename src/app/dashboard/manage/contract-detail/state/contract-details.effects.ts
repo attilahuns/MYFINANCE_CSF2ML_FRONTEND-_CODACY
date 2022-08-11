@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+import { ContractDetailService } from '../contract-detail.service';
 import { ContractDetail } from '../contractDetail';
 import * as ContractDetailsAction from './contract-details.actions';
 
@@ -34,5 +35,17 @@ export class ContractDetailtEffect {
     )
   });
 
-  constructor(private actions: Actions) { }
+  loadcontractsMetadata$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(ContractDetailsAction.loadContractDetailMetadata),
+      mergeMap(() => this.contractService.getMetadata().pipe(
+        map(contractDetailMetadata => ContractDetailsAction.loadContractDetailMetadataSuccess({contractDetailMetadata})),
+        catchError(error => {
+          return of(ContractDetailsAction.loadContractDetailMetadataFailure({error}))
+        })
+      ))
+    )
+  });
+
+  constructor(private actions: Actions, private contractService: ContractDetailService) { }
 }

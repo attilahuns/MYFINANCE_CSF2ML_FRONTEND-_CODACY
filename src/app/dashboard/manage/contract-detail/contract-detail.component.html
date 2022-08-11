@@ -1,81 +1,81 @@
-<f2ml-default-template *ngIf="(contracts$| async)?.length as contractDetails">
+<f2ml-default-template *ngIf="contracts$| async" [communicationMetadata]="contractDetailMetadata.communicationMetadata">
   <div content class="contract__card" main>
     <div class="contract__wrapper__header">
       <div class="">
-        <h1>PCP Contract 100P06100206</h1>
+        <h1>{{ contractDetailMetadata.title }} 100P06100206</h1>
       </div>
       <div class="contract__btn__container">
-        <button mat-flat-button class="contract__btn">Make a payment</button>
-        <button mat-flat-button class="contract__btn">Modify agreement</button>
-        <button [routerLink]="['payments']" mat-flat-button class="contract__btn">Payment history</button>
+        <button mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata?.makePaymentLabel !== ''">{{ contractDetailMetadata?.makePaymentLabel }}</button>
+        <button mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata?.modifyAgreementLabel !== ''">{{ contractDetailMetadata?.modifyAgreementLabel }}</button>
+        <button [routerLink]="['payments']" mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata?.paymentHistoryLabel !== ''">{{ contractDetailMetadata?.paymentHistoryLabel }}</button>
       </div>
     </div>
 
     <div class="contract__card__details">
-      <h3>Agreements details</h3>
+      <h3>{{ contractDetailMetadata.agreementDetailMetadata.title }}</h3>
       <div class="contract__display__desktop__mobile">
         <div class="contract__padding__left">
-          <p><span class="contract__agreements__details__title">Finance product</span><br/>PCP</p><br/>
-          <p><span class="contract__agreements__details__title">Amount financed</span><br/>£ 35000</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.financeProductLabel }}</span><br/>PCP</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.amountFinancedLabel }}</span><br/>£ 35000</p><br/>
         </div>
         <div class="contract__card__border contract__padding__left">
-          <p><span class="contract__agreements__details__title">Total contract mileage</span><br/>18600 miles</p><br/>
-          <p><span class="contract__agreements__details__title">Number of instalments</span><br/>45 months</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.totalContractMileageLabel }}</span><br/>18600 miles</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.numberOfInstalmentsLabel }}</span><br/>45 months</p><br/>
         </div>
         <div class="contract__card__border contract__padding__left">
-          <p><span class="contract__agreements__details__title">Next payment date</span><br/>15/03/2022</p><br/>
-          <p><span class="contract__agreements__details__title">Amount of next payment</span><br/>£650</p>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.nextPaymentDateLabel }}</span><br/>15/03/2022</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.amountOfNextPaymentLabel }}</span><br/>£650</p>
         </div>
         <div class="contract__card__border contract__padding__left">
-          <p><span class="contract__agreements__details__title">Agreement start date</span><br/>12/05/2021</p><br/>
-          <p><span class="contract__agreements__details__title">Agreement end date</span><br/>11/05/2026</p>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.agreementStartDateLabel }}</span><br/>12/05/2021</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.agreementEndDateLabel }}</span><br/>11/05/2026</p>
         </div>
         <div class="contract__card__border contract__padding__left">
-          <p><span class="contract__agreements__details__title">TAN</span><br/>2,990140%</p><br/>
-          <p><span class="contract__agreements__details__title">Residual value</span><br/>6801,64 €</p>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.tanLabel }}</span><br/>2,990140%</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.residualValueLabel }}</span><br/>6801,64 €</p>
         </div>
       </div>
 
       <div class="contract__display__tablet">
         <table>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Finance product</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.financeProductLabel }}</span></p></td>
             <td><p>PCP</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Amount financed</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.amountFinancedLabel }}</span></p></td>
             <td><p>£ 35000</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">TAN</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.tanLabel }}</span></p></td>
             <td><p>2,990140%</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Total contract mileage</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.totalContractMileageLabel }}</span></p></td>
             <td><p>18600 miles</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Number of instalments</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.numberOfInstalmentsLabel }}</span></p></td>
             <td><p>45 months</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Residual value</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.residualValueLabel }}</span></p></td>
             <td><p>6801,64 €</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Next payment date</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.nextPaymentDateLabel }}</span></p></td>
             <td><p>15/03/2022</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Amount of next payment</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.amountOfNextPaymentLabel }}</span></p></td>
             <td><p>£650</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Agreement start date</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.agreementStartDateLabel }}</span></p></td>
             <td><p>12/05/2021</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Agreement end date</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.agreementDetailMetadata.agreementEndDateLabel }}</span></p></td>
             <td><p>11/05/2026</p></td>
           </tr>
         </table>
@@ -83,7 +83,7 @@
     </div>
 
     <div class="contract__card__details">
-      <h3>Vehicule details</h3>
+      <h3>{{ contractDetailMetadata.vehiculeDetailMetadata.title }}</h3>
       <div class="contract__display__desktop__mobile">
         <div class="contract__padding__left">
           <div class="car__container">
@@ -92,50 +92,50 @@
           </div>
         </div>
         <div class="contract__padding__left">
-          <p><span class="contract__agreements__details__title">VIN</span><br/>VF3F678FH76</p><br/>
-          <p><span class="contract__agreements__details__title">Model</span><br/>208 Allure 1.2L PureTech 82 5d</p>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.vinLabel }}</span><br/>VF3F678FH76</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.modelLabel }}</span><br/>208 Allure 1.2L PureTech 82 5d</p>
         </div>
         <div class="contract__card__border contract__padding__left">
-          <p><span class="contract__agreements__details__title">Registration number</span><br/>WW-342-ZE</p><br/>
-          <p><span class="contract__agreements__details__title">CO2 consumption</span><br/>98 g/miles</p>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.registrationNumberLabel }}</span><br/>WW-342-ZE</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.co2ConsumptionLabel }}</span><br/>98 g/miles</p>
         </div>
         <div class="contract__card__border contract__padding__left">
-          <p><span class="contract__agreements__details__title">Delivery date</span><br/>15/03/2021</p><br/>
-          <p><span class="contract__agreements__details__title">Horsepower</span><br/>5 cv</p>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.deliveryDateLabel }}</span><br/>15/03/2021</p><br/>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.horsepowerLabel }}</span><br/>5 cv</p>
         </div>
         <div class="contract__card__border contract__padding__left">
-          <p><span class="contract__agreements__details__title">Cylinder</span><br/>1560 cc</p>
+          <p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.cylinderLabel }}</span><br/>1560 cc</p>
         </div>
       </div>
 
       <div class="contract__display__tablet">
         <table>
           <tr>
-            <td><p><span class="contract__agreements__details__title">VIN</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.vinLabel }}</span></p></td>
             <td><p>VF3F678FH76</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Model</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.modelLabel }}</span></p></td>
             <td><p>208 Allure 1.2L PureTech 82 5d</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Registration number</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.registrationNumberLabel }}</span></p></td>
             <td><p>WW-342-ZE</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">CO2 consumption</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.co2ConsumptionLabel }}</span></p></td>
             <td><p>98 g/miles</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Delivery date</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.deliveryDateLabel }}</span></p></td>
             <td><p>15/03/2021</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Horsepower</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.horsepowerLabel }}</span></p></td>
             <td><p>5 cv</p></td>
           </tr>
           <tr>
-            <td><p><span class="contract__agreements__details__title">Cylinder</span></p></td>
+            <td><p><span class="contract__agreements__details__title">{{ contractDetailMetadata.vehiculeDetailMetadata.cylinderLabel }}</span></p></td>
             <td><p>1560 cc</p></td>
           </tr>
         </table>
@@ -143,14 +143,14 @@
     </div>
 
     <div class="contract__card__details">
-      <h3>Service details</h3>
+      <h3>{{ contractDetailMetadata.serviceDetailMetadata.title }}</h3>
       <div class="contract__service__wrapper">
         <div *ngFor="let service of servicesDataSource;let i = index" [attr.data-index]="i" [ngClass]="i % 2 == 0 ? '' : 'contract__service__details__span contract__card__border contract__padding__left'">
           <p><span class="contract__agreements__details__title">{{ service.title }}</span><br/>{{ service.text }}</p>
         </div>
       </div>
-      <div *ngIf="services.length > 2">
-        <f2ml-view-more (viewMore)="displayServicesData($event)" [displayFullData]="displayFullServices"></f2ml-view-more>
+      <div *ngIf="services.length > contractDetailMetadata.serviceDetailMetadata.displayedRowsLimit">
+        <f2ml-view-more (viewMore)="displayServicesData($event)" [displayFullData]="displayFullServices" [viewMoreMessage]="contractDetailMetadata.serviceDetailMetadata.viewMoreLabel" [viewLessMessage]="contractDetailMetadata.serviceDetailMetadata.viewLessLabel"></f2ml-view-more>
       </div>
     </div>
 
@@ -162,40 +162,40 @@
       <div class="contract__responsive__card" *ngFor="let item of dataSource.filteredData" [class.color-background-highlighter]="item.unopened">
         <table class="contract__responsive__card__table">
           <tr class="contract__only__for__tablet">
-            <td class="contract__only__for__tablet__document__col">Document<br/><b>{{ item.document }}</b></td>
-            <td class="contract__only__for__tablet__references__col">Reference<br/> <b>{{ item.reference }}</b></td>
-            <td class="contract__only__for__tablet__date__col">Date<br/><b>{{ item.date }}</b></td>
+            <td class="contract__only__for__tablet__document__col">{{ contractDetailMetadata.documentDetailMetadata.documentLabel }}<br/><b>{{ item.document }}</b></td>
+            <td class="contract__only__for__tablet__references__col">{{ contractDetailMetadata.documentDetailMetadata.referenceLabel }}<br/> <b>{{ item.reference }}</b></td>
+            <td class="contract__only__for__tablet__date__col">{{ contractDetailMetadata.documentDetailMetadata.dateLabel }}<br/><b>{{ item.date }}</b></td>
           </tr>
           <tr class="contract__only__for__tablet">
-            <td>Download<br/><img src="/assets/images/download_icon.png"/></td>
-            <td>View<br/><img src="/assets/images/view_icon.png"/></td>
+            <td>{{ contractDetailMetadata.documentDetailMetadata.downloadColumn.label }}<br/><img [src]="getIcon(contractDetailMetadata.documentDetailMetadata.downloadColumn.picto)"/></td>
+            <td>{{ contractDetailMetadata.documentDetailMetadata.viewColumn.label }}<br/><img [src]="getIcon(contractDetailMetadata.documentDetailMetadata.viewColumn.picto)"/></td>
           </tr>
 
           <tr class="contract__only__for__mobile">
-            <td>Document</td>
+            <td>{{ contractDetailMetadata.documentDetailMetadata.documentLabel }}</td>
             <td [class.text-bold]="item.unopened">{{ item.document }}</td>
           </tr>
           <tr class="contract__only__for__mobile">
-            <td>Reference</td>
+            <td>{{ contractDetailMetadata.documentDetailMetadata.referenceLabel }}</td>
             <td [class.text-bold]="item.unopened">{{ item.reference }}</td>
           </tr>
           <tr class="contract__only__for__mobile">
-            <td>Date</td>
+            <td>{{ contractDetailMetadata.documentDetailMetadata.dateLabel }}</td>
             <td [class.text-bold]="item.unopened">{{ item.date }}</td>
           </tr>
           <tr class="contract__only__for__mobile">
-            <td>Download</td>
-            <td><img src="/assets/images/download_icon.png"/></td>
+            <td>{{ contractDetailMetadata.documentDetailMetadata.downloadColumn.label }}</td>
+            <td><img [src]="getIcon(contractDetailMetadata.documentDetailMetadata.downloadColumn.picto)"/></td>
           </tr>
           <tr class="contract__only__for__mobile">
-            <td>View</td>
-            <td><img src="/assets/images/view_icon.png"/></td>
+            <td>{{ contractDetailMetadata.documentDetailMetadata.viewColumn.label }}</td>
+            <td><img [src]="getIcon(contractDetailMetadata.documentDetailMetadata.viewColumn.picto)"/></td>
           </tr>
         </table>
       </div>
     </div>
-    <div *ngIf="originalData.length > 3">
-      <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData"></f2ml-view-more>
+    <div *ngIf="originalData.length > contractDetailMetadata.documentDetailMetadata.displayedRowsLimit">
+      <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData" [viewMoreMessage]="contractDetailMetadata.documentDetailMetadata.viewMoreLabel" [viewLessMessage]="contractDetailMetadata.documentDetailMetadata.viewLessLabel"></f2ml-view-more>
     </div>
   </div>
 </f2ml-default-template>
