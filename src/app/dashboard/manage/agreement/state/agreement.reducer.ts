@@ -29,9 +29,6 @@ export const agreementInitialState: AgreementState = {
       agreementNumberLabel: '',
       agreementStartDate: '',
       detailsLabel: '',
-    },
-    communicationMetadata: {
-      title: ''
     }
   },
   error: '',
@@ -84,9 +81,6 @@ export const agreementReducer = createReducer<AgreementState>(
           agreementNumberLabel: '',
           agreementStartDate: '',
           detailsLabel: '',
-        },
-        communicationMetadata: {
-          title: ''
         }
       },
       error: action.error,

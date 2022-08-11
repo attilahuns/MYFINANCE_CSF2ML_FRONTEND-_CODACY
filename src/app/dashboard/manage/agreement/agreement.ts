@@ -18,7 +18,7 @@ export interface AgreementMetadata {
   emptyListMessage: string;
   emptyContractListMessage: string,
   tableMetadata: AgreementMetadataTable;
-  communicationMetadata: CommunicationMetadata;
+  communicationMetadata?: CommunicationMetadata;
 }
 export interface AgreementMetadataTable {
   contractHolderLabel: string;

@@ -35,9 +35,6 @@ export const accessManagementInitialState: AccessManagementState = {
       deleteIcon: '',
       validateIcon: '',
       discardIcon: ''
-    },
-    communicationMetadata: {
-      title: ''
     }
   },
   error: '',
@@ -95,9 +92,6 @@ export const accessManagementReducer = createReducer<AccessManagementState>(
           deleteIcon: '',
           validateIcon: '',
           discardIcon: ''
-        },
-        communicationMetadata: {
-          title: '',
         }
       },
       error: action.error,

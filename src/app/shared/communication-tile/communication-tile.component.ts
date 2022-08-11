@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class CommunicationTileComponent implements OnInit {
   @Input() centered: boolean = true;
-  @Input() metadata!: CommunicationMetadata;
+  @Input() metadata!: CommunicationMetadata | undefined;
 
   constructor(private sanitizer: DomSanitizer, public deviceDetector: DeviceDetectorService, private router: Router) { }
 

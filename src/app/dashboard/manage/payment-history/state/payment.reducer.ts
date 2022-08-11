@@ -28,9 +28,6 @@ export const paymentInitialState: PaymentState = {
       viewMoreLabel: '',
       viewLessLabel: '',
       displayedRowsLimit: 5
-    },
-    communicationMetadata: {
-      title: ''
     }
   },
   error: '',

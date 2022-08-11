@@ -38,9 +38,6 @@ export const documentInitialState: DocumentState = {
         picto: '',
         alt: ''
       }
-    },
-    communicationMetadata: {
-      title: ''
     }
   },
   error: '',
@@ -103,9 +100,6 @@ export const documentReducer = createReducer<DocumentState>(
             picto: '',
             alt: ''
           }
-        },
-        communicationMetadata: {
-          title: ''
         }
       },
       error: action.error,

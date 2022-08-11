@@ -12,5 +12,5 @@ export interface BankDetailMetadata {
   bankAccountNumberLabel: string;
   bankDetailsLabel: string;
   updateInformationLabel: string;
-  communicationMetadata: CommunicationMetadata;
+  communicationMetadata?: CommunicationMetadata;
 }

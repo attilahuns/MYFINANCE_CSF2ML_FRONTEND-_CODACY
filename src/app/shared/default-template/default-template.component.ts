@@ -10,7 +10,7 @@ import { CommunicationMetadata } from '../communication-tile/communication';
 export class DefaultTemplateComponent implements OnInit {
 
   @Input() hiddenSideFaq:boolean = false;
-  @Input() communicationMetadata!: CommunicationMetadata;
+  @Input() communicationMetadata!: CommunicationMetadata | undefined;
 
   constructor(public deviceDetector: DeviceDetectorService) { }
 

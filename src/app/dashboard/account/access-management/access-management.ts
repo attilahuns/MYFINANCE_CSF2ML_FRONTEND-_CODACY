@@ -18,7 +18,7 @@ export interface AccessManagementMetadata {
   noAccessToDisplayLabel: string,
   maxAccessExceededLabel: string,
   tableMetadata: AccessManagementMetadataTable,
-  communicationMetadata: CommunicationMetadata
+  communicationMetadata?: CommunicationMetadata
 }
 
 interface AccessManagementMetadataTable {

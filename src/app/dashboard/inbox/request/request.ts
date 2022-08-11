@@ -27,7 +27,7 @@ export interface RequestMetadata {
   displayedRowsLimit: number;
   emptyRequestListMessage: string;
   emptyListMessage: string;
-  communicationMetadata: CommunicationMetadata;
+  communicationMetadata?: CommunicationMetadata;
 }
 
 export interface RequestForm {

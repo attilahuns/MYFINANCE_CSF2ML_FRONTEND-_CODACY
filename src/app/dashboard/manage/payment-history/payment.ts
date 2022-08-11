@@ -11,7 +11,7 @@ export interface PaymentMetadata {
   title: string,
   downloadBtnLabel: string,
   tableMetadata: PaymentMetadataTable,
-  communicationMetadata: CommunicationMetadata
+  communicationMetadata?: CommunicationMetadata
 }
 
 export interface PaymentMetadataTable {

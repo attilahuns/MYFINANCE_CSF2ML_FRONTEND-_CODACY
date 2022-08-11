@@ -41,5 +41,5 @@ export interface InformationMetadata {
     emailLabel: string,
   },
   updateInformation: string,
-  communicationMetadata: CommunicationMetadata
+  communicationMetadata?: CommunicationMetadata
 }

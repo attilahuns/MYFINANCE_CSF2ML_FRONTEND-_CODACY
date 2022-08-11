@@ -20,7 +20,7 @@ export interface DocumentMetadata {
   documentListNotFound: string;
   downloadCTALabel: string;
   tableMetadata: DocumentMetadataTable;
-  communicationMetadata: CommunicationMetadata
+  communicationMetadata?: CommunicationMetadata
 }
 
 export interface DocumentMetadataTable {

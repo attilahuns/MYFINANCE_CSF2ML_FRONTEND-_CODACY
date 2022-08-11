@@ -1,4 +1,4 @@
-<div class="communication__container">
+<div class="communication__container" *ngIf="metadata">
   <div class="communication-title">{{metadata.title}}</div>
   <div class="communication-subtitle" *ngIf="metadata.description">
     <div class="communication-subtitle-label" [innerHTML]="metadata.description"></div>
