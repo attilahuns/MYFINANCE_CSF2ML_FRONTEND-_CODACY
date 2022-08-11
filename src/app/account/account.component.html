@@ -1,17 +1,17 @@
-<div class="account__container" [class.is-signup_page]="isSignupPage()" [class.is-signin_page]="isSigninPage()">
+<div class="account__container" *ngIf="content$ | async" [class.is-signup_page]="isSignupPage()" [class.is-signin_page]="isSigninPage()">
   <div class="account-title__container">
-    <h1 class="account-title">Welcome to your online account</h1>
+    <h1 class="account-title">{{ metadata.title }}</h1>
   </div>
 
   <div class="account-content__container">
-    <div class="account-service__container" *ngIf="services$ | async as services">
+    <div class="account-service__container">
       <div class="account-service__list">
-        <div class="account-service" *ngFor="let service of services">
+        <div class="account-service" *ngFor="let feature of metadata.features">
           <div class="account-service__icon-container">
-            <img class="account-service__icon" src="assets/images/{{service.icon}}_outline.svg" />
+            <img class="account-service__icon" [src]="getIconUrl(feature.icon)" />
           </div>
           <div class="account-service__presentation-container">
-            <span class="account-service__presentation">{{service.title}}</span>
+            <span class="account-service__presentation">{{feature.title}}</span>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="account-footer__container" *ngIf="footerItems$ | async as footerItems">
+  <div class="account-footer__container">
     <f2ml-footer [footerItems]="footerItems"></f2ml-footer>
   </div>
 </div>

@@ -1,28 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { combineLatest, filter, map, Observable, tap } from 'rxjs';
 import { FooterItem } from '../shared/footer/footer-item';
-import { getFooterItems, getServiceItems, State } from './state/account.reducer';
+import { getAccountMetadata, getFooterItems, State } from './state/account.reducer';
 import * as AccountActions from './state/account.actions';
 import { Router } from '@angular/router';
-import { AccountServiceItem } from './account-service-item';
 import { DeviceDetectorService } from '../core/services/device-detector/device-detector.service';
+import { AccountMetadata, AccountPage } from './account';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'f2ml-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, OnDestroy {
 
-  footerItems$: Observable<FooterItem[]> = this.store.select(getFooterItems);
-  services$: Observable<AccountServiceItem[]> = this.store.select(getServiceItems);
+  footerItems: FooterItem[] = [];
+  metadata!: AccountMetadata;
+  content$: Observable<boolean> = combineLatest([this.store.select(getAccountMetadata), this.store.select(getFooterItems)]).pipe(
+    filter(([metadata, footerItems]) => !!metadata.title && !!footerItems.length),
+    tap(([metadata, footerItems]) => {
+      this.metadata = metadata;
+      this.footerItems = footerItems;
+    }),
+    map(([metadata, footerItems]) => !!metadata.title && !!footerItems.length),
+  );
 
   constructor(private store: Store<State>, private router: Router, public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {
     this.store.dispatch(AccountActions.loadFooterItems());
-    this.store.dispatch(AccountActions.loadAccountServiceItems());
+    this.store.dispatch(AccountActions.loadAccountMetadata({page: this.isSigninPage() ? AccountPage.SIGN_IN : AccountPage.SIGN_UP}));
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(AccountActions.resetAccountMetadata());
   }
 
   isSignupPage() {
@@ -31,4 +43,9 @@ export class AccountComponent implements OnInit {
   isSigninPage() {
     return this.router.url.startsWith('/signin');
   }
+
+  getIconUrl(icon: string) {
+    return environment.cms.endpoint + icon;
+  }
+
 }
