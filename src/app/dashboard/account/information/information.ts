@@ -1,3 +1,5 @@
+import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+
 export interface Information {
   title: string,
   data: InformationItem[],
@@ -38,5 +40,6 @@ export interface InformationMetadata {
     phoneNumberLabel: string,
     emailLabel: string,
   },
-  updateInformation: string;
+  updateInformation: string,
+  communicationMetadata: CommunicationMetadata
 }

@@ -28,6 +28,9 @@ export const paymentInitialState: PaymentState = {
       viewMoreLabel: '',
       viewLessLabel: '',
       displayedRowsLimit: 5
+    },
+    communicationMetadata: {
+      title: ''
     }
   },
   error: '',
@@ -78,6 +81,9 @@ export const paymentReducer = createReducer<PaymentState>(
           viewMoreLabel: '',
           viewLessLabel: '',
           displayedRowsLimit: 5
+        },
+        communicationMetadata: {
+          title: ''
         }
       },
       error: action.error,

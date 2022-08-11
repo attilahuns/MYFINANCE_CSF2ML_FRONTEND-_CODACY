@@ -1,3 +1,5 @@
+import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+
 export interface AccessManagement {
   id: number,
   name: string,
@@ -15,7 +17,8 @@ export interface AccessManagementMetadata {
   updateAccessLabel: string,
   noAccessToDisplayLabel: string,
   maxAccessExceededLabel: string,
-  tableMetadata: AccessManagementMetadataTable
+  tableMetadata: AccessManagementMetadataTable,
+  communicationMetadata: CommunicationMetadata
 }
 
 interface AccessManagementMetadataTable {

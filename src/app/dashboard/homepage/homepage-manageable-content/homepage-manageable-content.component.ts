@@ -18,14 +18,14 @@ export class HomepageManageableContentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getVideoSanitizedUrl(url: string) {
+  getVideoSanitizedUrl(url: string): string {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
     let videoCode = url;
     if (match && match[2].length == 11) {
         videoCode = match[2];
     }
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoCode}`);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoCode}`) as string;
   }
   downloadPdf(uri: string): void {
     window.open(environment.cms.endpoint + uri);

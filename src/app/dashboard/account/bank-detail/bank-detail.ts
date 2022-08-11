@@ -1,3 +1,5 @@
+import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+
 export interface BankDetail {
   bankName: string;
   bankAccountNumber: string;
@@ -10,4 +12,5 @@ export interface BankDetailMetadata {
   bankAccountNumberLabel: string;
   bankDetailsLabel: string;
   updateInformationLabel: string;
+  communicationMetadata: CommunicationMetadata;
 }

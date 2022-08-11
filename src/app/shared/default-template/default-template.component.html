@@ -7,9 +7,9 @@
       </div>
       <div class="template__side" *ngIf="!hiddenSideFaq">
         <f2ml-faq-tile></f2ml-faq-tile>
-        <f2ml-communication-tile *ngIf="deviceDetector.isLaptop()"></f2ml-communication-tile>
+        <f2ml-communication-tile *ngIf="deviceDetector.isLaptop()" [metadata]="communicationMetadata"></f2ml-communication-tile>
       </div>
     </div>
   </div>
-  <f2ml-communication-tile *ngIf="!deviceDetector.isLaptop()"></f2ml-communication-tile>
+  <f2ml-communication-tile *ngIf="!deviceDetector.isLaptop()" [metadata]="communicationMetadata"></f2ml-communication-tile>
 </div>

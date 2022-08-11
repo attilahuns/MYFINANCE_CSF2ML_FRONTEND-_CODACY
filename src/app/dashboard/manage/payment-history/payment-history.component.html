@@ -1,5 +1,5 @@
-<f2ml-default-template >
-  <f2ml-default-card *ngIf="content$ | async" main>
+<f2ml-default-template *ngIf="content$ | async" [communicationMetadata]="metadata.communicationMetadata">
+  <f2ml-default-card main>
     <div content>
       <div class="payment-history__wrapper">
         <div><h1 class="default-card__title">{{ metadata.title }}</h1></div>

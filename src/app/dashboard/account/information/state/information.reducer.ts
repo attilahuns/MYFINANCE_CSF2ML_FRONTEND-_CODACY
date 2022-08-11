@@ -40,7 +40,10 @@ export const informationInitialState: informationState = {
       phoneNumberLabel: '',
       emailLabel: '',
     },
-    updateInformation: ''
+    updateInformation: '',
+    communicationMetadata: {
+      title: ''
+    }
   },
   error: '',
 }
@@ -103,7 +106,10 @@ export const informationReducer = createReducer<informationState>(
           phoneNumberLabel: '',
           emailLabel: '',
         },
-        updateInformation: ''
+        updateInformation: '',
+        communicationMetadata: {
+          title: ''
+        }
       },
       error: action.error,
     }

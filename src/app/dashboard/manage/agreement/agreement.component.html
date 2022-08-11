@@ -1,5 +1,5 @@
-<f2ml-default-template>
-  <f2ml-default-card *ngIf="content$ | async" [title]="metadata.title" main>
+<f2ml-default-template *ngIf="content$ | async" [communicationMetadata]="metadata.communicationMetadata">
+  <f2ml-default-card [title]="metadata.title" main>
     <div class="agreement__container" content>
       <ng-template [ngIf]="originalData.length">
         <!--search -->

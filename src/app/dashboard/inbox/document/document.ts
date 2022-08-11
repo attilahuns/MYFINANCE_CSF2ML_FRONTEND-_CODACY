@@ -1,3 +1,5 @@
+import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+
 export interface Document {
   documentType: string;
   date: string;
@@ -18,6 +20,7 @@ export interface DocumentMetadata {
   documentListNotFound: string;
   downloadCTALabel: string;
   tableMetadata: DocumentMetadataTable;
+  communicationMetadata: CommunicationMetadata
 }
 
 export interface DocumentMetadataTable {

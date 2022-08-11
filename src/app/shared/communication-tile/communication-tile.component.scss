@@ -1,68 +1,58 @@
 @use 'breakpoints' as device;
 @import 'variables';
 
-.primary-button{
-  background-color: $color-primary;
-  color: $color-font-primary-in-filled-background;
-  font-size: $font-size-fourth;
-  border: 1px solid $color-primary;
-  cursor: pointer;
-  font-weight: bold;
-  align-self: center;
-  border-radius: 4px;
-  padding: 1vh 2vh;
-  z-index: 1;
-}
-.primary-button:hover{
-  background-color: $color-background-primary;
-  color: $color-font-primary-in-filled-background;
-}
-.communication-information-container {
+.communication__container {
   background-color: $color-background-block;
-  padding: 2vh 1.6vh;
+  padding: 2vh 1vh;
   height: auto;
   margin-top: 5vh;
   border-left: 4px solid $color-background-edge;
-  .communication-information-title{
+  .communication-title {
     font-weight: bold;
-    font-size: 18px;
+    font-size: $font-size-third;
     padding: 0.5em;
   }
-  .communication-information-subtitle {
+  .communication-subtitle {
     display: flex;
-    margin: 1.6vh 0;
+    margin: 1vh 0;
     align-items: center;
     padding: 0.5em;
-    .communication-information-subtitle-label {
+    .communication-subtitle-label {
       flex: 2;
     }
-    span{
+    span {
       text-decoration: underline;
       font-weight: bold;
       color: $color-primary;
       cursor: pointer;
     }
   }
-  .information-description-button-container {
+  .communication-video {
+    padding: 0.5em;
+    iframe {
+      width: 100%;
+      height: 'auto';
+    }
+  }
+  .communication-picture {
+    padding-top: 1em;
+    width: 100% !important;
+    max-height: 200px;
+    min-height: 150px;
+  }
+  .communication-pdf {
     display: flex;
     padding-bottom: 1vw;
+    button {
+      &:hover {
+        background-color: $color-background-primary;
+      }
+    }
   }
-}
-.center-style {
-  justify-content: center;
-}
-.end-style {
-  justify-content: end;
-}
-.communication-card{
-  margin: 1em !important;
-}
-.video-container{
-  padding: 0.5em;
 }
 
 @include device.viewport(not-laptop) {
-  .communication-information-subtitle, .information-description-button-container{
-    padding-left: 0.5em;
+  .communication__container {
+    margin: 1em !important;
   }
 }

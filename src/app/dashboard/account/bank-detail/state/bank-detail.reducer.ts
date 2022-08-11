@@ -22,7 +22,10 @@ export const bankDetailInitialState: BankDetailState = {
     bankNameLabel: '',
     bankAccountNumberLabel: '',
     bankDetailsLabel: '',
-    updateInformationLabel: ''
+    updateInformationLabel: '',
+    communicationMetadata: {
+      title: ''
+    }
   },
   error: '',
 }
@@ -66,7 +69,10 @@ export const bankDetailReducer = createReducer<BankDetailState>(
         bankNameLabel: '',
         bankAccountNumberLabel: '',
         bankDetailsLabel: '',
-        updateInformationLabel: ''
+        updateInformationLabel: '',
+        communicationMetadata: {
+          title: ''
+        }
       },
       error: action.error,
     }

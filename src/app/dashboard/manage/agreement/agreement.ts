@@ -1,3 +1,5 @@
+import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+
 export interface Agreement {
   contactHolder: string;
   vehicule: string;
@@ -16,6 +18,7 @@ export interface AgreementMetadata {
   emptyListMessage: string;
   emptyContractListMessage: string,
   tableMetadata: AgreementMetadataTable;
+  communicationMetadata: CommunicationMetadata;
 }
 export interface AgreementMetadataTable {
   contractHolderLabel: string;

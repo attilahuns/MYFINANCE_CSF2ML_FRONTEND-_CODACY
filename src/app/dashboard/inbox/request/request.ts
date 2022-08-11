@@ -1,3 +1,5 @@
+import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+
 export enum RequestStatus {
   IN_PROGRESS = 'In Progress',
   CANCELED = 'Canceled',
@@ -25,6 +27,7 @@ export interface RequestMetadata {
   displayedRowsLimit: number;
   emptyRequestListMessage: string;
   emptyListMessage: string;
+  communicationMetadata: CommunicationMetadata;
 }
 
 export interface RequestForm {

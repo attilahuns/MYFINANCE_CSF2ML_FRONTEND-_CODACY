@@ -28,7 +28,10 @@ export const requestInitialState: RequestState = {
     viewMoreLabel: '',
     displayedRowsLimit: 5,
     emptyRequestListMessage: '',
-    emptyListMessage: ''
+    emptyListMessage: '',
+    communicationMetadata: {
+      title: ''
+    }
   },
   requestForms: [],
   error: '',
@@ -80,12 +83,15 @@ export const requestReducer = createReducer<RequestState>(
         viewMoreLabel: '',
         displayedRowsLimit: 5,
         emptyRequestListMessage: '',
-        emptyListMessage: ''
+        emptyListMessage: '',
+        communicationMetadata: {
+          title: ''
+        }
       },
       error: action.error,
     }
   }),
-  
+
   on(RequestAction.loadRequestFormsSuccess, (state, action): RequestState => {
     return {
       ...state,
