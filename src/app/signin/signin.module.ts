@@ -5,7 +5,10 @@ import { SigninComponent } from './signin.component';
 import { SharedModule } from '../shared/shared.module';
 import { AccountModule } from '../account/account.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { signinReducer } from './state/signin.reducer';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { SigninEffect } from './state/signin.effects';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SigninRoutingModule,
     ReactiveFormsModule,
+    StoreModule.forFeature('signin', signinReducer),
+    EffectsModule.forFeature([SigninEffect])
   ]
 })
 export class SigninModule { }

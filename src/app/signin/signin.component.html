@@ -1,41 +1,41 @@
-<f2ml-account-card [withFooter]="true">
+<f2ml-account-card [withFooter]="true" *ngIf="signin$ | async as metadata" [label]="metadata.ctaHelp.label">
   <div class="signin__container" content>
     <div class="sign-main__wrapper">
       <div class="signin-form__container">
         <form class="signin-form" novalidate (ngSubmit)="submit()" [formGroup]="signinForm">
           <div class="signin-email__container input__container">
-            <mat-label class="signin-email__label input__label">Email</mat-label>
+            <mat-label class="signin-email__label input__label">{{ metadata.emailLabel }}</mat-label>
             <mat-form-field class="signin-email__input" appearance="legacy" [hideRequiredMarker]="true">
               <mat-label></mat-label>
               <input formControlName="email" type="email" matInput placeholder="Email" />
               <mat-error>
-                <p ngxError="pattern">Email not valid</p>
+                <p ngxError="pattern">{{ metadata.emailErrorLabel }}</p>
               </mat-error>
             </mat-form-field>
             <mat-checkbox class="signin-email__remember">
-              <mat-label class="signin-remember__label input__label">Remember my email</mat-label>
+              <mat-label class="signin-remember__label input__label">{{ metadata.rememberEmailLabel }}</mat-label>
             </mat-checkbox>
           </div>
 
           <div class="signin-captcha__container input__container">
-            <mat-label class="signin-captcha__label input__label">Captcha</mat-label>
+            <mat-label class="signin-captcha__label input__label">{{ metadata.captchaLabel }}</mat-label>
             <div class="signin-captcha__input"></div>
           </div>
 
           <div class="signin-confirm__container input__container">
-            <button class="signin-confirm__button" mat-raised-button color="primary" type="submit">Log in</button>
+            <button class="signin-confirm__button" mat-raised-button color="primary" type="submit">{{ metadata.submitBtnLabel }}</button>
           </div>
         </form>
       </div>
 
       <div class="signin-redirect__container">
         <div class="signin-redirect__text__container">
-          <span class="signin-redirect__text">Not registred yet?<br/>Create your account:</span>
+          <span class="signin-redirect__text">{{ metadata.notRegisteredLabel }}</span>
         </div>
 
         <div class="signin-redirect__button__conrainer">
-          <button class="signin-redirect__button" mat-raised-button color="primary" [routerLink]="'/signup'" [queryParams]="{account: 'personal'}">Personal</button>
-          <button class="signin-redirect__button" mat-raised-button color="primary" [routerLink]="'/signup'" [queryParams]="{account: 'business'}">Business</button>
+          <button class="signin-redirect__button" mat-raised-button color="primary" [routerLink]="'/signup'" [queryParams]="{account: 'personal'}">{{ metadata.ctaPersonalLabel }}</button>
+          <button class="signin-redirect__button" mat-raised-button color="primary" [routerLink]="'/signup'" [queryParams]="{account: 'business'}">{{ metadata.ctaBusinessLabel }}</button>
         </div>
       </div>
     </div>

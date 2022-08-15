@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AccountCardComponent implements OnInit {
 
   @Input() withFooter = false;
+  @Input() label!: string;
 
   constructor() { }
 

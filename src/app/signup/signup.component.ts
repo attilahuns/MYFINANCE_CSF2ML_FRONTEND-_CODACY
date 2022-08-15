@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { filter } from 'rxjs';
+import { getSignupMetadata } from './state/signup.reducer';
+import * as SignupAction from "./state/signup.actions";
 
 @Component({
   selector: 'f2ml-singup',
@@ -12,8 +16,11 @@ export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   submitted = false;
   withFooter = true;
+  signup$ = this.store.select(getSignupMetadata).pipe(
+    filter(metadata => '' !== metadata.emailLabel)
+  )
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private store: Store) { }
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
@@ -24,6 +31,7 @@ export class SignupComponent implements OnInit {
     if (!['business','personal'].includes(accountType)) {
       this.router.navigate(['/page-not-found']);
     }
+    this.store.dispatch(SignupAction.loadSignupMetadata());
   }
 
   submit() {

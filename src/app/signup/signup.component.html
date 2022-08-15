@@ -1,44 +1,44 @@
-<f2ml-account-card [withFooter]="withFooter">
+<f2ml-account-card [withFooter]="withFooter" *ngIf="signup$ | async as metadata" [label]="metadata.ctaHelp.label">
   <div class="signup__container" content>
 
     <div class="signup-feedback__message__container" *ngIf="submitted">
-      <span class="signup-feedback__message">You will receive an e-mail.</span>
+      <span class="signup-feedback__message">{{ metadata.confirmationMessage }}</span>
     </div>
 
     <div class="sign-main__wrapper" *ngIf="!submitted">
       <div class="signup-form__container">
         <form class="signup-form" novalidate (ngSubmit)="submit()" [formGroup]="signupForm">
           <div class="signup-email__container input__container">
-            <mat-label class="signup-email__label input__label">Email</mat-label>
+            <mat-label class="signup-email__label input__label">{{ metadata.emailLabel }}</mat-label>
             <mat-form-field class="signup-email__input" appearance="legacy" [hideRequiredMarker]="true">
               <mat-label></mat-label>
               <input formControlName="email" type="email" matInput placeholder="Email" />
               <mat-error>
-                <p ngxError="pattern">Email not valid</p>
+                <p ngxError="pattern">{{ metadata.emailErrorLabel }}</p>
               </mat-error>
             </mat-form-field>
             <mat-checkbox class="signup-email__remember">
-              <mat-label class="signup-remember__label input__label">Remember my email</mat-label>
+              <mat-label class="signup-remember__label input__label">{{ metadata.rememberEmailLabel }}</mat-label>
             </mat-checkbox>
           </div>
 
           <div class="signup-captcha__container input__container">
-            <mat-label class="signup-captcha__label input__label">Captcha</mat-label>
+            <mat-label class="signup-captcha__label input__label">{{ metadata.captchaLabel }}</mat-label>
             <div class="signup-captcha__input"></div>
           </div>
 
           <div class="signup-confirm__container input__container">
-            <button class="signup-confirm__button" mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">Create my account</button>
+            <button class="signup-confirm__button" mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">{{ metadata.submitBtnLabel }}</button>
           </div>
         </form>
       </div>
 
       <div class="signup-redirect__container">
         <div class="signup-redirect__text__container">
-          <span class="signup-redirect__text">You already have an account ?</span>
+          <span class="signup-redirect__text">{{ metadata.accountExistsLabel }}</span>
         </div>
         <div class="signup-redirect__button__conrainer">
-          <button class="signup-redirect__button" mat-raised-button color="primary" [routerLink]="'/signin'">Log in</button>
+          <button class="signup-redirect__button" mat-raised-button color="primary" [routerLink]="'/signin'">{{ metadata.ctaLoginLabel }}</button>
         </div>
       </div>
     </div>

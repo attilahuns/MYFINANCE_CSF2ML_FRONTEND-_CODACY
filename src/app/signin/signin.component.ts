@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { filter } from 'rxjs';
+import * as SigninAction from "./state/signin.actions";
+import { getSigninMetadata } from './state/signin.reducer';
 
 @Component({
   selector: 'f2ml-signin',
@@ -10,13 +14,17 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit {
 
   signinForm!: FormGroup;
+  signin$ = this.store.select(getSigninMetadata).pipe(
+    filter(metadata => '' !== metadata.emailLabel)
+  )
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private store: Store) { }
 
   ngOnInit(): void {
     this.signinForm = this.formBuilder.group({
       email: ['', [ Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')] ],
     });
+    this.store.dispatch(SigninAction.loadSigninMetadata());
   }
 
   submit() {

@@ -1,0 +1,13 @@
+@import 'variables';
+
+.help__container {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
+.help__header {
+  font-size: $font-size-page-title;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 0;
+}

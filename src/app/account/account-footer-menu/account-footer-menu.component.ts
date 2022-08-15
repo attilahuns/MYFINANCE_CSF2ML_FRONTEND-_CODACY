@@ -1,9 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { AccountFooterItem } from '../account-footer-item';
-import { getAccountFooterItems, State } from '../state/account.reducer';
-import * as AccountActions from '../state/account.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'f2ml-account-footer-menu',
@@ -12,12 +8,16 @@ import * as AccountActions from '../state/account.actions';
 })
 export class AccountFooterMenuComponent implements OnInit {
 
-  accountFooterItems$: Observable<AccountFooterItem[]> = this.store.select(getAccountFooterItems);
+  @Input() label!: string;
 
-  constructor(private store: Store<State>) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.store.dispatch(AccountActions.loadAccountFooterItems());
+
+  }
+
+  isSignIn() {
+    return this.router.url.startsWith('/signin');
   }
 
 }

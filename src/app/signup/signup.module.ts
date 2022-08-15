@@ -8,6 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AccountModule } from '../account/account.module';
 import { SignupCompletePersonalComponent } from './signup-complete-personal/signup-complete-personal.component';
 import { SignupCompleteBusinessComponent } from './signup-complete-business/signup-complete-business.component';
+import { signupReducer } from './state/signup.reducer';
+import { SignupEffect } from './state/signup.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,8 @@ import { SignupCompleteBusinessComponent } from './signup-complete-business/sign
     CommonModule,
     SignupRoutingModule,
     ReactiveFormsModule,
+    StoreModule.forFeature('signup', signupReducer),
+    EffectsModule.forFeature([SignupEffect])
   ]
 })
 export class SignupModule { }
