@@ -1,4 +1,4 @@
-<div *ngIf="help$ | async as help" class="help__container">
-  <h1 class="help__header">{{ help.title }}</h1>
-  <f2ml-wysiwyg-displayer [html]="help.body" *ngIf="help.body"></f2ml-wysiwyg-displayer>
+<div *ngIf="metadata$ | async as metadata" class="help__container">
+  <h1 class="help__header">{{ metadata.title }}</h1>
+  <f2ml-wysiwyg-displayer [html]="metadata.body" *ngIf="metadata.body"></f2ml-wysiwyg-displayer>
 </div>

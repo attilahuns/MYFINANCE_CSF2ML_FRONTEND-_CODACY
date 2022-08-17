@@ -16,8 +16,8 @@ export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   submitted = false;
   withFooter = true;
-  signup$ = this.store.select(getSignupMetadata).pipe(
-    filter(metadata => '' !== metadata.emailLabel)
+  metadata$ = this.store.select(getSignupMetadata).pipe(
+    filter(metadata => !!metadata.emailLabel),
   )
 
   constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private store: Store) { }

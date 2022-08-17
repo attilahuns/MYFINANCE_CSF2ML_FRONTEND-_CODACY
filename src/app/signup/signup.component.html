@@ -1,4 +1,4 @@
-<f2ml-account-card [withFooter]="withFooter" *ngIf="signup$ | async as metadata" [label]="metadata.ctaHelp.label">
+<f2ml-account-card [withFooter]="withFooter" *ngIf="metadata$ | async as metadata" [label]="metadata.ctaHelp.label">
   <div class="signup__container" content>
 
     <div class="signup-feedback__message__container" *ngIf="submitted">

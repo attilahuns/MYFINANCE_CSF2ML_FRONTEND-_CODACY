@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, tap, map, filter } from 'rxjs';
-import { ContactMetadata } from './contact';
+import { filter } from 'rxjs';
 import * as ContactAction from "./state/contact.actions";
 import { getContactMetadata } from './state/contact.reducer';
 
@@ -12,8 +11,8 @@ import { getContactMetadata } from './state/contact.reducer';
 })
 export class ContactComponent implements OnInit {
 
-  contact$ = this.store.select(getContactMetadata).pipe(
-    filter(metadata => '' !== metadata.title),
+  metadata$ = this.store.select(getContactMetadata).pipe(
+    filter(metadata => !!metadata.title),
   )
 
   constructor(private store: Store) { }

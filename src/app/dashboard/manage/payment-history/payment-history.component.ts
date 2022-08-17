@@ -21,7 +21,7 @@ export class PaymentHistoryComponent implements OnInit {
   displayFullData = false;
   metadata!: PaymentMetadata;
   content$: Observable<boolean> = combineLatest([this.store.select(getPayments), this.store.select(getPaymentMetadata)]).pipe(
-    filter(([payments, metadata]) => '' != metadata.title ),
+    filter(([payments, metadata]) => !!metadata.title),
     tap(([payments, metadata]) => {
       this.metadata = metadata;
       this.originalData = this.originalData.concat(payments);
@@ -53,7 +53,7 @@ export class PaymentHistoryComponent implements OnInit {
         },
       ];
     }),
-    map(([payments, metadata]) => '' != metadata.title)
+    map(([payments, metadata]) => !!metadata.title)
   )
 
   constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }

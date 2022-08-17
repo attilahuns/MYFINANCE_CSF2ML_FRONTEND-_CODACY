@@ -20,7 +20,7 @@ export class AgreementComponent implements OnInit {
   dataSource = new MatTableDataSource<Agreement>();
   metadata!: AgreementMetadata;
   content$ = combineLatest([this.store.select(getAgreements), this.store.select(getAgreementsMetadata)]).pipe(
-    filter(([agreements, metadata]) => '' !== metadata.title),
+    filter(([agreements, metadata]) => !!metadata.title),
     tap(([agreements, metadata]) => {
       this.metadata = metadata;
       this.originalData = this.originalData.concat(agreements);
@@ -70,7 +70,7 @@ export class AgreementComponent implements OnInit {
         },
       ];
     }),
-    map(([agreements, metadata]) => '' !== metadata.title),
+    map(([agreements, metadata]) => !!metadata.title),
   );
 
   displayFullData = false;

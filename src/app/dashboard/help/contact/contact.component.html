@@ -1,4 +1,4 @@
-<f2ml-default-template [hiddenSideFaq]="true" *ngIf="contact$ | async as metadata">
+<f2ml-default-template [hiddenSideFaq]="true" *ngIf="metadata$ | async as metadata">
   <f2ml-default-card main [title]="metadata.title">
     <div class="contact__card" content>
       <div class="contact__card__content">

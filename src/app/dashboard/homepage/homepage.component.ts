@@ -14,12 +14,12 @@ export class HomepageComponent implements OnInit {
   homepage!: Homepage;
   metadata!: HomepageMetada;
   content$: Observable<boolean> = combineLatest([this.store.select(getHomepageData), this.store.select(getHomepageMetadata)]).pipe(
-    filter(([homepage, metadata]) => '' !== metadata.title),
+    filter(([homepage, metadata]) => !!metadata.title),
     tap(([homepage, metadata]) => {
       this.homepage = homepage;
       this.metadata = metadata;
     }),
-    map(([homepage, metadata]) => '' !== metadata.title)
+    map(([homepage, metadata]) => !!metadata.title)
   )
 
   constructor(private store: Store<State>) { }

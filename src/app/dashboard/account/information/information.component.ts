@@ -16,7 +16,7 @@ export class InformationComponent implements OnInit {
   informations: Information[] = [];
   metadata!: InformationMetadata;
   content$ = combineLatest([this.store.select(getInformations), this.store.select(getInformationsMetadata)]).pipe(
-    filter(([informations, metadata]) => '' !== metadata.title),
+    filter(([informations, metadata]) => !!metadata.title),
     tap(([informations, metadata]) => {
       this.metadata = metadata;
       this.informations = [
@@ -77,7 +77,7 @@ export class InformationComponent implements OnInit {
         },
       ];
     }),
-    map(([informations, metadata]) => '' !== metadata.title),
+    map(([informations, metadata]) => !!metadata.title),
   );
 
   constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }

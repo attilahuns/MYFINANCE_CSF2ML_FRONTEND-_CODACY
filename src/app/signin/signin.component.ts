@@ -14,8 +14,8 @@ import { getSigninMetadata } from './state/signin.reducer';
 export class SigninComponent implements OnInit {
 
   signinForm!: FormGroup;
-  signin$ = this.store.select(getSigninMetadata).pipe(
-    filter(metadata => '' !== metadata.emailLabel)
+  metadata$ = this.store.select(getSigninMetadata).pipe(
+    filter(metadata => !!metadata.emailLabel),
   )
 
   constructor(private formBuilder: FormBuilder, private router: Router, private store: Store) { }

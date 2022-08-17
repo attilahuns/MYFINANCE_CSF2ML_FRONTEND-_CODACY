@@ -17,7 +17,7 @@ export class BankDetailComponent implements OnInit {
   originalData?: BankDetail;
   metadata!: BankDetailMetadata;
   bankDetails$ = combineLatest([this.store.select(getBankDetails), this.store.select(getBankDetailsMetadata)]).pipe(
-    filter(([bankDetail, metadata]) => '' !== metadata.title),
+    filter(([bankDetail, metadata]) => !!metadata.title),
     tap(([bankDetail, metadata]) => {
       this.metadata = metadata;
       this.columns = [
@@ -38,7 +38,7 @@ export class BankDetailComponent implements OnInit {
         },
       ]
     }),
-    map(([bankDetail, metadata]) => '' !== metadata.title),
+    map(([bankDetail, metadata]) => !!metadata.title),
   )
 
   constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }

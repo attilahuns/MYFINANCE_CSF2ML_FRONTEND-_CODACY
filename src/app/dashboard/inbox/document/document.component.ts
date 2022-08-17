@@ -9,7 +9,6 @@ import * as DocumentAction from "./state/document.actions";
 import { getdocuments, getDocumentsMetadata } from './state/document.reducer';
 import { environment } from 'src/environments/environment';
 
-const LIMIT_DISPLAYED_ROWS = 5;
 @Component({
   selector: 'f2ml-document',
   templateUrl: './document.component.html',
@@ -22,7 +21,7 @@ export class DocumentComponent implements OnInit {
   dataSource = new MatTableDataSource<Document>();
   metadata!: DocumentMetadata;
   content$ = combineLatest([this.store.select(getdocuments), this.store.select(getDocumentsMetadata)]).pipe(
-    filter(([documents, metadata]) => '' !== metadata.title),
+    filter(([documents, metadata]) => !!metadata.title),
     tap(([documents, metadata]) => {
       this.metadata = metadata;
       this.originalData = this.originalData.concat(documents);
@@ -84,7 +83,7 @@ export class DocumentComponent implements OnInit {
         },
       ];
     }),
-    map(([documents, metadata]) => '' !== metadata.title),
+    map(([documents, metadata]) => !!metadata.title),
   );
   displayFullData = false;
 

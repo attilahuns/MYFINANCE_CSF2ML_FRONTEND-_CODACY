@@ -20,7 +20,7 @@ export class RequestComponent implements OnInit {
   dataSource = new MatTableDataSource<Request>();
   metadata!: RequestMetadata;
   content$ = combineLatest([this.store.select(getRequestsData), this.store.select(getRequestsMetadata)]).pipe(
-    filter(([requests, metadata]) => '' !== metadata.title),
+    filter(([requests, metadata]) => !!metadata.title),
     tap(([requests, metadata]) => {
       this.metadata = metadata;
       this.originalData = this.originalData.concat(requests);
@@ -52,7 +52,7 @@ export class RequestComponent implements OnInit {
         },
       ];
     }),
-    map(([requests, metadata]) => '' !== metadata.title),
+    map(([requests, metadata]) => !!metadata.title),
   );
   displayFullData = false;
   constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }

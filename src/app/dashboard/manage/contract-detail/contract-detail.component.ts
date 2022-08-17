@@ -22,7 +22,7 @@ export class ContractDetailComponent implements OnInit {
   displayFullData = false;
   servicesDataSource: { title: string, text: string }[] = [];
   contracts$ = combineLatest([this.store.select(getContractDetails), this.store.select(getContractMetadataDetails)]).pipe(
-    filter(([contracts, contractDetailMetadata]) => '' !== contractDetailMetadata.title),
+    filter(([contracts, contractDetailMetadata]) => !!contractDetailMetadata.title),
     tap(([contracts, contractDetailMetadata]) => {
       this.originalData = this.originalData.concat(contracts);
       this.dataSource = new MatTableDataSource(this.originalData.slice(0, contractDetailMetadata.documentDetailMetadata.displayedRowsLimit));
@@ -61,7 +61,7 @@ export class ContractDetailComponent implements OnInit {
         },
       ];
     }),
-    map(([contracts, contractDetailMetadata]) => '' !== contractDetailMetadata.title)
+    map(([contracts, contractDetailMetadata]) => !!contractDetailMetadata.title)
   );
 
   services = [

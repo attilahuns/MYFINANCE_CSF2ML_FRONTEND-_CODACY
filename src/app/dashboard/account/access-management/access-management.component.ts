@@ -22,7 +22,7 @@ export class AccessManagementComponent extends AccessManagementEditableComponent
   columns: { name: string, header: string, sortable: boolean, value: CallableFunction }[] = [];
   metadata!: AccessManagementMetadata;
   content$: Observable<boolean> = combineLatest([this.store.select(getAccessManagementItems), this.store.select(getAccessManagementMetadata)]).pipe(
-    filter(([accessManagementItems, metadata]) => '' !== metadata.title),
+    filter(([accessManagementItems, metadata]) => !!metadata.title),
     tap(([accessManagementItems, metadata]) => {
       this.metadata = metadata;
       this.originalData = this.originalData.concat(accessManagementItems);
@@ -66,7 +66,7 @@ export class AccessManagementComponent extends AccessManagementEditableComponent
         },
       ];
     }),
-    map(([accessManagementItems, metadata]) => '' !== metadata.title)
+    map(([accessManagementItems, metadata]) => !!metadata.title)
   )
 
   constructor(private store: Store, public deviceDetector: DeviceDetectorService) {

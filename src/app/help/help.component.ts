@@ -12,8 +12,8 @@ import { getHelpContent } from './state/help.reducer';
 })
 export class HelpComponent implements OnInit {
 
-  help$ = this.store.select(getHelpContent).pipe(
-    filter(data => '' !== data.title)
+  metadata$ = this.store.select(getHelpContent).pipe(
+    filter(metadata => !!metadata.title),
   )
 
   constructor(private route: ActivatedRoute, private store: Store, private router: Router) { }
