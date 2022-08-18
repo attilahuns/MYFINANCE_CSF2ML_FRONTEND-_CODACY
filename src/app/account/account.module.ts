@@ -15,6 +15,7 @@ import { AccountOtpNotReceivedPersonalComponent } from './account-otp-not-receiv
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccountOtpInvalidComponent } from './account-otp-invalid/account-otp-invalid.component';
 import { AccountOtpNotReceivedBusinessComponent } from './account-otp-not-received-business/account-otp-not-received-business.component';
+import { AccountLoaderComponent } from './account-loader/account-loader.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AccountOtpNotReceivedBusinessComponent } from './account-otp-not-receiv
     AccountOtpNotReceivedPersonalComponent,
     AccountOtpInvalidComponent,
     AccountOtpNotReceivedBusinessComponent,
+    AccountLoaderComponent,
   ],
   imports: [
     SharedModule,
@@ -42,6 +44,7 @@ import { AccountOtpNotReceivedBusinessComponent } from './account-otp-not-receiv
     AccountOtpNotReceivedPersonalComponent,
     AccountOtpInvalidComponent,
     AccountOtpNotReceivedBusinessComponent,
+    AccountLoaderComponent,
   ]
 })
 export class AccountModule { }

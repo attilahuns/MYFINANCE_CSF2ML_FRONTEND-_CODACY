@@ -16,6 +16,7 @@ import { HomepageTemplateComponent } from './homepage-template/homepage-template
 import { HttpClientModule } from '@angular/common/http';
 import { BannerComponent } from './banner/banner.component';
 import { WysiwygDisplayerComponent } from './wysiwyg-displayer/wysiwyg-displayer.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { WysiwygDisplayerComponent } from './wysiwyg-displayer/wysiwyg-displayer
     SearchInputComponent,
     HomepageTemplateComponent,
     BannerComponent,
-    WysiwygDisplayerComponent
+    WysiwygDisplayerComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,8 @@ import { WysiwygDisplayerComponent } from './wysiwyg-displayer/wysiwyg-displayer
     CommunicationTileComponent,
     HomepageTemplateComponent,
     BannerComponent,
-    WysiwygDisplayerComponent
+    WysiwygDisplayerComponent,
+    LoaderComponent
   ]
 })
 export class SharedModule { }
