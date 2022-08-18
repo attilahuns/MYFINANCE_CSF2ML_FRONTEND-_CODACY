@@ -1,6 +1,6 @@
 <div class="banner__container" *ngIf="display && banners.length">
-  <div class="banner__content" *ngIf="timer$ | async as currentIndex">
-    <div class="banner__info__container banner__icon__container" [matTooltip]="tooltipContent">
+  <div class="banner__content">
+    <div class="banner__info__container banner__icon__container" [class.is-empty]="!tooltipContent" [attr.data-tooltip]="tooltipContent">
       <img class="banner__info__icon  banner__icon" src="/assets/images/info_outline.svg" alt="More information">
     </div>
     <div class="banner__messages__container">

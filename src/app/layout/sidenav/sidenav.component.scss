@@ -17,6 +17,7 @@
 }
 .menu-sidenav {
   background: $color-background-primary;
+  width: 300px;
 }
 .menu-sidenav__content-container {
   flex-grow: 1;
@@ -49,14 +50,13 @@
   }
   &.is-active, &:hover {
     background-color: $color-background-accent;
-    font-weight: bold;
+    font-weight: 500;
     border-radius: 8px 0px 0px 8px;
     .menu-navlist__item-icon {
         filter: invert(1);
     }
     .menu-navlist__item-label {
       color: $color-background-primary;
-      font-size: $font-size-fifth;
     }
   }
 }

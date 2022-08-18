@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
-import { map, Observable, tap, timer } from 'rxjs';
+import { ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { map, Subscription, tap, timer } from 'rxjs';
 import { Banner } from './banner';
 
 @Component({
@@ -14,25 +14,40 @@ import { Banner } from './banner';
     ])
   ],
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent implements OnInit, OnDestroy {
 
   static readonly timeInterval = 10000;
 
-  @Input() banners: Banner[] = [];
+  @Input() banners!: Banner[];
   tooltipContent = '';
   display = true;
-  timer$: Observable<number> = timer(0, BannerComponent.timeInterval).pipe(
-    map(n => n % this.banners.length),
-    tap(n => this.tooltipContent = this.banners[n].moreInformation),
-    map(n => n + 1),
-  );
+  timer$!: Subscription;
+  currentIndex = 0;
 
-  constructor() { }
+  constructor(private ref: ChangeDetectorRef, private _ngZone: NgZone) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.ref.detach();
+    this._ngZone.runOutsideAngular(
+      () => {
+        this.timer$ = timer(0, BannerComponent.timeInterval).pipe(
+          map(n => n % this.banners.length),
+          tap(n => this.tooltipContent = this.banners[n].moreInformation),
+          map(n => this.currentIndex = n + 1),
+        ).subscribe(n => this.ref.detectChanges());
+      }
+    );
+  }
+  ngOnDestroy(): void {
+    if (this.timer$) {
+      this.timer$.unsubscribe();
+    }
+  }
 
   close(): void {
     this.display = false;
+    this.ref.detectChanges();
+    this.timer$.unsubscribe();
   }
 
 }

@@ -51,10 +51,38 @@
 ::ng-deep.mat-tooltip.mat-tooltip-show {
   max-width: 300px;
 }
+.banner__info__container:not(.is-empty) {
+  position: relative;
+  &::after {
+    content: attr(data-tooltip);
+    background-color: rgb(97, 97, 97, 0.9);
+    color: #ffffff;
+    z-index: 2;
+    border-radius: 4px;
+    width: 300px;
+    padding: 1em;
+    text-align: center;
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    visibility: hidden;
+    -webkit-transition: visibility 100ms ease-in-out;
+    transition: visibility 100ms ease-in-out;
+  }
+  &:hover::after {
+    visibility: visible;
+  }
+}
+
 @include device.viewport(mobile) {
   .banner__message__block {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+  }
+  .banner__info__container:not(.is-empty) {
+    &::after {
+      width: 200px;
+    }
   }
 }
