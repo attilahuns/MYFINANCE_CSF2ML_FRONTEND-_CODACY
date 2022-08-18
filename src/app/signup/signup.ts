@@ -13,3 +13,25 @@ export interface SignupMetadata {
   ctaLoginLabel: string;
   confirmationMessage: string;
 }
+
+export interface SignupCompleteMetadata {
+  descriptionMessage: string;
+  ctaSendLabel: string;
+  feedbackMessage: string;
+}
+
+export interface SignupCompletePersonalMetadata extends SignupCompleteMetadata {
+  nif: SignupCompleteInputMetadata;
+  birthDate: SignupCompleteInputMetadata;
+}
+
+export interface SignupCompleteBusinessMetadata extends SignupCompleteMetadata {
+  piva: SignupCompleteInputMetadata;
+  vin: SignupCompleteInputMetadata;
+  address: SignupCompleteInputMetadata;
+}
+
+export interface SignupCompleteInputMetadata {
+  label: string;
+  errorMessage: string;
+}

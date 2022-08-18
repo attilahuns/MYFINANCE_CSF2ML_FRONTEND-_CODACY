@@ -22,5 +22,17 @@ export class SignupEffect {
     )
   });
 
+  loadSignupCompleteMetadata$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(SignupAction.loadSignupCompleteMetadata),
+      mergeMap((action) => this.signupService.getMetadataComplete(action.client).pipe(
+        map(metadata => SignupAction.loadSignupCompleteMetadataSuccess({metadata})),
+        catchError(error => {
+          return of(SignupAction.loadSignupCompleteMetadataFailure({error}))
+        })
+      ))
+    )
+  });
+
   constructor(private actions: Actions, private signupService: SignupService) { }
 }

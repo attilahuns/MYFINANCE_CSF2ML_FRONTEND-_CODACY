@@ -1,51 +1,51 @@
-<f2ml-account-card>
+<f2ml-account-card *ngIf="metadata$ | async as metadata">
   <div class="signup-complete-business__container" content>
 
     <div class="signup-complete-business__feedback-message__container" *ngIf="submitted">
-      <span class="signup-complete-business__feedback-message">You will receive an e-mail.</span>
+      <span class="signup-complete-business__feedback-message">{{ metadata.feedbackMessage }}</span>
     </div>
 
     <div class="signup-complete-business__form__wrapper" *ngIf="!submitted">
       <div class="signup-complete-business__form__container">
         <div class="signup-complete-business__legend__container">
-          <span class="signup-complete-business__legend">Please fill in the fields to help us identify you :</span>
+          <span class="signup-complete-business__legend">{{ metadata.descriptionMessage }}</span>
         </div>
         <form class="signup-complete-business__form" novalidate (ngSubmit)="submit()" [formGroup]="signupCompleteForm">
           <div class="signup-complete-business__piva__container signup-complete-business__input__container">
-            <mat-label class="signup-complete-business__piva__label signup-complete-business__input__label">PIVA</mat-label>
+            <mat-label class="signup-complete-business__piva__label signup-complete-business__input__label">{{ metadata.piva.label }}</mat-label>
             <mat-form-field class="signup-complete-business__piva__input signup-complete-business__input" appearance="legacy" [hideRequiredMarker]="true">
               <mat-label></mat-label>
               <input formControlName="piva" type="text" matInput placeholder="XXXXXXXXX" />
               <mat-error>
-                <p ngxError="pattern">PIVA not valid</p>
+                <p ngxError="pattern">{{ metadata.piva.errorMessage }}</p>
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="signup-complete-business__vin__container signup-complete-business__input__container">
-            <mat-label class="signup-complete-business__vin__label signup-complete-business__input__label">VIN</mat-label>
+            <mat-label class="signup-complete-business__vin__label signup-complete-business__input__label">{{ metadata.vin.label }}</mat-label>
             <mat-form-field class="signup-complete-business__vin__input signup-complete-business__input" appearance="legacy" [hideRequiredMarker]="true">
               <mat-label></mat-label>
               <input formControlName="vin" type="text" matInput placeholder="XXXXXXXXX" />
               <mat-error>
-                <p ngxError="pattern">VIN not valid</p>
+                <p ngxError="pattern">{{ metadata.vin.errorMessage }}</p>
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="signup-complete-business__address__container signup-complete-business__input__container">
-            <mat-label class="signup-complete-business__address__label signup-complete-business__input__label">Address</mat-label>
+            <mat-label class="signup-complete-business__address__label signup-complete-business__input__label">{{ metadata.address.label }}</mat-label>
             <mat-form-field class="signup-complete-business__address__input signup-complete-business__input" appearance="legacy" [hideRequiredMarker]="true">
               <mat-label></mat-label>
               <input formControlName="address" type="text" matInput placeholder="XXXXXXXXX" />
               <mat-error>
-                <p ngxError="pattern">Address not valid</p>
+                <p ngxError="pattern">{{ metadata.address.errorMessage }}</p>
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="signup-complete-business__submit__container">
-            <button class="signup-complete-business__submit__button" mat-raised-button color="primary" type="submit" [disabled]="!signupCompleteForm.valid">Send</button>
+            <button class="signup-complete-business__submit__button" mat-raised-button color="primary" type="submit" [disabled]="!signupCompleteForm.valid">{{ metadata.ctaSendLabel }}</button>
           </div>
         </form>
       </div>
