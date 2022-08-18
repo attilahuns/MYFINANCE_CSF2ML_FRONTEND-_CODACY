@@ -1,8 +1,7 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { AppState } from "src/app/state/app.state";
 import { FooterItem } from "../../shared/footer/footer-item";
-import { AccountMetadata, OtpBusinessMetadata, OtpMetadata, OtpPersonalMetadata } from "../account";
-import { AccountFooterItem } from "../account-footer-item";
+import { AccountMetadata, OtpMetadata } from "../account";
 import * as AccountAction from "./account.actions";
 
 export interface State extends AppState {
@@ -11,7 +10,6 @@ export interface State extends AppState {
 export interface AccountState {
   metadata: AccountMetadata,
   footerItems: FooterItem[],
-  accountFooterItems: AccountFooterItem[],
   otpMetadata: OtpMetadata,
   error: string;
 }
@@ -20,7 +18,6 @@ export const signupInitialState: AccountState = {
     title: '',
   },
   footerItems: [],
-  accountFooterItems: [],
   otpMetadata: {
     otpGeneralMetadata: {
       otp: {
@@ -70,7 +67,6 @@ export const signupInitialState: AccountState = {
 const getAccountState = createFeatureSelector<AccountState>('account');
 export const getAccountMetadata = createSelector(getAccountState, state => state.metadata);
 export const getFooterItems = createSelector(getAccountState, state => state.footerItems);
-export const getAccountFooterItems = createSelector(getAccountState, state => state.accountFooterItems);
 export const getOtpGeneralMetadata = createSelector(getAccountState, state => state.otpMetadata.otpGeneralMetadata);
 export const getOtpInvalidMetadata = createSelector(getAccountState, state => state.otpMetadata.otpInvalidMetadata);
 export const getOtpPersonalMetadata = createSelector(getAccountState, state => state.otpMetadata.otpPersonalMetadata);
@@ -114,20 +110,6 @@ export const accountReducer = createReducer<AccountState>(
       metadata: {
         title: '',
       },
-      error: action.error,
-    }
-  }),
-  on(AccountAction.loadAccountFooterItemsSuccess, (state, action): AccountState => {
-    return {
-      ...state,
-      accountFooterItems: action.accountFooterItems,
-      error: '',
-    }
-  }),
-  on(AccountAction.loadAccountFooterItemsFailure, (state, action): AccountState => {
-    return {
-      ...state,
-      accountFooterItems: [],
       error: action.error,
     }
   }),

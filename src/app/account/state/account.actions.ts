@@ -1,7 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { FooterItem } from "../../shared/footer/footer-item";
-import { AccountMetadata, OtpMetadata, OtpNotReceivedMetadata } from "../account";
-import { AccountFooterItem } from "../account-footer-item";
+import { AccountMetadata, OtpMetadata } from "../account";
 
 
 export const resetAccountMetadata = createAction('[ACCOUNT METADATA] INITIALIZE ITEMS');
@@ -12,10 +11,6 @@ export const loadAccountMetadataFailure = createAction('[ACCOUNT METADATA] LOAD 
 export const loadFooterItems = createAction('[FOOTER] LOAD ITEMS');
 export const loadFooterItemsSuccess = createAction('[FOOTER] LOAD ITEMS SUCCESS', props<{footerItems: FooterItem[]}>());
 export const loadFooterItemsFailure = createAction('[FOOTER] LOAD ITEMS FAILURE', props<{error: string}>());
-
-export const loadAccountFooterItems = createAction('[ACCOUNT FOOTER] LOAD ITEMS');
-export const loadAccountFooterItemsSuccess = createAction('[ACCOUNT FOOTER] LOAD ITEMS SUCCESS', props<{accountFooterItems: AccountFooterItem[]}>());
-export const loadAccountFooterItemsFailure = createAction('[ACCOUNT FOOTER] LOAD ITEMS FAILURE', props<{error: string}>());
 
 export const loadOtpMetadata = createAction('[OTP] LOAD OTP METADATA');
 export const loadOtpMetadataSuccess = createAction('[OTP] LOAD OTP METADATA SUCCESS', props<{metadata: OtpMetadata}>());

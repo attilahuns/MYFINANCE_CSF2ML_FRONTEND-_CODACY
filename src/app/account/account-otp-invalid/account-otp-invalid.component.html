@@ -7,7 +7,7 @@
 
     <div class="account-otp-invalid__submit__wrapper">
       <div class="account-otp-invalid__submit__container">
-        <button class="account-otp-invalid__submit__button" mat-raised-button color="primary" type="submit" [routerLink]="'../otp'">{{ metadata.ctaResendLabel }}</button>
+        <button class="account-otp-invalid__submit__button" mat-raised-button color="primary" type="submit" [routerLink]="'../otp'" [queryParams]="{account: accountType}">{{ metadata.ctaResendLabel }}</button>
       </div>
     </div>
 

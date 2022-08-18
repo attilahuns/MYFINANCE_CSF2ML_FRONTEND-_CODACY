@@ -3,7 +3,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { FooterService } from 'src/app/shared/footer/footer.service';
-import { AccountFooterItem } from '../account-footer-item';
 import { AccountService } from '../account.service';
 import * as AccountAction from './account.actions';
 
@@ -11,13 +10,6 @@ import * as AccountAction from './account.actions';
   providedIn: 'root'
 })
 export class AccountEffect {
-
-  private footerItems: AccountFooterItem[] = [
-    {
-      href: '',
-      label: 'Help',
-    },
-  ];
 
   loadAccountMetadata$ = createEffect(() => {
     return this.actions.pipe(
@@ -38,18 +30,6 @@ export class AccountEffect {
         map(footerItems => AccountAction.loadFooterItemsSuccess({footerItems})),
         catchError(error => {
           return of(AccountAction.loadFooterItemsFailure({error}))
-        })
-      ))
-    )
-  });
-
-  loadAccountFooterItems$ = createEffect(() => {
-    return this.actions.pipe(
-      ofType(AccountAction.loadAccountFooterItems),
-      mergeMap(() => of(this.footerItems).pipe(
-        map(accountFooterItems => AccountAction.loadAccountFooterItemsSuccess({accountFooterItems})),
-        catchError(error => {
-          return of(AccountAction.loadAccountFooterItemsFailure({error}))
         })
       ))
     )

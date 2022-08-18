@@ -40,7 +40,7 @@ export class AccountOtpComponent implements OnInit {
     // check if the OTP is truly valid
     // this is for demo only
     if ('000000' === this.otpForm.value.otp) {
-      this.router.navigate(['../otp-invalid'], {relativeTo: this.route});
+      this.router.navigate(['../otp-invalid'], {relativeTo: this.route, queryParams: { account: this.accountType}});
       return;
     }
     // authenticate & redirect to dashboard
