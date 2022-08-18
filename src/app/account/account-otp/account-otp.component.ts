@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { getOtpGeneralMetadata } from '../state/account.reducer';
+import { Store } from '@ngrx/store';
+import { filter } from 'rxjs';
+import * as AccountAction from "../state/account.actions";
 
 @Component({
   selector: 'f2ml-account-otp',
@@ -10,10 +14,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AccountOtpComponent implements OnInit {
 
   otpForm!: FormGroup;
-  submitted = false;
   accountType!: string;
+  metadata$ = this.store.select(getOtpGeneralMetadata).pipe(
+    filter(metadata => !!metadata.ctaValidateLabel)
+  )
 
-  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private store: Store) { }
 
   ngOnInit(): void {
     this.otpForm = this.formBuilder.group({
@@ -23,6 +29,8 @@ export class AccountOtpComponent implements OnInit {
     if (!['business','personal'].includes(this.accountType)) {
       this.router.navigate(['/page-not-found']);
     }
+
+    this.store.dispatch(AccountAction.loadOtpMetadata());
   }
 
   submit(): void {

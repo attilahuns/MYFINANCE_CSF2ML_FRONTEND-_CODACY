@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { getOtpInvalidMetadata } from '../state/account.reducer';
+import { Store } from '@ngrx/store';
+import { filter } from 'rxjs';
+import * as AccountAction from "../state/account.actions";
 
 @Component({
   selector: 'f2ml-account-otp-invalid',
@@ -7,8 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountOtpInvalidComponent implements OnInit {
 
-  constructor() { }
+  metadata$ = this.store.select(getOtpInvalidMetadata).pipe(
+    filter(metadata => !!metadata.notValidFeedbackMessage)
+  )
 
-  ngOnInit(): void { }
+  constructor(private store: Store) { }
+
+  ngOnInit(): void {
+    this.store.dispatch(AccountAction.loadOtpMetadata());
+  }
 
 }

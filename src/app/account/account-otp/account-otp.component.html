@@ -1,30 +1,26 @@
-<f2ml-account-card>
+<f2ml-account-card *ngIf="metadata$ | async as metadata">
   <div class="account-otp__container" content>
 
-    <div class="account-otp__feedback-message__container" *ngIf="submitted">
-      <span class="account-otp__feedback-message">You will receive an e-mail.</span>
-    </div>
-
-    <div class="account-otp__form__wrapper" *ngIf="!submitted">
+    <div class="account-otp__form__wrapper">
       <div class="account-otp__form__container">
         <form class="account-otp__form" novalidate (ngSubmit)="submit()" [formGroup]="otpForm">
           <div class="account-otp__otp__container">
-            <mat-label class="account-otp__otp__label">Enter the OTP you have received at XXXXXX</mat-label>
+            <mat-label class="account-otp__otp__label">{{ metadata.otp.label }} XXXXXX</mat-label>
             <mat-form-field class="account-otp__otp__input" appearance="legacy" [hideRequiredMarker]="true">
               <mat-label></mat-label>
               <input formControlName="otp" type="text" matInput placeholder="XXXXXXX" />
               <mat-error>
-                <p ngxError="pattern">OTP not valid</p>
+                <p ngxError="pattern">{{ metadata.otp.errorMessage }}</p>
               </mat-error>
             </mat-form-field>
             <div class="account-otp__not-received__container">
-              <a class="account-otp__not-received__link" [routerLink]="'../otp-not-received-personal'" *ngIf="accountType == 'personal'">I did not receive a SMS OTP</a>
-              <a class="account-otp__not-received__link" [routerLink]="'../otp-not-received-business'" *ngIf="accountType == 'business'">I did not receive a SMS OTP</a>
+              <a [matTooltip]="metadata.notReceivedSms.tooltip" class="account-otp__not-received__link" [routerLink]="'../otp-not-received-personal'" *ngIf="accountType == 'personal'">{{ metadata.notReceivedSms.label }}</a>
+              <a [matTooltip]="metadata.notReceivedSms.tooltip" class="account-otp__not-received__link" [routerLink]="'../otp-not-received-business'" *ngIf="accountType == 'business'">{{ metadata.notReceivedSms.label }}</a>
             </div>
           </div>
 
           <div class="account-otp__confirm__container">
-            <button class="account-otp__confirm__button" mat-raised-button color="primary" type="submit" [disabled]="!otpForm.valid">Validate</button>
+            <button class="account-otp__confirm__button" mat-raised-button color="primary" type="submit" [disabled]="!otpForm.valid">{{ metadata.ctaValidateLabel }}</button>
           </div>
         </form>
       </div>

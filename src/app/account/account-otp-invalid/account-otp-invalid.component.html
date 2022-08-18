@@ -1,13 +1,13 @@
-<f2ml-account-card>
+<f2ml-account-card *ngIf="metadata$ | async as metadata">
   <div class="account-otp-invalid__container" content>
 
     <div class="account-otp-invalid__feedback-message__container">
-      <span class="account-otp-invalid__feedback-message">The entered OTP was not valid.</span>
+      <span class="account-otp-invalid__feedback-message">{{ metadata.notValidFeedbackMessage }}</span>
     </div>
 
     <div class="account-otp-invalid__submit__wrapper">
       <div class="account-otp-invalid__submit__container">
-        <button class="account-otp-invalid__submit__button" mat-raised-button color="primary" type="submit" [routerLink]="'../otp'">Resend OTP</button>
+        <button class="account-otp-invalid__submit__button" mat-raised-button color="primary" type="submit" [routerLink]="'../otp'">{{ metadata.ctaResendLabel }}</button>
       </div>
     </div>
 

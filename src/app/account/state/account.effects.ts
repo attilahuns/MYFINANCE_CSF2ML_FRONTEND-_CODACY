@@ -55,5 +55,17 @@ export class AccountEffect {
     )
   });
 
+  loadOtpMetadata$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(AccountAction.loadOtpMetadata),
+      mergeMap(() => this.accountService.getOtpMetadata().pipe(
+        map(metadata => AccountAction.loadOtpMetadataSuccess({metadata})),
+        catchError(error => {
+          return of(AccountAction.loadOtpMetadataFailure({error}))
+        })
+      ))
+    )
+  });
+
   constructor(private actions: Actions, private accountService: AccountService, private footerService: FooterService) { }
 }
