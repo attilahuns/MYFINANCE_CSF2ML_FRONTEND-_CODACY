@@ -8,7 +8,6 @@ import { FooterItem } from 'src/app/shared/footer/footer-item';
 import { environment } from 'src/environments/environment';
 import { SidenavMenuItem } from './sidenav-menu-item';
 import { Banner } from 'src/app/shared/banner/banner';
-import { LoaderService } from 'src/app/shared/loader/loader.service';
 
 @Component({
   selector: 'f2ml-sidenav',
@@ -24,7 +23,7 @@ export class SidenavComponent implements OnInit {
     filter(banners => banners.length > 0),
   );
 
-  constructor(private store: Store<State>, public deviceDetector: DeviceDetectorService, public loaderService: LoaderService) { }
+  constructor(private store: Store<State>, public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void { }
 

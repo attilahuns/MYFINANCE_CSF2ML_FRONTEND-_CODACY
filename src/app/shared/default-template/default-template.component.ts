@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
 import { CommunicationMetadata } from '../communication-tile/communication';
+import { LoaderService } from '../loader/loader.service';
 
 @Component({
   selector: 'f2ml-default-template',
@@ -12,7 +13,7 @@ export class DefaultTemplateComponent implements OnInit {
   @Input() hiddenSideFaq:boolean = false;
   @Input() communicationMetadata!: CommunicationMetadata | undefined;
 
-  constructor(public deviceDetector: DeviceDetectorService) { }
+  constructor(public deviceDetector: DeviceDetectorService, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,4 @@
-<div class="default-template__container">
+<div class="default-template__container" *ngIf="!(loaderService.isLoading$ | async)">
   <div class="template__container">
     <f2ml-breadcrumb class="breadcrumb__container"></f2ml-breadcrumb>
     <div class="template__grid">

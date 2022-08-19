@@ -1,4 +1,4 @@
-<div class="homepage-template__container">
+<div class="homepage-template__container" *ngIf="!(loaderService.isLoading$ | async)">
   <div class="template__container">
     <div>
       <ng-content select="[header]"></ng-content>
