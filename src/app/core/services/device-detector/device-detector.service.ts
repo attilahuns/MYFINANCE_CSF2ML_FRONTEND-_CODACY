@@ -2,9 +2,9 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
 
 export enum Breakpoints {
-  Mobile = '(max-width: 428px)',
-  Tablet = '(min-width: 429px) and (max-width: 991px)',
-  Laptop = '(min-width: 992px)',
+  Mobile = '(max-width: 576px)',
+  Tablet = '(min-width: 577px) and (max-width: 1023px)',
+  Laptop = '(min-width: 1024px)',
 }
 
 @Injectable({

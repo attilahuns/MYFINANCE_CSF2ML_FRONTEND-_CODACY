@@ -43,3 +43,22 @@ $csf2ml_b2c_frontend-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 html, body { height: 100%; }
 body { margin: 0 }
+
+html {
+  @media (resolution: 1.25dppx) {
+    & {
+      zoom: 0.8;
+    }
+  }
+  @media (resolution: 1.5dppx) {
+    & {
+      zoom: 0.6667;
+    }
+  }
+  @media (resolution: 1.75dppx) {
+    & {
+      zoom: 0.5714;
+    }
+  }
+}
+

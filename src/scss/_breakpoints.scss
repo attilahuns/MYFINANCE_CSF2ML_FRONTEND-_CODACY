@@ -1,9 +1,6 @@
 // Breakpoint per device
-// $screen-mobile: 576px !default;
-$screen-mobile: 428px !default;
-// $screen-tablet: 768px !default;
-$screen-laptop: 992px !default;
-// $screen-large: 1200px !default;
+$screen-mobile: 576px !default;
+$screen-laptop: 1024px !default;
 
 // Define media queries using breakpoints
 $mobile-query: '(max-width: #{$screen-mobile})';
