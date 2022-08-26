@@ -118,5 +118,7 @@
       }
     }
   },
-  "defaultProject": "csf2ml_b2c_frontend"
+  "cli": {
+    "analytics": false
+  }
 }

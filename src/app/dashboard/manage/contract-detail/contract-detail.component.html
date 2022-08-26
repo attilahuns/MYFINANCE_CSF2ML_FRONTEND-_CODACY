@@ -5,9 +5,9 @@
         <h1>{{ contractDetailMetadata.title }} 100P06100206</h1>
       </div>
       <div class="contract__btn__container">
-        <button mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata?.makePaymentLabel !== ''">{{ contractDetailMetadata?.makePaymentLabel }}</button>
-        <button mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata?.modifyAgreementLabel !== ''">{{ contractDetailMetadata?.modifyAgreementLabel }}</button>
-        <button [routerLink]="['payments']" mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata?.paymentHistoryLabel !== ''">{{ contractDetailMetadata?.paymentHistoryLabel }}</button>
+        <button mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata.makePaymentLabel">{{ contractDetailMetadata.makePaymentLabel }}</button>
+        <button mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata.modifyAgreementLabel">{{ contractDetailMetadata.modifyAgreementLabel }}</button>
+        <button [routerLink]="['payments']" mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata.paymentHistoryLabel">{{ contractDetailMetadata.paymentHistoryLabel }}</button>
       </div>
     </div>
 
