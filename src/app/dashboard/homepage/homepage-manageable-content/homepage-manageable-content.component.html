@@ -2,27 +2,21 @@
   <div class="manageable-content__container" content>
     <p>{{metadata.description}}</p>
 
-    <iframe
-      *ngIf="metadata.videoUrl" class="manageable_content_video"
-      [src]="getVideoSanitizedUrl(metadata.videoUrl)"
-      title="YouTube video player"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+    <f2ml-youtube-video-player *ngIf="metadata.videoUrl" [videoUrl]="metadata.videoUrl"></f2ml-youtube-video-player>
 
-    <div *ngIf="metadata.link && metadata.link.url && metadata.link.label" class="manageable_content_link">
+    <div *ngIf="metadata.link" class="manageable_content_link">
       <span (click)="navigateTo(metadata.link.url)">{{ metadata.link.label }}</span>
     </div>
 
-    <div *ngIf="metadata.pdf && metadata.pdf.url && metadata.pdf.label" class="manageable_content_cta">
+    <div *ngIf="metadata.pdf" class="manageable_content_cta">
       <button (click)="downloadPdf(metadata.pdf.url)">{{ metadata.pdf.label }}</button>
     </div>
 
     <div>
-      <img *ngIf="metadata.image && metadata.image.url" [src]="getImageUrl(metadata.image.url)" [alt]="metadata.image.alt" class="manageable_content_picture" />
+      <img *ngIf="metadata.image" [src]="getImageUrl(metadata.image.url)" [alt]="metadata.image.alt" class="manageable_content_picture" />
     </div>
 
-    <div *ngIf="metadata.cta && metadata.cta.url && metadata.cta.label" class="manageable_content_cta">
+    <div *ngIf="metadata.cta" class="manageable_content_cta">
       <button (click)="navigateTo(metadata.cta.url)">{{ metadata.cta.label }}</button>
     </div>
   </div>

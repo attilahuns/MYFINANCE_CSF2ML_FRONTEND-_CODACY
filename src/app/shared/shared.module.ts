@@ -17,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BannerComponent } from './banner/banner.component';
 import { WysiwygDisplayerComponent } from './wysiwyg-displayer/wysiwyg-displayer.component';
 import { LoaderComponent } from './loader/loader.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { YoutubeVideoPlayerComponent } from './youtube-video-player/youtube-video-player.component';
 
 @NgModule({
   declarations: [
@@ -31,15 +33,17 @@ import { LoaderComponent } from './loader/loader.component';
     HomepageTemplateComponent,
     BannerComponent,
     WysiwygDisplayerComponent,
-    LoaderComponent
+    LoaderComponent,
+    YoutubeVideoPlayerComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule,
-    NgxExtendedPdfViewerModule,
     RouterModule,
     HttpClientModule,
+    MaterialModule,
+    NgxExtendedPdfViewerModule,
+    YouTubePlayerModule,
   ],
   exports: [
     FooterComponent,
@@ -56,7 +60,8 @@ import { LoaderComponent } from './loader/loader.component';
     HomepageTemplateComponent,
     BannerComponent,
     WysiwygDisplayerComponent,
-    LoaderComponent
+    LoaderComponent,
+    YoutubeVideoPlayerComponent,
   ]
 })
 export class SharedModule { }

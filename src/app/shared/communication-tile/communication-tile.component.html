@@ -4,12 +4,7 @@
     <div class="communication-subtitle-label" [innerHTML]="metadata.description"></div>
   </div>
   <div class="communication-video" *ngIf="metadata.video">
-    <div id="message"></div>
-    <iframe [src]="getVideoSanitizedUrl(metadata.video)"
-      title="YouTube video player"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+    <f2ml-youtube-video-player [videoUrl]="metadata.video"></f2ml-youtube-video-player>
   </div>
   <div *ngIf="metadata.image">
     <img [src]="getImageUrl(metadata.image.url)" [alt]="metadata.image.alt" class="communication-picture"/>
