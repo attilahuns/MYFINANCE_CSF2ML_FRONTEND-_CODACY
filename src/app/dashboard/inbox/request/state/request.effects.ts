@@ -85,7 +85,7 @@ export class RequestEffect {
   loadRequestMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(RequestAction.loadRequestMetadata),
-      mergeMap(() => this.requestService.getMetadata().pipe(
+      mergeMap(() => this.requestService.metadata$.pipe(
         map(metadata => RequestAction.loadRequestMetadataSuccess({metadata})),
         catchError(error => {
           return of(RequestAction.loadRequestMetadataFailure({error}))

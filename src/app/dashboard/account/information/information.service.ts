@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { InformationMetadata } from './information';
 
@@ -10,11 +10,10 @@ import { InformationMetadata } from './information';
 export class InformationService {
 
   static readonly metadataEndpoint = `${environment.cms.endpoint}/api/information`;
+  readonly metadata$ = this.http.get<InformationMetadata>(InformationService.metadataEndpoint).pipe(
+    shareReplay(1),
+  );
 
   constructor(private http: HttpClient) { }
-
-  getMetadata(): Observable<InformationMetadata> {
-    return this.http.get<InformationMetadata>(InformationService.metadataEndpoint);
-  }
 
 }

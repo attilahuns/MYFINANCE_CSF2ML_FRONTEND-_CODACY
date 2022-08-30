@@ -4,6 +4,7 @@ import { getSignupCompletePersonalMetadata } from '../state/signup.reducer';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import * as SignupAction from "../state/signup.actions";
+import { ClientType } from '../signup';
 
 @Component({
   selector: 'f2ml-signup-complete-individual',
@@ -25,7 +26,7 @@ export class SignupCompletePersonalComponent implements OnInit {
       nif: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9]{16}$') ] ],
       birthDate: ['', [ Validators.required ] ],
     });
-    this.store.dispatch(SignupAction.loadSignupCompleteMetadata({client: 'personal'}));
+    this.store.dispatch(SignupAction.loadSignupCompleteMetadata({client: ClientType.Personal}));
   }
 
   submit() {

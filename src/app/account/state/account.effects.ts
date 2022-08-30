@@ -26,7 +26,7 @@ export class AccountEffect {
   loadfooterItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(AccountAction.loadFooterItems),
-      mergeMap(() => this.footerService.getFooterItems().pipe(
+      mergeMap(() => this.footerService.footerItems$.pipe(
         map(footerItems => AccountAction.loadFooterItemsSuccess({footerItems})),
         catchError(error => {
           return of(AccountAction.loadFooterItemsFailure({error}))
@@ -38,7 +38,7 @@ export class AccountEffect {
   loadOtpMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(AccountAction.loadOtpMetadata),
-      mergeMap(() => this.accountService.getOtpMetadata().pipe(
+      mergeMap(() => this.accountService.otpMetadata$.pipe(
         map(metadata => AccountAction.loadOtpMetadataSuccess({metadata})),
         catchError(error => {
           return of(AccountAction.loadOtpMetadataFailure({error}))

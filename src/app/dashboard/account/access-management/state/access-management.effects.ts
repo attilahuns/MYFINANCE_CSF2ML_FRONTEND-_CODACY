@@ -32,7 +32,7 @@ export class AccessManagementEffect {
   loadAccessManagementMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(AccessManagementAction.loadAccessManagementMetadata),
-      mergeMap(() => this.accessManagementService.getMetadata().pipe(
+      mergeMap(() => this.accessManagementService.metadata$.pipe(
         map(accessManagementMetadata => AccessManagementAction.loadAccessManagementMetadataSuccess({accessManagementMetadata})),
         catchError(error => {
           return of(AccessManagementAction.loadAccessManagementMetadataFailure({error}))

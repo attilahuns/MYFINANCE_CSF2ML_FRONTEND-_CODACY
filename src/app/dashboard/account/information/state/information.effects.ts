@@ -38,7 +38,7 @@ export class InformationEffect {
   loadInformationMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(InformationActions.loadInformationMetadata),
-      mergeMap(() => this.informationService.getMetadata().pipe(
+      mergeMap(() => this.informationService.metadata$.pipe(
         map(metadata => InformationActions.loadInformationMetadataSuccess({metadata})),
         catchError(error => {
           return of(InformationActions.loadInformationMetadataFailure({error}))

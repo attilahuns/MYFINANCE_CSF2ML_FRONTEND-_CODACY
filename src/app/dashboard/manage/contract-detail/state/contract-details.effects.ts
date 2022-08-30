@@ -38,7 +38,7 @@ export class ContractDetailtEffect {
   loadcontractsMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(ContractDetailsAction.loadContractDetailMetadata),
-      mergeMap(() => this.contractService.getMetadata().pipe(
+      mergeMap(() => this.contractService.metadata$.pipe(
         map(contractDetailMetadata => ContractDetailsAction.loadContractDetailMetadataSuccess({contractDetailMetadata})),
         catchError(error => {
           return of(ContractDetailsAction.loadContractDetailMetadataFailure({error}))

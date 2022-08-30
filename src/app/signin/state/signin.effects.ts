@@ -13,7 +13,7 @@ export class SigninEffect {
   loadsigninMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(SigninAction.loadSigninMetadata),
-      mergeMap(() => this.signinService.getMetadata().pipe(
+      mergeMap(() => this.signinService.metadata$.pipe(
         map(metadata => SigninAction.loadSigninMetadataSuccess({metadata})),
         catchError(error => {
           return of(SigninAction.loadSigninMetadataFailure({error}))

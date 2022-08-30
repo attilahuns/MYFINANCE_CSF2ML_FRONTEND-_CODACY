@@ -13,7 +13,7 @@ export class SignupEffect {
   loadsignupMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(SignupAction.loadSignupMetadata),
-      mergeMap(() => this.signupService.getMetadata().pipe(
+      mergeMap(() => this.signupService.metadata$.pipe(
         map(metadata => SignupAction.loadSignupMetadataSuccess({metadata})),
         catchError(error => {
           return of(SignupAction.loadSignupMetadataFailure({error}))

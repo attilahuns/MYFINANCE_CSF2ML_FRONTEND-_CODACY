@@ -32,7 +32,7 @@ export class BankDetailEffect {
   loadBankDetailMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(BankDetailAction.loadBankDetailMetadata),
-      mergeMap(() => this.bankDetailService.getMetadata().pipe(
+      mergeMap(() => this.bankDetailService.metadata$.pipe(
         map(metadata => BankDetailAction.loadBankDetailMetadataSuccess({metadata})),
         catchError(error => {
           return of(BankDetailAction.loadBankDetailMetadataFailure({error}))

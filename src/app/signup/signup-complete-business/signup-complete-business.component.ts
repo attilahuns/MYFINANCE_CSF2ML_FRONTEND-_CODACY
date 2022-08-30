@@ -4,6 +4,7 @@ import { getSignupCompleteBusinessMetadata } from '../state/signup.reducer';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import * as SignupAction from "../state/signup.actions";
+import { ClientType } from '../signup';
 
 @Component({
   selector: 'f2ml-signup-complete-business',
@@ -26,7 +27,7 @@ export class SignupCompleteBusinessComponent implements OnInit {
       vin: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9]{17}$') ] ],
       address: ['', [ Validators.required ] ],
     });
-    this.store.dispatch(SignupAction.loadSignupCompleteMetadata({client: 'business'}));
+    this.store.dispatch(SignupAction.loadSignupCompleteMetadata({client: ClientType.Business}));
   }
 
   submit() {

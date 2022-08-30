@@ -43,7 +43,7 @@ export class DocumentEffect {
   loaddocumentMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(DocumentAction.loadDocumentMetadata),
-      mergeMap(() => this.documentService.getMetadata().pipe(
+      mergeMap(() => this.documentService.metadata$.pipe(
         map(metadata => DocumentAction.loadDocumentMetadataSuccess({metadata})),
         catchError(error => {
           return of(DocumentAction.loadDocumentMetadataFailure({error}))

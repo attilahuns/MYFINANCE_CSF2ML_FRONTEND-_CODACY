@@ -1,3 +1,8 @@
+export enum ClientType {
+  Business = 'business',
+  Personal = 'personal',
+}
+
 export interface SignupMetadata {
   emailLabel: string;
   emailErrorLabel: string;

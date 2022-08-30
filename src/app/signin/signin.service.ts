@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SignInMetadata } from './signin';
 
@@ -10,10 +10,10 @@ import { SignInMetadata } from './signin';
 export class SigninService {
 
   static readonly metadataEndpoint = `${environment.cms.endpoint}/api/authentications/signin`;
+  readonly metadata$ = this.http.get<SignInMetadata>(SigninService.metadataEndpoint).pipe(
+    shareReplay(1),
+  );
 
   constructor(private http: HttpClient) { }
 
-  getMetadata(): Observable<SignInMetadata> {
-    return this.http.get<SignInMetadata>(SigninService.metadataEndpoint);
-  }
 }

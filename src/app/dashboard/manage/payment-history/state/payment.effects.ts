@@ -35,7 +35,7 @@ export class PaymentEffect {
   loadpaymentMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(PaymentAction.loadPaymentMetadata),
-      mergeMap(() => this.paymentService.getMetadata().pipe(
+      mergeMap(() => this.paymentService.metadata$.pipe(
         map(metadata => PaymentAction.loadPaymentMetadataSuccess({metadata})),
         catchError(error => {
           return of(PaymentAction.loadPaymentMetadataFailure({error}))

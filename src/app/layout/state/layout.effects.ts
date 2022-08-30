@@ -27,7 +27,7 @@ export class LayoutEffect {
   loadfooterItems$ = createEffect(() => {
     return this.actions.pipe(
       ofType(LayoutActions.loadFooterItems),
-      mergeMap(() => this.footerService.getFooterItems().pipe(
+      mergeMap(() => this.footerService.footerItems$.pipe(
         map(footerItems => LayoutActions.loadFooterItemsSuccess({footerItems})),
         catchError(error => {
           return of(LayoutActions.loadFooterItemsFailure({error}))

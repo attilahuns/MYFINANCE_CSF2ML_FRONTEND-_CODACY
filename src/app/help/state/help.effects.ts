@@ -13,7 +13,7 @@ export class HelpEffect {
   loadhelp$ = createEffect(() => {
     return this.actions.pipe(
       ofType(HelpAction.loadHelp),
-      mergeMap((payload) => this.helpService.getHelpContent(payload.helpType).pipe(
+      mergeMap((action) => this.helpService.getMetadata(action.helpType).pipe(
         map(help => HelpAction.loadHelpSuccess({help})),
         catchError(error => {
           return of(HelpAction.loadHelpFailure({error}))

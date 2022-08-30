@@ -13,7 +13,7 @@ export class ContactEffect {
   loadAccessManagementMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(ContactAction.loadContactMetadataItems),
-      mergeMap(() => this.contactService.getMetadata().pipe(
+      mergeMap(() => this.contactService.metadata$.pipe(
         map(contactMetadata => ContactAction.loadContactMetadataItemsSuccess({contactMetadata})),
         catchError(error => {
           return of(ContactAction.loadContactMetadataItemsFailure({error}))

@@ -41,7 +41,7 @@ export class AgreementEffect {
   loadagreementMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(AgreementAction.loadAgreementMetadata),
-      mergeMap(() => this.agreementService.getMetadata().pipe(
+      mergeMap(() => this.agreementService.metadata$.pipe(
         map(metadata => AgreementAction.loadAgreementMetadataSuccess({metadata})),
         catchError(error => {
           return of(AgreementAction.loadAgreementMetadataFailure({error}))

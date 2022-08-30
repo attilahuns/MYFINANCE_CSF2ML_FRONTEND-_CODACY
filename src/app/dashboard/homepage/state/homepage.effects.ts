@@ -83,7 +83,7 @@ export class HomepageEffect {
   loadHomepageMetadata$ = createEffect(() => {
     return this.actions.pipe(
       ofType(HomepageAction.loadHomepageMetadata),
-      mergeMap(() => this.homepageService.getMetadata().pipe(
+      mergeMap(() => this.homepageService.metadata$.pipe(
         map(homepageMetadata => HomepageAction.loadHomepageMetadataSuccess({homepageMetadata})),
         catchError(error => {
           return of(HomepageAction.loadHomepageMetadataFailure({error}))
