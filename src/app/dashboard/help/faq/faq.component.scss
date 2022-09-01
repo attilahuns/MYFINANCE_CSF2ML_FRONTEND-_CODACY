@@ -63,6 +63,21 @@
   .rotate90deg {
     transform: rotate(90deg);
   }
+  .faq__video, .faq__image, .faq__answer {
+    margin: 20px 0px;
+  }
+  .faq__image {
+    display: flex;
+    justify-content: center;
+  }
+  .faq__cta, .faq__pdf {
+    margin: 10px 0px;
+    font-size: $font-size-third;
+    font-weight: bold;
+    a {
+      color: $color-primary;
+    }
+  }
   @include device.viewport(mobile) {
     .faq__feedback__form {
       mat-radio-button {

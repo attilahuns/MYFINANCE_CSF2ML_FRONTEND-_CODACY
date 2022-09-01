@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { filter } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import * as FaqAction from "./state/faq.actions";
+import { getFaqMetadata } from './state/faq.reducer';
 
 @Component({
   selector: 'f2ml-faq',
@@ -7,10 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqComponent implements OnInit {
   panelIndex: number = -1;
-  questions = ['Setting your agreement','How do l change my address?','How do I change my bank details?','How long should I wait for a reply to query?']
-  constructor() { }
+  metadata$ = this.store.select(getFaqMetadata).pipe(
+    filter(metadata => !!metadata.title)
+  )
+
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.store.dispatch(FaqAction.loadFaqMetadata());
   }
 
   openPanel(index: number) {
@@ -23,4 +32,7 @@ export class FaqComponent implements OnInit {
     }
   }
 
+  getFullUrl(url: string) {
+    return environment.cms.endpoint + url;
+  }
 }

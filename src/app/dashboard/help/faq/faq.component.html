@@ -1,32 +1,41 @@
-<f2ml-default-template [hiddenSideFaq]="true">
-  <f2ml-default-card title="Help page" main>
+<f2ml-default-template [hiddenSideFaq]="true" *ngIf="metadata$ | async as metadata">
+  <f2ml-default-card [title]="metadata.title" main>
     <div content class="faq__page">
-      <mat-accordion class="faq__headers__align">
-        <mat-expansion-panel [expanded]="panelIndex == i" *ngFor="let item of questions;let i = index" [attr.data-index]="i" class="mat-elevation-z0" hideToggle (closed)="closePanel(i)" (opened)="openPanel(i)">
+      <mat-accordion class="faq__headers__align" *ngIf="metadata.faqs">
+        <mat-expansion-panel [expanded]="panelIndex == i" *ngFor="let faq of metadata.faqs;let i = index" [attr.data-index]="i" class="mat-elevation-z0" hideToggle (closed)="closePanel(i)" (opened)="openPanel(i)">
         <mat-expansion-panel-header>
-          <mat-panel-title><span [class.is-bold]="i === panelIndex">{{ item }}</span></mat-panel-title>
+          <mat-panel-title><span [class.is-bold]="i === panelIndex">{{ faq.title }}</span></mat-panel-title>
           <mat-panel-description>
             <mat-icon [class.rotate90deg]="i === panelIndex">arrow_forward_ios</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>
-          Payment can be made by credit or debit card via the Account section of this website. You will just need to login or register to make payment.<br/><br/>
-          We acknowledge that some people feel safer using a credit card online but please remember repaying your debt with a credit card may
-          increase the risk of escalating debt and financial difficulties. Please talk to us if you find yourself in financial difficulties.<br/><br/>
-          Alternative methods of payment are as follows. Please note that we can only take payment from the account holder or an authorised third
-          party.<br/><br/>
-          Call us: 0345 345 5449
-        </p>
+
+        <div *ngIf="faq.answer" class="faq__answer">
+          <f2ml-wysiwyg-displayer [html]="faq.answer"></f2ml-wysiwyg-displayer>
+        </div>
+        <div *ngIf="faq.video" class="faq__video">
+          <f2ml-youtube-video-player [videoUrl]="faq.video"></f2ml-youtube-video-player>
+        </div>
+        <div *ngIf="faq.cta" class="faq__cta">
+          <a [href]="faq.cta.url" target="_blank">{{ faq.cta.title }}</a>
+        </div>
+        <div *ngIf="faq.image" class="faq__image">
+          <img [src]="getFullUrl(faq.image.url)" [alt]="faq.image.alt"/>
+        </div>
+        <div *ngIf="faq.pdf" class="faq__pdf">
+          <a [href]="getFullUrl(faq.pdf.url)" target="_blank">{{ faq.pdf.label }}</a>
+        </div>
+
         <br/>
         <form class="faq__feedback__form">
-          <span>Did this answer help you ?</span><br/>
+          <span>{{ metadata.voteMetadata.question }}</span><br/>
           <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="yes">Yes</mat-radio-button>
-            <mat-radio-button value="no">No</mat-radio-button>
+            <mat-radio-button value="yes">{{ metadata.voteMetadata.yesLabel }}</mat-radio-button>
+            <mat-radio-button value="no">{{ metadata.voteMetadata.noLabel }}</mat-radio-button>
           </mat-radio-group>
-          <button mat-flat-button>Submit</button>
+          <button mat-flat-button>{{ metadata.voteMetadata.submitCtaLabel }}</button>
         </form>
-      <hr *ngIf="questions.length > i+1"/>
+      <hr *ngIf="metadata.faqs.length > i+1"/>
     </mat-expansion-panel>
    </mat-accordion>
   </div>
