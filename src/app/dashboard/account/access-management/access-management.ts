@@ -1,4 +1,5 @@
 import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+import { FaqMetadata } from "src/app/shared/faq-tile/faq-tile";
 
 export interface AccessManagement {
   id: number,
@@ -18,7 +19,8 @@ export interface AccessManagementMetadata {
   noAccessToDisplayLabel: string,
   maxAccessExceededLabel: string,
   tableMetadata: AccessManagementMetadataTable,
-  communicationMetadata?: CommunicationMetadata
+  communicationMetadata?: CommunicationMetadata,
+  faqMetadata?: FaqMetadata;
 }
 
 interface AccessManagementMetadataTable {

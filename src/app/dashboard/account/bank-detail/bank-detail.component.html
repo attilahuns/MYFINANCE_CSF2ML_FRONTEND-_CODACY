@@ -1,4 +1,4 @@
-<f2ml-default-template *ngIf="bankDetails$ | async as bankDetails" [communicationMetadata]="metadata.communicationMetadata">
+<f2ml-default-template *ngIf="bankDetails$ | async as bankDetails" [communicationMetadata]="metadata.communicationMetadata" [faqMetadata]="metadata.faqMetadata">
   <div class="bank-detail__container" main>
     <f2ml-default-card [title]="metadata.title">
       <div class="bank-detail__card__container" content>

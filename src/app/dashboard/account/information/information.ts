@@ -1,4 +1,5 @@
 import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+import { FaqMetadata } from "src/app/shared/faq-tile/faq-tile";
 
 export interface Information {
   title: string,
@@ -41,5 +42,6 @@ export interface InformationMetadata {
     emailLabel: string,
   },
   updateInformation: string,
-  communicationMetadata?: CommunicationMetadata
+  communicationMetadata?: CommunicationMetadata,
+  faqMetadata?: FaqMetadata;
 }

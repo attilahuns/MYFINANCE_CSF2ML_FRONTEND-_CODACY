@@ -12,6 +12,7 @@ export interface VoteMetadata {
 }
 
 export interface Faq {
+    id: number;
     title: string,
     answer?: string,
     video?: string,

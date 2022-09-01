@@ -1,4 +1,5 @@
 import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+import { FaqMetadata } from "src/app/shared/faq-tile/faq-tile";
 
 export interface Agreement {
   contactHolder: string;
@@ -19,6 +20,7 @@ export interface AgreementMetadata {
   emptyContractListMessage: string,
   tableMetadata: AgreementMetadataTable;
   communicationMetadata?: CommunicationMetadata;
+  faqMetadata?: FaqMetadata;
 }
 export interface AgreementMetadataTable {
   contractHolderLabel: string;

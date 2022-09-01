@@ -1,4 +1,5 @@
 import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+import { FaqMetadata } from "src/app/shared/faq-tile/faq-tile";
 
 export interface BankDetail {
   bankName: string;
@@ -13,4 +14,5 @@ export interface BankDetailMetadata {
   bankDetailsLabel: string;
   updateInformationLabel: string;
   communicationMetadata?: CommunicationMetadata;
+  faqMetadata?: FaqMetadata;
 }

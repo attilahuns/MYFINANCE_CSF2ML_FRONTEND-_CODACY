@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
+import { FaqMetadata } from './faq-tile';
 
 @Component({
   selector: 'f2ml-faq-tile',
@@ -9,18 +10,8 @@ import { DeviceDetectorService } from 'src/app/core/services/device-detector/dev
 export class FaqTileComponent implements OnInit {
 
   displayFaq = false;
-  title= 'Need assistance';
-  @Input() faqs = [
-    {
-      label: 'How can I update my request ?'
-    },
-    {
-      label: 'How can I update my request ?'
-    },
-    {
-      label: 'How can I update my request ?'
-    }
-  ];
+  @Input() metadata!: FaqMetadata;
+
   constructor(public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {}

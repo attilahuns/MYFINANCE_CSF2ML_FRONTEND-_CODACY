@@ -1,15 +1,15 @@
-<f2ml-default-card [title]="title" *ngIf="deviceDetector.isLaptop()">
+<f2ml-default-card [title]="metadata.title" *ngIf="deviceDetector.isLaptop()">
   <div class="faq__list" content>
-    <div class="faq__item-container" *ngFor="let faq of faqs">
-      <span class="faq__item">{{faq.label}}</span>
+    <div class="faq__item-container" *ngFor="let faq of metadata.faqs">
+      <a [routerLink]="['/dashboard/help/faq']" [queryParams]="{ id: faq.id }" class="faq__item">{{faq.title}}</a>
     </div>
   </div>
 </f2ml-default-card>
 
 <div class="faq-mobile__container is-animated" (click)="openFaq()" [class.is-extended]="displayFaq" *ngIf="!deviceDetector.isLaptop()">
   <div class="faq-mobile__list-container" *ngIf="displayFaq">
-    <div class="faq-mobile__item-container" *ngFor="let faq of faqs">
-      <span class="faq__item faq-mobile__item">{{faq.label}}</span>
+    <div class="faq-mobile__item-container" *ngFor="let faq of metadata.faqs">
+      <a [routerLink]="['/dashboard/help/faq']" [queryParams]="{ id: faq.id }" class="faq__item faq-mobile__item">{{faq.title}}</a>
     </div>
     <div class="faq-mobile__close">
       <img class="faq-mobile__close-icon" alt="close help" src="assets/images/close.svg" (click)="closeFaq($event)">

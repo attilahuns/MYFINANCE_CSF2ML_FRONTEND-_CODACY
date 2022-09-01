@@ -1,4 +1,4 @@
-<f2ml-default-template *ngIf="content$ | async" [communicationMetadata]="metadata.communicationMetadata">
+<f2ml-default-template *ngIf="content$ | async" [communicationMetadata]="metadata.communicationMetadata" [faqMetadata]="metadata.faqMetadata">
   <f2ml-default-card [title]="metadata.title" main>
     <div class="document__container" content>
       <ng-template [ngIf]="originalData.length">

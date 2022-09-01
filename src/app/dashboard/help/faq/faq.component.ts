@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -16,10 +17,14 @@ export class FaqComponent implements OnInit {
     filter(metadata => !!metadata.title)
   )
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.store.dispatch(FaqAction.loadFaqMetadata());
+    const faqId = +(this.route.snapshot.queryParamMap.get('id') as string);
+    if (faqId) {
+      this.panelIndex = faqId;
+    }
   }
 
   openPanel(index: number) {

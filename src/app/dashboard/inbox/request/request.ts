@@ -1,4 +1,5 @@
 import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+import { FaqMetadata } from "src/app/shared/faq-tile/faq-tile";
 
 export enum RequestStatus {
   IN_PROGRESS = 'In Progress',
@@ -28,6 +29,7 @@ export interface RequestMetadata {
   emptyRequestListMessage: string;
   emptyListMessage: string;
   communicationMetadata?: CommunicationMetadata;
+  faqMetadata?: FaqMetadata;
 }
 
 export interface RequestForm {

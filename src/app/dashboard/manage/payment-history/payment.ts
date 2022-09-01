@@ -1,4 +1,5 @@
 import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+import { FaqMetadata } from "src/app/shared/faq-tile/faq-tile";
 
 export interface Payment {
   dueAmount: string;
@@ -11,7 +12,8 @@ export interface PaymentMetadata {
   title: string,
   downloadBtnLabel: string,
   tableMetadata: PaymentMetadataTable,
-  communicationMetadata?: CommunicationMetadata
+  communicationMetadata?: CommunicationMetadata,
+  faqMetadata?: FaqMetadata
 }
 
 export interface PaymentMetadataTable {

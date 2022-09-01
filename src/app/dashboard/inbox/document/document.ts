@@ -1,4 +1,5 @@
 import { CommunicationMetadata } from "src/app/shared/communication-tile/communication";
+import { FaqMetadata } from "src/app/shared/faq-tile/faq-tile";
 
 export interface Document {
   documentType: string;
@@ -20,7 +21,8 @@ export interface DocumentMetadata {
   documentListNotFound: string;
   downloadCTALabel: string;
   tableMetadata: DocumentMetadataTable;
-  communicationMetadata?: CommunicationMetadata
+  communicationMetadata?: CommunicationMetadata;
+  faqMetadata?: FaqMetadata;
 }
 
 export interface DocumentMetadataTable {
