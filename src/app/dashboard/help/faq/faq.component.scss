@@ -16,8 +16,13 @@
     background: $color-font-primary-in-filled-background !important;
   }
   .mat-expansion-panel-header {
-    padding: 0px !important;
+    padding: 10px 0px !important;
     font-size: $font-size-third;
+    height: auto !important;
+  }
+  .mat-expansion-panel-header-title:hover {
+    font-weight: bold;
+    text-decoration: underline;
   }
   p {
     font-size: $font-size-fourth;
@@ -41,13 +46,23 @@
     display: flex;
     justify-content: center;
   }
+  .faq__video {
+    width: 85%;
+    margin: auto;
+  }
+  .faq__answer {
+    font-size: $font-size-fourth;
+  }
   .faq__cta, .faq__pdf {
-    margin: 10px 0px;
+    margin: 20px 0px;
     font-size: $font-size-third;
     font-weight: bold;
     a {
       color: $color-primary;
     }
+  }
+  ::ng-deep .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+    flex: auto;
   }
   @include device.viewport(mobile) {
     .faq__feedback__form {
