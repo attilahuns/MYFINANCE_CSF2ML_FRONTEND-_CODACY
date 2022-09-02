@@ -17,7 +17,7 @@ export interface Faq {
   answer?: string,
   video?: string,
   cta?: {
-    title: string,
+    label: string,
     url: string
   },
   pdf?: {

@@ -17,7 +17,7 @@
           <f2ml-youtube-video-player [videoUrl]="faq.video"></f2ml-youtube-video-player>
         </div>
         <div *ngIf="faq.cta" class="faq__cta">
-          <a [href]="faq.cta.url" target="_blank">{{ faq.cta.title }}</a>
+          <a [href]="faq.cta.url" target="_blank">{{ faq.cta.label }}</a>
         </div>
         <div *ngIf="faq.image" class="faq__image">
           <img [src]="getFullUrl(faq.image.url)" [alt]="faq.image.alt"/>
