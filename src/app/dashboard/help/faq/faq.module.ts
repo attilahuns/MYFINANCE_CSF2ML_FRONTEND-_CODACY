@@ -8,14 +8,18 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { FaqEffect } from './state/faq.effects';
 import { faqReducer } from './state/faq.reducer';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FaqVoteComponent } from './faq-vote/faq-vote.component';
 
 
 @NgModule({
   declarations: [
-    FaqComponent
+    FaqComponent,
+    FaqVoteComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FaqRoutingModule,
     SharedModule,
     StoreModule.forFeature('faq', faqReducer),

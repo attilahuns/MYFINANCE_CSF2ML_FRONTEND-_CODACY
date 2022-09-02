@@ -12,20 +12,25 @@ export interface VoteMetadata {
 }
 
 export interface Faq {
-    id: number;
+  id: number;
+  title: string,
+  answer?: string,
+  video?: string,
+  cta?: {
     title: string,
-    answer?: string,
-    video?: string,
-    cta?: {
-      title: string,
-      url: string
-    },
-    pdf?: {
-      label: string,
-      url: string
-    },
-    image?: {
-      url: string,
-      alt: string
-    }
+    url: string
+  },
+  pdf?: {
+    label: string,
+    url: string
+  },
+  image?: {
+    url: string,
+    alt: string
+  }
+}
+
+export interface FaqVote {
+  Up: 'up',
+  Down: 'down,'
 }

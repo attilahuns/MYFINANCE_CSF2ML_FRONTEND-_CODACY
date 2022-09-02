@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs';
+import { BehaviorSubject, filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { FaqService } from './faq.service';
 import * as FaqAction from "./state/faq.actions";
 import { getFaqMetadata } from './state/faq.reducer';
 
@@ -12,29 +13,31 @@ import { getFaqMetadata } from './state/faq.reducer';
   styleUrls: ['./faq.component.scss']
 })
 export class FaqComponent implements OnInit {
-  panelIndex: number = -1;
+
+  private panelSubject: BehaviorSubject<number> = new BehaviorSubject<number>(-1);
+  panel$ = this.panelSubject.asObservable();
+
   metadata$ = this.store.select(getFaqMetadata).pipe(
     filter(metadata => !!metadata.title)
-  )
+  );
 
-  constructor(private store: Store, private route: ActivatedRoute) { }
+  constructor(private store: Store, private route: ActivatedRoute, private faqService: FaqService) { }
 
   ngOnInit(): void {
     this.store.dispatch(FaqAction.loadFaqMetadata());
     const faqId = +(this.route.snapshot.queryParamMap.get('id') as string);
     if (faqId) {
-      this.panelIndex = faqId;
+      this.togglePanel(faqId);
     }
   }
 
-  openPanel(index: number) {
-    this.panelIndex = index;
-  }
-
-  closePanel(index: number) {
-    if (index == this.panelIndex) {
-      this.panelIndex = -1
+  togglePanel(id: number): void {
+    if (id === this.panelSubject.getValue()) {
+      this.panelSubject.next(-1);
+      return;
     }
+    this.panelSubject.next(id);
+    this.faqService.consulte(id);
   }
 
   getFullUrl(url: string) {

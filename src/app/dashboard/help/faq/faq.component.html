@@ -1,9 +1,9 @@
 <f2ml-default-template [hiddenSideFaq]="true" *ngIf="metadata$ | async as metadata">
   <f2ml-default-card [title]="metadata.title" main>
-    <div content class="faq__page">
+    <div content class="faq__page" *ngIf="panel$ | async as panelIndex">
       <mat-accordion class="faq__headers__align" *ngIf="metadata.faqs">
-        <mat-expansion-panel *ngFor="let faq of metadata.faqs;let i = index" [expanded]="panelIndex == faq.id" [attr.data-index]="i" class="mat-elevation-z0" hideToggle (closed)="closePanel(faq.id)" (opened)="openPanel(faq.id)">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel *ngFor="let faq of metadata.faqs;let i = index" [expanded]="panelIndex == faq.id" [attr.data-index]="i" class="mat-elevation-z0" hideToggle>
+        <mat-expansion-panel-header (click)="togglePanel(faq.id)">
           <mat-panel-title><span [class.is-bold]="faq.id === panelIndex">{{ faq.title }}</span></mat-panel-title>
           <mat-panel-description>
             <mat-icon [class.rotate90deg]="faq.id === panelIndex">arrow_forward_ios</mat-icon>
@@ -27,14 +27,7 @@
         </div>
 
         <br/>
-        <form class="faq__feedback__form">
-          <span>{{ metadata.voteMetadata.question }}</span><br/>
-          <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="yes">{{ metadata.voteMetadata.yesLabel }}</mat-radio-button>
-            <mat-radio-button value="no">{{ metadata.voteMetadata.noLabel }}</mat-radio-button>
-          </mat-radio-group>
-          <button mat-flat-button>{{ metadata.voteMetadata.submitCtaLabel }}</button>
-        </form>
+        <f2ml-faq-vote [faqId]="faq.id" [metadata]="metadata.voteMetadata"></f2ml-faq-vote>
       <hr *ngIf="metadata.faqs.length > i+1"/>
     </mat-expansion-panel>
    </mat-accordion>

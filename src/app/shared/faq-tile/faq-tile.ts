@@ -1,6 +1,6 @@
 export interface FaqMetadata {
   title: string,
-  faqs: Faq[];
+  faqs?: Faq[];
 }
 
 export interface Faq {

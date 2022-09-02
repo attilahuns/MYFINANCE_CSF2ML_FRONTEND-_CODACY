@@ -1,0 +1,10 @@
+<div class="faq-vote__container">
+  <form class="faq-vote__feedback__form" (ngSubmit)="submit()" [formGroup]="voteForm" *ngIf="!voteFormSubmitted">
+    <span>{{ metadata.question }}</span><br/>
+    <mat-radio-group formControlName="vote">
+      <mat-radio-button value="up">{{ metadata.yesLabel }}</mat-radio-button>
+      <mat-radio-button value="down">{{ metadata.noLabel }}</mat-radio-button>
+    </mat-radio-group>
+    <button mat-flat-button>{{ metadata.submitCtaLabel }}</button>
+  </form>
+</div>
