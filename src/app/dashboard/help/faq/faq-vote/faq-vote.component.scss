@@ -6,10 +6,8 @@
     font-size: $font-size-third;
     font-weight: bold;
   }
-  mat-radio-button {
+  .faq__radio__group mat-radio-button {
     margin-right: 70px;
-  }
-  mat-radio-button {
     font-size: $font-size-fourth;
   }
   button {
@@ -20,25 +18,33 @@
     padding: 0 30px;
     margin: 10px 0 16px 35px;
   }
-  ::ng-deep .mat-ripple-element {
-    display: none !important;
+  ::ng-deep .faq__radio__group .mat-ripple-element {
+    display: none;
   }
-  ::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: $color-primary !important;
+  ::ng-deep .faq__radio__group .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: $color-primary;
   }
-  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-    background-color: $color-primary !important;
+  ::ng-deep .faq__radio__group .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: $color-primary;
+  }
+  ::ng-deep .faq__radio__group .mat-radio-outer-circle:hover {
+    border-color: $color-accent;
+  }
+  .faq-vote__question {
+    margin-bottom: 12px;
+  }
+  button:hover {
+    background-color: $color-font-primary;
   }
 }
 
 @include device.viewport(mobile) {
-  .faq__feedback__form {
-    mat-radio-button {
-      margin-right: 40px !important;
+  .faq-vote__feedback__form {
+    .faq__radio__group mat-radio-button {
+      margin-right: 30px;
     }
     button {
-      margin-left: 20px !important;
-      margin-top: 10px !important;
+      margin: 0px;
     }
   }
 }
