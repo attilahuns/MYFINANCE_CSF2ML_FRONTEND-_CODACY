@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, filter } from 'rxjs';
+import { BehaviorSubject, filter, tap } from 'rxjs';
+import { TitleService } from 'src/app/core/services/title-service/title.service';
 import { environment } from 'src/environments/environment';
 import { FaqService } from './faq.service';
 import * as FaqAction from "./state/faq.actions";
-import { getFaqMetadata } from './state/faq.reducer';
+import { getFaqMetadata, State } from './state/faq.reducer';
 
 @Component({
   selector: 'f2ml-faq',
@@ -18,10 +19,11 @@ export class FaqComponent implements OnInit {
   panel$ = this.panelSubject.asObservable();
 
   metadata$ = this.store.select(getFaqMetadata).pipe(
-    filter(metadata => !!metadata.title)
+    filter(metadata => !!metadata.title),
+    tap(metadata => this.titleService.setTitle(metadata.title)),
   );
 
-  constructor(private store: Store, private route: ActivatedRoute, private faqService: FaqService) { }
+  constructor(private store: Store<State>, private titleService: TitleService, private route: ActivatedRoute, private faqService: FaqService) { }
 
   ngOnInit(): void {
     this.store.dispatch(FaqAction.loadFaqMetadata());

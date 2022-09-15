@@ -5,8 +5,11 @@ import { Store } from '@ngrx/store';
 import { combineLatest, filter, map, Observable, tap } from 'rxjs';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
 import { Payment, PaymentMetadata } from './payment';
-import { getPaymentMetadata, getPayments } from './state/payment.reducer';
+import { getPaymentMetadata, getPayments, State } from './state/payment.reducer';
 import * as PaymentAction from "./state/payment.actions";
+import { BreadcrumbService } from 'xng-breadcrumb';
+import { ActivatedRoute } from '@angular/router';
+import { TitleService } from 'src/app/core/services/title-service/title.service';
 
 @Component({
   selector: 'f2ml-payment-history',
@@ -22,6 +25,15 @@ export class PaymentHistoryComponent implements OnInit {
   metadata!: PaymentMetadata;
   content$: Observable<boolean> = combineLatest([this.store.select(getPayments), this.store.select(getPaymentMetadata)]).pipe(
     filter(([payments, metadata]) => !!metadata.title),
+    tap(([_, metadata]) => {
+      const id = this.route.snapshot.params['id'];
+      const breadcrumb = metadata.contractDetailsTitle.replace('@[FINANCE_PRODUCT]', 'PCP').replace('@[REGISTRATION_NUMBER]', id);
+      this.breadcrumbService.set('@contract-details', breadcrumb);
+    }),
+    tap(([_, metadata]) => {
+      this.titleService.setTitle(metadata.title);
+      this.breadcrumbService.set('@payment-history', metadata.title);
+    }),
     tap(([payments, metadata]) => {
       this.metadata = metadata;
       this.originalData = this.originalData.concat(payments);
@@ -56,7 +68,7 @@ export class PaymentHistoryComponent implements OnInit {
     map(([payments, metadata]) => !!metadata.title)
   )
 
-  constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }
+  constructor(private store: Store<State>, private titleService: TitleService, public deviceDetector: DeviceDetectorService, private breadcrumbService: BreadcrumbService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.store.dispatch(PaymentAction.loadPayment());

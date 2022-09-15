@@ -3,14 +3,29 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContractDetailComponent } from './contract-detail.component';
 
 const routes: Routes = [
-  { path: '' , component: ContractDetailComponent },
   {
-    path: 'payments',
+    path: ':id',
     data: {
-      breadcrumb: 'Payment History'
+      breadcrumb: {
+        alias: 'contract-details',
+      },
     },
-    loadChildren: () => import('../payment-history/payment-history.module').then(m => m.PaymentHistoryModule)
-  },
+    children: [
+      {
+        path: '',
+        component: ContractDetailComponent,
+      },
+      {
+        path: 'payment-history',
+        data: {
+          breadcrumb: {
+            alias: 'payment-history',
+          },
+        },
+        loadChildren: () => import('../payment-history/payment-history.module').then(m => m.PaymentHistoryModule)
+      },
+    ]
+  }
 ];
 
 @NgModule({

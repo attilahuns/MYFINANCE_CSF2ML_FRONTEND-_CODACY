@@ -6,14 +6,18 @@ const routes: Routes = [
   {
     path: 'requests',
     data: {
-      breadcrumb: 'Requests'
+      breadcrumb: {
+        alias: 'requests',
+      },
     },
    loadChildren: () => import('./request/request.module').then(m => m.RequestModule)
   },
   {
     path: 'documents',
     data: {
-      breadcrumb: 'Documents'
+      breadcrumb: {
+        alias: 'documents',
+      },
     },
     loadChildren: () => import('./document/document.module').then(m => m.DocumentModule)
   },

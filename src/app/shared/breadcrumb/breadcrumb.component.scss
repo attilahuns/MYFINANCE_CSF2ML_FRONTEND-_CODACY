@@ -1,36 +1,27 @@
 @use 'breakpoints' as device;
 @import 'variables';
 
-.breadcrumb {
-  margin: 0;
-  font-size: $font-size-fourth;
-  li {
-    list-style: none;
-    float: left;
-    margin: 5px;
-  }
-  li:last-child{
-    margin-right: 20px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  li:last-child:hover, li:nth-child(2):hover, li:nth-child(3):hover {
+.breadcrumb__separator {
+  color: $color-font-sub-title;
+}
+::ng-deep.breadcrumb__container .breadcrumb {
+  .xng-breadcrumb-trail {
+    font-size: $font-size-fourth;
     color: $color-font-sub-title;
-    text-decoration: none;
     font-weight: bold;
   }
-  li:nth-child(2),li:nth-child(3){
-    cursor: pointer;
-  }
-  li:first-child {
-    cursor: auto;
-    font-weight: normal !important;
-  }
-  li::after {
-    content: " > ";
+  .xng-breadcrumb-item {
+    font-size: $font-size-fourth;
     color: $color-font-sub-title;
+    &:hover {
+      a:not(.xng-breadcrumb-link-disabled) {
+        font-weight: bold;
+        text-decoration: none;
+        color: $color-font-sub-title;
+      }
+    }
   }
-  li:last-child::after {
-    content: "";
+  .xng-breadcrumb-separator {
+    padding: 0 0.5emm;
   }
 }

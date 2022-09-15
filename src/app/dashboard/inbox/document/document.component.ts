@@ -6,8 +6,9 @@ import { combineLatest, filter, map, tap } from 'rxjs';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
 import { Document, DocumentMetadata } from './document';
 import * as DocumentAction from "./state/document.actions";
-import { getdocuments, getDocumentsMetadata } from './state/document.reducer';
+import { getdocuments, getDocumentsMetadata, State } from './state/document.reducer';
 import { environment } from 'src/environments/environment';
+import { TitleService } from 'src/app/core/services/title-service/title.service';
 
 @Component({
   selector: 'f2ml-document',
@@ -22,6 +23,7 @@ export class DocumentComponent implements OnInit {
   metadata!: DocumentMetadata;
   content$ = combineLatest([this.store.select(getdocuments), this.store.select(getDocumentsMetadata)]).pipe(
     filter(([documents, metadata]) => !!metadata.title),
+    tap(([_, metadata]) => this.titleService.setTitle(metadata.title)),
     tap(([documents, metadata]) => {
       this.metadata = metadata;
       this.originalData = this.originalData.concat(documents);
@@ -87,7 +89,7 @@ export class DocumentComponent implements OnInit {
   );
   displayFullData = false;
 
-  constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }
+  constructor(private store: Store<State>, private titleService: TitleService, public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {
     this.store.dispatch(DocumentAction.loadDocument());

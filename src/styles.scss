@@ -60,5 +60,10 @@ html {
       zoom: 0.5714;
     }
   }
+
+  // remove scrollbar
+  &::-webkit-scrollbar, &::-webkit-scrollbar {
+    display: none;
+  }
 }
 

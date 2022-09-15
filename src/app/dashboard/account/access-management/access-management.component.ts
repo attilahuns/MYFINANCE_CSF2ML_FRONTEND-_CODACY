@@ -5,9 +5,10 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, filter, map, Observable, tap } from 'rxjs';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
 import { AccessManagement, AccessManagementMetadata } from './access-management';
-import { getAccessManagementItems, getAccessManagementMetadata } from './state/access-management.reducer';
+import { getAccessManagementItems, getAccessManagementMetadata, State } from './state/access-management.reducer';
 import * as AccessManagementAction from "./state/access-management.actions";
 import { AccessManagementEditableComponent } from './access-management-editable.component';
+import { TitleService } from 'src/app/core/services/title-service/title.service';
 
 @Component({
   selector: 'f2ml-access-management',
@@ -23,6 +24,7 @@ export class AccessManagementComponent extends AccessManagementEditableComponent
   metadata!: AccessManagementMetadata;
   content$: Observable<boolean> = combineLatest([this.store.select(getAccessManagementItems), this.store.select(getAccessManagementMetadata)]).pipe(
     filter(([accessManagementItems, metadata]) => !!metadata.title),
+    tap(([_, metadata]) => this.titleService.setTitle(metadata.title)),
     tap(([accessManagementItems, metadata]) => {
       this.metadata = metadata;
       this.originalData = this.originalData.concat(accessManagementItems);
@@ -69,7 +71,7 @@ export class AccessManagementComponent extends AccessManagementEditableComponent
     map(([accessManagementItems, metadata]) => !!metadata.title)
   )
 
-  constructor(private store: Store, public deviceDetector: DeviceDetectorService) {
+  constructor(private store: Store<State>, private titleService: TitleService, public deviceDetector: DeviceDetectorService) {
     super();
    }
 

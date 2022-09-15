@@ -6,11 +6,13 @@ import { DocumentComponent } from './document.component';
 const routes: Routes = [
   { path:'', component: DocumentComponent },
   {
-    path: 'detail',
+    path: 'details/:id',
     component: DocumentDetailComponent,
     data: {
-      breadcrumb: 'Details'
-    }
+      breadcrumb: {
+        alias: 'document-details'
+      }
+    },
   },
 ];
 

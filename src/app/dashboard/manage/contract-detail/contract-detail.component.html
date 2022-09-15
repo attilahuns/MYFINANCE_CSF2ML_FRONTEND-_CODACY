@@ -2,12 +2,12 @@
   <div content class="contract__card" main>
     <div class="contract__wrapper__header">
       <div class="">
-        <h1>{{ contractDetailMetadata.title }} 100P06100206</h1>
+        <h1>{{ title }}</h1>
       </div>
       <div class="contract__btn__container">
         <button mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata.makePaymentLabel">{{ contractDetailMetadata.makePaymentLabel }}</button>
         <button mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata.modifyAgreementLabel">{{ contractDetailMetadata.modifyAgreementLabel }}</button>
-        <button [routerLink]="['payments']" mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata.paymentHistoryLabel">{{ contractDetailMetadata.paymentHistoryLabel }}</button>
+        <button [routerLink]="['payment-history']" mat-flat-button class="contract__btn" *ngIf="contractDetailMetadata.paymentHistoryLabel">{{ contractDetailMetadata.paymentHistoryLabel }}</button>
       </div>
     </div>
 

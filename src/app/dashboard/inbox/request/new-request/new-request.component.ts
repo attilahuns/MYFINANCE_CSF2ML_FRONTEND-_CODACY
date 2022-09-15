@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 import { getrequestForms, State } from '../state/request.reducer';
 import * as RequestAction from "../state/request.actions";
+import { BreadcrumbService } from 'xng-breadcrumb';
+import { TitleService } from 'src/app/core/services/title-service/title.service';
 
 @Component({
   selector: 'f2ml-new-request',
@@ -19,15 +21,18 @@ export class NewRequestComponent implements OnInit {
   forms$ = this.store.select(getrequestForms);
   exampleForm!: FormGroup;
 
-  constructor(private store: Store<State>, private formBuilder: FormBuilder) { }
+  constructor(private store: Store<State>, private titleService: TitleService, private formBuilder: FormBuilder, private breadcrumbService: BreadcrumbService) { }
 
   ngOnInit(): void {
     this.exampleForm = this.formBuilder.group({
       bankName: ['', [ Validators.required ] ],
       bankCertificate: ['', [ Validators.required ] ],
     });
-    this.store.dispatch(RequestAction.loadRequestForms())
+    this.store.dispatch(RequestAction.loadRequestForms());
+    this.breadcrumbService.set('@new-request', 'New Request');
+    this.titleService.setTitle('New Request');
   }
+
   displayForm(formId: number): void {
     if (formId === this.displayedFormSubject.getValue()) {
       this.displayedFormSubject.next(-1);

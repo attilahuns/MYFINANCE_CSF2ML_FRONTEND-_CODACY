@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, map, tap } from 'rxjs';
-import { getInformations, getInformationsMetadata } from './state/information.reducer';
+import { getInformations, getInformationsMetadata, State } from './state/information.reducer';
 import * as InformationActions from './state/information.actions';
 import { Information, InformationMetadata } from './information';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
+import { TitleService } from 'src/app/core/services/title-service/title.service';
 
 @Component({
   selector: 'f2ml-information',
@@ -17,6 +18,7 @@ export class InformationComponent implements OnInit {
   metadata!: InformationMetadata;
   content$ = combineLatest([this.store.select(getInformations), this.store.select(getInformationsMetadata)]).pipe(
     filter(([informations, metadata]) => !!metadata.title),
+    tap(([_, metadata]) => this.titleService.setTitle(metadata.title)),
     tap(([informations, metadata]) => {
       this.metadata = metadata;
       this.informations = [
@@ -80,7 +82,7 @@ export class InformationComponent implements OnInit {
     map(([informations, metadata]) => !!metadata.title),
   );
 
-  constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }
+  constructor(private store: Store<State>, private titleService: TitleService, public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {
     this.store.dispatch(InformationActions.loadInformation());

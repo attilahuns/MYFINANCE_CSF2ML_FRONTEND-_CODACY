@@ -10,6 +10,7 @@ export interface Payment {
 
 export interface PaymentMetadata {
   title: string,
+  contractDetailsTitle: string,
   downloadBtnLabel: string,
   tableMetadata: PaymentMetadataTable,
   communicationMetadata?: CommunicationMetadata,

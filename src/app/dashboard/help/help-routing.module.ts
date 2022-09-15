@@ -2,18 +2,22 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'contact', pathMatch: 'full' },
+  { path: '', redirectTo: 'faq', pathMatch: 'full' },
   {
     path: 'contact',
     data: {
-      breadcrumb: 'Contact us'
+      breadcrumb: {
+        alias: 'contact',
+      },
     },
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
   },
   {
     path: 'faq',
     data: {
-      breadcrumb: 'FAQ'
+      breadcrumb: {
+        alias: 'faq',
+      },
     },
     loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule)
   }

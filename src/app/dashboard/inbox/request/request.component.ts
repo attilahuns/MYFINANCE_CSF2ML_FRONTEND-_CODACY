@@ -4,9 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, map, tap } from 'rxjs';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
+import { TitleService } from 'src/app/core/services/title-service/title.service';
 import { Request, RequestMetadata } from './request';
 import * as RequestAction from "./state/request.actions";
-import { getRequestsData, getRequestsMetadata } from './state/request.reducer';
+import { getRequestsData, getRequestsMetadata, State } from './state/request.reducer';
 
 @Component({
   selector: 'f2ml-request',
@@ -21,6 +22,7 @@ export class RequestComponent implements OnInit {
   metadata!: RequestMetadata;
   content$ = combineLatest([this.store.select(getRequestsData), this.store.select(getRequestsMetadata)]).pipe(
     filter(([requests, metadata]) => !!metadata.title),
+    tap(([_, metadata]) => this.titleService.setTitle(metadata.title)),
     tap(([requests, metadata]) => {
       this.metadata = metadata;
       this.originalData = this.originalData.concat(requests);
@@ -55,7 +57,7 @@ export class RequestComponent implements OnInit {
     map(([requests, metadata]) => !!metadata.title),
   );
   displayFullData = false;
-  constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }
+  constructor(private store: Store<State>, private titleService: TitleService, public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {
     this.store.dispatch(RequestAction.loadRequest());

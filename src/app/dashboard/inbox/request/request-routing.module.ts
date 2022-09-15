@@ -9,7 +9,9 @@ const routes: Routes = [
   {
     path: 'new',
     data: {
-      breadcrumb: 'New requests'
+      breadcrumb: {
+        alias: 'new-request',
+      },
     },
     component: NewRequestComponent,
   },

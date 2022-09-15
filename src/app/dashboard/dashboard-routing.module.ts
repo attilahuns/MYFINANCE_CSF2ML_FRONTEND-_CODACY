@@ -7,6 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    data: {
+      breadcrumb: {
+        skip: true
+      }
+    },
     resolve: {
       layout: LayoutResolver
     },
@@ -14,28 +19,40 @@ const routes: Routes = [
       {
         path: 'inbox',
         data: {
-          breadcrumb: 'Inbox'
+          breadcrumb: {
+            alias: 'inbox',
+            disable: true,
+          },
         },
         loadChildren: () => import('./inbox/inbox.module').then(m => m.InboxModule),
       },
       {
         path: 'account',
         data: {
-          breadcrumb: 'Account'
+          breadcrumb: {
+            alias: 'account',
+            disable: true,
+          },
         },
         loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
       },
       {
         path: 'manage',
         data: {
-          breadcrumb: 'Manage'
+          breadcrumb: {
+            alias: 'manage',
+            disable: true,
+          },
         },
         loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule),
       },
       {
         path: 'help',
         data: {
-          breadcrumb: 'Help'
+          breadcrumb: {
+            alias: 'help',
+            disable: true,
+          },
         },
         loadChildren: () => import('./help/help.module').then(m => m.HelpModule),
       },

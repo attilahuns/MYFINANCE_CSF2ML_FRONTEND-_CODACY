@@ -15,6 +15,7 @@ export const paymentInitialState: PaymentState = {
   payments: [],
   metadata: {
     title: '',
+    contractDetailsTitle: '',
     downloadBtnLabel: '',
     tableMetadata: {
       dueAmountLabel: '',
@@ -65,6 +66,7 @@ export const paymentReducer = createReducer<PaymentState>(
       ...state,
       metadata: {
         title: '',
+        contractDetailsTitle: '',
         downloadBtnLabel: '',
         tableMetadata: {
           dueAmountLabel: '',

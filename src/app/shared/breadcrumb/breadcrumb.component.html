@@ -1,6 +1,6 @@
-<ol class="breadcrumb">
-  <li *ngFor="let breadcrumb of breadcrumbs let i = index">
-    <span [routerLink]="[breadcrumb.url]">{{ breadcrumb.label }}
-    </span>
-  </li>
-</ol>
+<div class="breadcrumb__container">
+  <xng-breadcrumb class="breadcrumb" [separator]="iconTemplate"></xng-breadcrumb>
+  <ng-template #iconTemplate>
+    <mat-icon class="breadcrumb__separator">navigate_next</mat-icon>
+  </ng-template>
+</div>

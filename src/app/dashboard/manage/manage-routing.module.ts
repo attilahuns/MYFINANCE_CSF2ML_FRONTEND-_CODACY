@@ -3,20 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: 'finance', pathMatch: 'full' },
+  { path: '', redirectTo: 'agreements', pathMatch: 'full' },
   {
     path: 'agreements',
     data: {
-      breadcrumb: 'Agreements'
+      breadcrumb: {
+        alias: 'agreements'
+      },
     },
     loadChildren: () => import('./agreement/agreement.module').then(m => m.AgreementModule)
-  },
-  {
-    path: 'agreements/contract-details/:id',
-    data: {
-      breadcrumb: '{{id}}'
-    },
-    loadChildren: () => import('./contract-detail/contract-detail.module').then(m => m.ContractDetailModule)
   },
 ];
 

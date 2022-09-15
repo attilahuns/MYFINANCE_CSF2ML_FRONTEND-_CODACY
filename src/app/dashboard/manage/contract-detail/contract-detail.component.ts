@@ -5,8 +5,11 @@ import { Store } from '@ngrx/store';
 import { ContractDetail, ContractDetailMetadata } from './contractDetail';
 import * as ContractDetailsAction from "./state/contract-details.actions";
 import { combineLatest, filter, map, tap } from 'rxjs';
-import { getContractDetails, getContractMetadataDetails } from './state/contract-details.reducer';
+import { getContractDetails, getContractMetadataDetails, State } from './state/contract-details.reducer';
 import { environment } from 'src/environments/environment';
+import { BreadcrumbService } from 'xng-breadcrumb';
+import { ActivatedRoute } from '@angular/router';
+import { TitleService } from 'src/app/core/services/title-service/title.service';
 
 @Component({
   selector: 'f2ml-contract-detail',
@@ -15,6 +18,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ContractDetailComponent implements OnInit {
 
+  title = '';
   columns: { name: string, header: string, sortable: boolean, value: CallableFunction }[] = [];
   originalData: ContractDetail[] = [];
   contractDetailMetadata!: ContractDetailMetadata;
@@ -23,6 +27,12 @@ export class ContractDetailComponent implements OnInit {
   servicesDataSource: { title: string, text: string }[] = [];
   contracts$ = combineLatest([this.store.select(getContractDetails), this.store.select(getContractMetadataDetails)]).pipe(
     filter(([contracts, contractDetailMetadata]) => !!contractDetailMetadata.title),
+    tap(([_, metadata]) => {
+      const id = this.route.snapshot.params['id'];
+      this.title = metadata.title.replace('@[FINANCE_PRODUCT]', 'PCP').replace('@[REGISTRATION_NUMBER]', id);
+      this.titleService.setTitle(this.title);
+      this.breadcrumbService.set('@contract-details', this.title);
+    }),
     tap(([contracts, contractDetailMetadata]) => {
       this.originalData = this.originalData.concat(contracts);
       this.dataSource = new MatTableDataSource(this.originalData.slice(0, contractDetailMetadata.documentDetailMetadata.displayedRowsLimit));
@@ -76,7 +86,7 @@ export class ContractDetailComponent implements OnInit {
   ]
   displayFullServices: boolean = false;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store<State>, private titleService: TitleService, private breadcrumbService: BreadcrumbService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.store.dispatch(ContractDetailsAction.loadContractDetail());

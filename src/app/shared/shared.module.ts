@@ -19,6 +19,7 @@ import { WysiwygDisplayerComponent } from './wysiwyg-displayer/wysiwyg-displayer
 import { LoaderComponent } from './loader/loader.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { YoutubeVideoPlayerComponent } from './youtube-video-player/youtube-video-player.component';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { YoutubeVideoPlayerComponent } from './youtube-video-player/youtube-vide
     MaterialModule,
     NgxExtendedPdfViewerModule,
     YouTubePlayerModule,
+    BreadcrumbModule,
   ],
   exports: [
     FooterComponent,

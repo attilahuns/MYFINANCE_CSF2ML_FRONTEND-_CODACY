@@ -20,8 +20,8 @@ export class LayoutResolver implements Resolve<boolean> {
     this.store.dispatch(LayoutAction.loadBannerItems());
 
     return combineLatest([this.store.select(getFooterItems), this.store.select(getSidenavMenuItems), this.store.select(getHeaderItems)]).pipe(
-      filter(([footer, menu, header]) => footer.length > 0 && menu.length > 0 && header.length > 0),
-      map(([footer, menu, header]) => footer.length > 0 && menu.length > 0 && header.length > 0),
+      map(([footer, menu, header]) => !!footer.length && !!menu.length && !!header.length),
+      filter((proceed) => proceed),
       first(),
     );
   }

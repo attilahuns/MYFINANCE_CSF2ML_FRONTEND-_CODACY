@@ -6,21 +6,27 @@ const routes: Routes = [
   {
     path: 'information',
     data: {
-      breadcrumb: 'Informations'
+      breadcrumb: {
+        alias: 'information',
+      },
     },
     loadChildren: () => import('./information/information.module').then(m => m.InformationModule)
   },
   {
     path: 'bank-details',
     data: {
-      breadcrumb: 'Bank details'
+      breadcrumb: {
+        alias: 'bank-details',
+      },
     },
     loadChildren: () => import('./bank-detail/bank-detail.module').then(m => m.BankDetailModule),
   },
   {
     path: 'access-management',
     data: {
-      breadcrumb: 'Access Management'
+      breadcrumb: {
+        alias: 'access-management',
+      },
     },
     loadChildren: () => import('./access-management/access-management.module').then(m => m.AccessManagementModule)
   },
