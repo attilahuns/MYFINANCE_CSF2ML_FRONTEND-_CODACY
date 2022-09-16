@@ -1,0 +1,31 @@
+<f2ml-default-template *ngIf="(accessManagementEnterpriseItems$ | async)?.length as accessManagementEnterpriseItems">
+  <f2ml-default-card title="Access Management" main>
+    <div class="access-management-enterprise__container" content>
+      <h3 class="access-management-enterprise__question">You are the legal represetant of several companies. Please select the company in order to manage the accesses.</h3>
+
+      <ng-template [ngIf]="originalData.length">
+        <!-- Mobile & Tablet -->
+        <ng-template [ngIf]="!deviceDetector.isLaptop()">
+          <f2ml-access-management-enterprise-mobile [dataSource]="dataSource.filteredData" [columns]="columns"></f2ml-access-management-enterprise-mobile>
+        </ng-template>
+
+        <!-- Laptop -->
+        <ng-template [ngIf]="deviceDetector.isLaptop()">
+          <f2ml-access-management-enterprise-laptop [dataSource]="dataSource" [columns]="columns" (sortChange)="sortChange($event)"></f2ml-access-management-enterprise-laptop>
+        </ng-template>
+
+        <!--View more | less -->
+        <div class="access-management-enterprise-viewmore__container" *ngIf="dataSource.filteredData.length">
+          <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData"></f2ml-view-more>
+        </div>
+      </ng-template>
+
+      <ng-template [ngIf]="!originalData.length">
+        <div class="access-management-enterprise-nodata__container">
+          <span class="access-management-enterprise-nodata__message">No enterprise has been found</span>
+        </div>
+      </ng-template>
+
+    </div>
+  </f2ml-default-card>
+</f2ml-default-template>

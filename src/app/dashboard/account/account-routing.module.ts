@@ -28,7 +28,7 @@ const routes: Routes = [
         alias: 'access-management',
       },
     },
-    loadChildren: () => import('./access-management/access-management.module').then(m => m.AccessManagementModule)
+    loadChildren: () => import('./access-management-enterprise/access-management-enterprise.module').then(m => m.AccessManagementEnterpriseModule)
   },
 ];
 

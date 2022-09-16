@@ -1,0 +1,38 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.access-management-enterprise-tile__container {
+  color: $color-font-primary;
+  background-color: $color-background-accent;
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 10px;
+}
+.access-management-enterprise-tile__content {
+  display: flex;
+}
+.access-management-enterprise-tile__table {
+  flex-grow: 1;
+}
+.access-management-enterprise-tile__cell {
+  padding-bottom: 1em;
+  &:hover {
+    button {
+      background-color: $color-background-primary;
+    }
+  }
+}
+.access-management-enterprise-tile__row-value {
+  font-weight: bold;
+}
+
+@include device.viewport(tablet) {
+  .access-management-enterprise-tile__table {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .access-management-enterprise-tile__row {
+    display: flex;
+    flex-direction: column;
+  }
+}

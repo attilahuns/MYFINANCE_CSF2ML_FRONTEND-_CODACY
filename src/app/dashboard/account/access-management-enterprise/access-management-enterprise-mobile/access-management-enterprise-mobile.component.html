@@ -1,0 +1,15 @@
+<div class="access-management-enterprise-mobile__container" *ngIf="dataSource.length">
+  <div class="access-management-enterprise-tile__container" *ngFor="let row of dataSource">
+    <div class="access-management-enterprise-tile__content">
+      <table class="access-management-enterprise-tile__table">
+        <tr class="access-management-enterprise-tile__row" *ngFor="let column of columns" >
+          <td class="access-management-enterprise-tile__row-label access-management-enterprise-tile__cell">{{ column.header }}:</td>
+          <td class="access-management-enterprise-tile__row-value access-management-enterprise-tile__cell" *ngIf="'manageAccesses' !== column.name">{{ column.value(row) }}</td>
+          <td class="access-management-enterprise-tile__row-value access-management-enterprise-tile__cell" *ngIf="'manageAccesses' == column.name">
+            <button mat-raised-button color="primary" [routerLink]="row.piva">Manage Access</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
