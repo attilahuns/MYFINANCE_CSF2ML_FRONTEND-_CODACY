@@ -1,0 +1,25 @@
+<div *ngIf="metadata$ | async as metadata" class="footer-page-content__container">
+  <h1 class="footer-page-content__header">{{ metadata.title }}</h1>
+
+  <div *ngIf="metadata.description" class="footer-page-content__description">
+    <f2ml-wysiwyg-displayer [html]="metadata.description"></f2ml-wysiwyg-displayer>
+  </div>
+
+  <div class="footer-page-content__wrapper">
+
+    <div *ngIf="metadata.video" class="footer-page-content__video">
+      <f2ml-youtube-video-player [videoUrl]="metadata.video"></f2ml-youtube-video-player>
+    </div>
+
+    <div>
+      <div *ngIf="metadata.picture" class="footer-page-content__image">
+        <img [src]="getFullUrl(metadata.picture.url)" [alt]="metadata.picture.alt"/>
+      </div>
+
+      <div *ngIf="metadata.link" class="footer-page-content__link" [class.is-centered]="metadata.picture">
+        <span (click)="navigate(metadata.link.url)">{{ metadata.link.title }}</span>
+      </div>
+    </div>
+
+  </div>
+</div>
