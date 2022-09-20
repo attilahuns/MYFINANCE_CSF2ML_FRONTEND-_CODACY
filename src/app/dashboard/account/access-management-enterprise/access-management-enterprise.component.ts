@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AccessManagementEnterprise } from './access-management-entreprise';
-import { getAccessManagementEnterpriseItems } from './state/access-management-enterprise.reducer';
+import { AccessManagementEnterprise, AccessManagementEnterpriseMetadata } from './access-management-entreprise';
+import { getAccessManagementEnterpriseItems, getAccessManagementEnterpriseMetadata } from './state/access-management-enterprise.reducer';
 import * as AccessManagementEnterpriseAction from "./state/access-management-enterprise.actions";
-import { tap } from 'rxjs';
+import { combineLatest, filter, map, tap } from 'rxjs';
 import { DeviceDetectorService } from 'src/app/core/services/device-detector/device-detector.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -15,41 +15,49 @@ import { MatSort } from '@angular/material/sort';
 })
 export class AccessManagementEnterpriseComponent implements OnInit {
 
-  columns = [
-    {
-      name: 'piva',
-      header: 'PIVA',
-      sortable: true,
-      value: (element: AccessManagementEnterprise) => `${element.piva}`,
-    },
-    {
-      name: 'companyName',
-      header: 'Name of the company',
-      sortable: true,
-      value: (element: AccessManagementEnterprise) => `${element.companyName}`,
-    },
-    {
-      name: 'manageAccesses',
-      header: 'Manage Accesses',
-      sortable: false,
-      value: (element: AccessManagementEnterprise) => '',
-    },
-  ];
+  columns: { name: string, header: string, sortable: boolean, value: CallableFunction }[] = [];
   originalData: AccessManagementEnterprise[] = [];
   dataSource = new MatTableDataSource<AccessManagementEnterprise>();
-  accessManagementEnterpriseItems$ = this.store.select(getAccessManagementEnterpriseItems).pipe(
-    tap(accessManagementEnterpriseItems => {
-      this.originalData = this.originalData.concat(accessManagementEnterpriseItems);
-      this.dataSource = new MatTableDataSource(this.originalData.slice(0, 5));
-    }),
-  )
+  metadata!: AccessManagementEnterpriseMetadata;
   displayFullData = false;
+
+  content$ = combineLatest([this.store.select(getAccessManagementEnterpriseItems), this.store.select(getAccessManagementEnterpriseMetadata)]).pipe(
+    filter(([accessManagementEnterprise, metadata]) => !!metadata.title),
+    tap(([accessManagementEnterprise, metadata]) => {
+      this.metadata = metadata;
+      this.originalData = this.originalData.concat(accessManagementEnterprise);
+      this.dataSource = new MatTableDataSource(this.originalData.slice(0, metadata.tableMetadata.maxAccessNumber));
+      this.columns = [
+        {
+          name: 'piva',
+          header: metadata.tableMetadata.pivaLabel,
+          sortable: true,
+          value: (element: AccessManagementEnterprise) => `${element.piva}`,
+        },
+        {
+          name: 'companyName',
+          header: metadata.tableMetadata.companyNameLabel,
+          sortable: true,
+          value: (element: AccessManagementEnterprise) => `${element.companyName}`,
+        },
+        {
+          name: 'manageAccesses',
+          header: metadata.tableMetadata.manageAccessesLabel,
+          sortable: false,
+          value: (element: AccessManagementEnterpriseMetadata) => `${metadata.tableMetadata.manageAccessesCtaLabel}`,
+        }
+      ];
+    }),
+    map(([accessManagementEnterprise, metadata]) => !!metadata.title),
+  );
+
   displayedColumns: string[] = [];
 
   constructor(private store: Store, public deviceDetector: DeviceDetectorService) { }
 
   ngOnInit(): void {
     this.store.dispatch(AccessManagementEnterpriseAction.loadAccessManagementEnterpriseItems());
+    this.store.dispatch(AccessManagementEnterpriseAction.loadAccessManagementEnterpriseMetadata());
   }
 
   sortChange(sort: MatSort): void {
@@ -58,7 +66,7 @@ export class AccessManagementEnterpriseComponent implements OnInit {
 
   displayData(displayFullData: boolean) {
     this.displayFullData = displayFullData;
-    this.dataSource.data = !displayFullData ? this.originalData.slice(0, 5) : this.originalData;
+    this.dataSource.data = !displayFullData ? this.originalData.slice(0, this.metadata.tableMetadata.maxAccessNumber) : this.originalData;
   }
 
 }

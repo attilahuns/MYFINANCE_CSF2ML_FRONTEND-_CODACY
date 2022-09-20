@@ -1,8 +1,7 @@
-<f2ml-default-template *ngIf="(accessManagementEnterpriseItems$ | async)?.length as accessManagementEnterpriseItems">
-  <f2ml-default-card title="Access Management" main>
+<f2ml-default-template *ngIf="(content$ | async) as accessManagementEnterpriseItems" [communicationMetadata]="metadata.communicationMetadata" [faqMetadata]="metadata.faqMetadata">
+  <f2ml-default-card title="{{ metadata.title }}" main>
     <div class="access-management-enterprise__container" content>
-      <h3 class="access-management-enterprise__question">You are the legal represetant of several companies. Please select the company in order to manage the accesses.</h3>
-
+      <h3 class="access-management-enterprise__question">{{ metadata.accessQuestionLabel }}</h3>
       <ng-template [ngIf]="originalData.length">
         <!-- Mobile & Tablet -->
         <ng-template [ngIf]="!deviceDetector.isLaptop()">
@@ -16,13 +15,13 @@
 
         <!--View more | less -->
         <div class="access-management-enterprise-viewmore__container" *ngIf="dataSource.filteredData.length">
-          <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData"></f2ml-view-more>
+          <f2ml-view-more (viewMore)="displayData($event)" [displayFullData]="displayFullData" [viewMoreMessage]="metadata.tableMetadata.viewMoreLabel" [viewLessMessage]="metadata.tableMetadata.viewLessLabel"></f2ml-view-more>
         </div>
       </ng-template>
 
       <ng-template [ngIf]="!originalData.length">
         <div class="access-management-enterprise-nodata__container">
-          <span class="access-management-enterprise-nodata__message">No enterprise has been found</span>
+          <span class="access-management-enterprise-nodata__message">{{ metadata.tableMetadata.noAccessToDisplayLabel }}</span>
         </div>
       </ng-template>
 

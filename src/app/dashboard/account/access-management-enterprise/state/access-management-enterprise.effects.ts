@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AccessManagementEnterprise } from '../access-management-entreprise';
+import { AccessManagementEnterpriseService } from '../access-management-enterprise.service';
 import * as AccessManagementEnterpriseAction from './access-management-enterprise.actions';
 
 @Injectable({
@@ -33,5 +34,17 @@ export class AccessManagementEnterpriseEffect {
     )
   });
 
-  constructor(private actions: Actions) { }
+  loadAccessManagementMetadata$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(AccessManagementEnterpriseAction.loadAccessManagementEnterpriseMetadata),
+      mergeMap(() => this.accessManagementEnterpriseService.metadata$.pipe(
+        map(accessManagementEnterpriseMetadata => AccessManagementEnterpriseAction.loadAccessManagementEnterpriseMetadataSuccess({accessManagementEnterpriseMetadata})),
+        catchError(error => {
+          return of(AccessManagementEnterpriseAction.loadAccessManagementEnterpriseMetadataFailure({error}))
+        })
+      ))
+    )
+  });
+
+  constructor(private actions: Actions,  private accessManagementEnterpriseService: AccessManagementEnterpriseService) { }
 }
