@@ -1,0 +1,59 @@
+@use 'breakpoints' as device;
+@import 'variables';
+
+.confirm-dialog-container .mat-dialog-container {
+  border-radius: .25em .25em .4em .4em;
+  padding: 0px;
+}
+.confirm-dialog-content-container {
+  display: flex;
+  ::ng-deep .mat-icon {
+    overflow: unset !important;
+  }
+  .confirm-dialog_close-icone {
+    margin-left: auto;
+    order: 2;
+    font-weight: bolder;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  .confirm-dialog_content-span {
+    text-align: center;
+    font-size: $font-size-second;
+    border-radius: .25em .25em .4em .4em;
+    padding-top: 2em;
+    margin-bottom: 20px;
+  }
+}
+.confirm-dialog_footer-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .confirm-dialog_confirm-button {
+    height: 50px;
+    width: 30%;
+    background-color: $color-primary;
+    color: $color-font-primary-in-filled-background;
+    border-radius: 0px;
+    margin: 20px;
+    border-radius: 10px;
+    &:hover {
+      background-color: $color-background-primary;
+    }
+  }
+  .confirm-dialog_cancel-button {
+    height: 50px;
+    width: 30%;
+    background-color: $color-font-primary-in-filled-background;
+    color: $color-font-primary;
+    border-radius: 0px;
+    border: 3px solid $color-primary;
+    margin: 20px;
+    border-radius: 10px;
+    &:hover {
+      background-color: $color-primary;
+      color: white;
+    }
+  }
+}

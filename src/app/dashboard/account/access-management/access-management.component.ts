@@ -17,6 +17,8 @@ import { TitleService } from 'src/app/core/services/title-service/title.service'
 })
 export class AccessManagementComponent extends AccessManagementEditableComponent implements OnInit {
 
+  title = '';
+  accessQuestionLabel = '';
   originalData: AccessManagement[] = [];
   override dataSource = new MatTableDataSource<AccessManagement>();
   displayFullData = false;
@@ -27,6 +29,8 @@ export class AccessManagementComponent extends AccessManagementEditableComponent
     tap(([_, metadata]) => this.titleService.setTitle(metadata.title)),
     tap(([accessManagementItems, metadata]) => {
       this.metadata = metadata;
+      this.title = metadata.title.replace('@[COMPANY_NAME]', 'Company name 1');
+      this.accessQuestionLabel = metadata.accessQuestionLabel.replace('@[COMPANY_NAME]', 'Company name');
       this.originalData = this.originalData.concat(accessManagementItems);
       this.dataSource = new MatTableDataSource(this.originalData.slice(0, metadata.tableMetadata.maxAccessNumber));
       this.columns = [
@@ -43,10 +47,10 @@ export class AccessManagementComponent extends AccessManagementEditableComponent
           value: (element: AccessManagement) => `${element.firstName}`,
         },
         {
-          name: 'role',
-          header: metadata.tableMetadata.roleLabel,
+          name: 'nif',
+          header: metadata.tableMetadata.nifLabel,
           sortable: true,
-          value: (element: AccessManagement) => `${element.role}`,
+          value: (element: AccessManagement) => `${element.nif}`,
         },
         {
           name: 'phone',

@@ -12,9 +12,9 @@ import * as AccessManagementAction from './access-management.actions';
 export class AccessManagementEffect {
 
   accessManagementItems: AccessManagement[] = [
-    {id : 1 ,name: 'Lorem', firstName: 'Ispsum', role: 'Role 1', phone: '0123456789' , email : 'mail1@gmail.com'},
-    {id : 2 ,name: 'Lorem', firstName: 'Ispsum', role: 'Role 1', phone: '0123456789' , email : 'email@mail.com'},
-    {id : 3 ,name: 'Lorem', firstName: '-Ispsum', role: 'Role 1', phone: '0123456789' , email : 'email@mail.com'},
+    {id : 1 ,name: 'Lorem', firstName: 'Ispsum', nif: 'Nif1234567892334', phone: '0123456789' , email : 'mail1@gmail.com'},
+    {id : 2 ,name: 'Lorem', firstName: 'Ispsum', nif: 'Nif1234567892335', phone: '0123456789' , email : 'email@mail.com'},
+    {id : 3 ,name: 'Lorem', firstName: '-Ispsum', nif: 'Nif1234567892336', phone: '0123456789' , email : 'email@mail.com'},
   ];
 
   loadAccessManagementItems$ = createEffect(() => {

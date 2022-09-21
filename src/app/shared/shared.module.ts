@@ -20,6 +20,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { YoutubeVideoPlayerComponent } from './youtube-video-player/youtube-video-player.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
+import { MatConfimDialogComponent } from './mat-confim-dialog/mat-confim-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
     WysiwygDisplayerComponent,
     LoaderComponent,
     YoutubeVideoPlayerComponent,
+    MatConfimDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +66,7 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
     WysiwygDisplayerComponent,
     LoaderComponent,
     YoutubeVideoPlayerComponent,
+    MatConfimDialogComponent,
   ]
 })
 export class SharedModule { }

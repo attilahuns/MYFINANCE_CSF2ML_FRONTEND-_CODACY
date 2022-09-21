@@ -5,7 +5,7 @@ export interface AccessManagement {
   id: number,
   name: string,
   firstName: string,
-  role: string,
+  nif: string,
   phone: string,
   email: string,
 }
@@ -13,7 +13,12 @@ export interface AccessManagement {
 export interface AccessManagementMetadata {
   title: string,
   accessQuestionLabel: string,
-  newAccessLabel: string,
+  newAccess: {
+    label: string,
+    grantAccessTooltipLabel: string,
+    maxAccessExceededTooltipLabel: string
+  },
+  popUp: PopUp
   accessWarningLabel: string,
   updateAccessLabel: string,
   noAccessToDisplayLabel: string,
@@ -26,7 +31,7 @@ export interface AccessManagementMetadata {
 interface AccessManagementMetadataTable {
     nameLabel: string,
     firstnameLabel: string,
-    roleLabel: string,
+    nifLabel: string,
     phoneLabel: string,
     emailLabel: string,
     actionsLabel: string,
@@ -37,4 +42,10 @@ interface AccessManagementMetadataTable {
     deleteIcon: string,
     validateIcon: string,
     discardIcon: string
+}
+
+export interface PopUp {
+  message: string,
+  confirmButtonLabel: string,
+  cancelButtonLabel: string
 }

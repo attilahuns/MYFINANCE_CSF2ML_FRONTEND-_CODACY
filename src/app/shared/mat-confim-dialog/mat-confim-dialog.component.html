@@ -1,0 +1,10 @@
+<div class="confirm-dialog_container">
+  <div class="confirm-dialog-content-container" appOutside>
+    <mat-icon class="confirm-dialog_close-icone" (click)="closeDialog()" [mat-dialog-close]="false">close</mat-icon>
+    <span class="confirm-dialog_content-span">{{ dialogService.data.message }}</span>
+  </div>
+  <div class="confirm-dialog_footer-container">
+    <button mat-flat-button class="confirm-dialog_cancel-button" [mat-dialog-close]="false">{{ dialogService.data.cancelButtonLabel }}</button>
+    <button mat-flat-button class="confirm-dialog_confirm-button" [mat-dialog-close]="true">{{ dialogService.data.confirmButtonLabel }}</button>
+  </div>
+</div>

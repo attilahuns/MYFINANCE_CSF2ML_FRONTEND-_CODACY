@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { MatInput } from '@angular/material/input';
 import { filter, Observable, Subscription } from 'rxjs';
-import { AccessManagement } from './access-management';
+import { DialogService } from 'src/app/shared/mat-confim-dialog/dialog.service';
+import { AccessManagement, AccessManagementMetadata, PopUp } from './access-management';
 
 @Component({
   template: '',
@@ -20,8 +21,9 @@ export class AccessManagementBaseComponent implements OnInit, OnDestroy {
   @Output() cancelAppliedAccessManagement: EventEmitter<AccessManagement> = new EventEmitter<AccessManagement>();
 
   private onCancelEditSubscription!: Subscription;
+  private onDeleteSubscription!: Subscription;
 
-  constructor() { }
+  constructor(private dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.onCancelEditSubscription = this.onCancelEdit$.pipe(
@@ -44,13 +46,18 @@ export class AccessManagementBaseComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.onCancelEditSubscription.unsubscribe();
+    this.onDeleteSubscription.unsubscribe();
   }
 
   editRow(access: AccessManagement): void {
     this.editAccessManagement.emit(access);
   }
-  deleteRow(access: AccessManagement): void {
-    this.deleteAccessManagement.emit(access);
+  deleteRow(access: AccessManagement, popUp: PopUp): void {
+     this.onDeleteSubscription = this.dialogService.openConfirmDialog(popUp).afterClosed().subscribe(resp => {
+      if (resp) {
+        this.deleteAccessManagement.emit(access);
+      }
+    });
   }
   isOnEdit(onEditAccess: AccessManagement, currentAccess: AccessManagement): boolean {
     return onEditAccess.id === currentAccess.id

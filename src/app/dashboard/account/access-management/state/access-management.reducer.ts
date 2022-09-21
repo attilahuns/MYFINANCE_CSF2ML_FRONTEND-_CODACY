@@ -16,7 +16,16 @@ export const accessManagementInitialState: AccessManagementState = {
   accessManagementMetadata: {
     title: '',
     accessQuestionLabel: '',
-    newAccessLabel: '',
+    newAccess: {
+      label: '',
+      grantAccessTooltipLabel: '',
+      maxAccessExceededTooltipLabel: ''
+    },
+    popUp: {
+      message: '',
+      confirmButtonLabel: '',
+      cancelButtonLabel: ''
+    },
     accessWarningLabel: '',
     updateAccessLabel: '',
     noAccessToDisplayLabel: '',
@@ -24,7 +33,7 @@ export const accessManagementInitialState: AccessManagementState = {
     tableMetadata: {
       nameLabel: '',
       firstnameLabel: '',
-      roleLabel: '',
+      nifLabel: '',
       phoneLabel: '',
       emailLabel: '',
       actionsLabel: '',
@@ -73,7 +82,16 @@ export const accessManagementReducer = createReducer<AccessManagementState>(
       accessManagementMetadata: {
         title: '',
         accessQuestionLabel: '',
-        newAccessLabel: '',
+        newAccess: {
+          label: '',
+          grantAccessTooltipLabel: '',
+          maxAccessExceededTooltipLabel: ''
+        },
+        popUp: {
+          message: '',
+          confirmButtonLabel: '',
+          cancelButtonLabel: ''
+        },
         accessWarningLabel: '',
         updateAccessLabel: '',
         noAccessToDisplayLabel: '',
@@ -81,7 +99,7 @@ export const accessManagementReducer = createReducer<AccessManagementState>(
         tableMetadata: {
           nameLabel: '',
           firstnameLabel: '',
-          roleLabel: '',
+          nifLabel: '',
           phoneLabel: '',
           emailLabel: '',
           actionsLabel: '',

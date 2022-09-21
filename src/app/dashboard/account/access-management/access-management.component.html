@@ -1,19 +1,18 @@
 <f2ml-default-template *ngIf="content$ | async" [communicationMetadata]="metadata.communicationMetadata" [faqMetadata]="metadata.faqMetadata">
-  <f2ml-default-card [title]="metadata.title" main>
+  <f2ml-default-card [title]="title" main>
     <div class="access-management__container" content>
       <div class="access-management__header__container">
         <div class="access-management__header__title-container">
-          <h3 class="access-management__header__title">{{ metadata.accessQuestionLabel }}</h3>
+          <h3 class="access-management__header__title">{{ accessQuestionLabel }}</h3>
         </div>
         <div class="access-management__actions__container">
-          <div [matTooltip]="dataSource.filteredData.length >= metadata.tableMetadata.maxAccessNumber ? metadata.maxAccessExceededLabel : ''" matTooltipPosition="above">
-            <button class="access-management__header__button" mat-raised-button color="primary" (click)="addRow()" [disabled]="dataSource.filteredData.length >= metadata.tableMetadata.maxAccessNumber">
-              {{ metadata.newAccessLabel }}
+          <div [matTooltip]="dataSource.filteredData.length >= metadata.tableMetadata.maxAccessNumber ? metadata.newAccess.maxAccessExceededTooltipLabel : metadata.newAccess.grantAccessTooltipLabel" matTooltipPosition="above">
+            <button class="access-management__header__button" mat-raised-button color="primary" mat-raised-button (click)="addRow()" [disabled]="dataSource.filteredData.length >= metadata.tableMetadata.maxAccessNumber">
+              {{ metadata.newAccess.label }}
             </button>
           </div>
         </div>
       </div>
-
       <!-- Mobile & Tablet -->
       <ng-template [ngIf]="!deviceDetector.isLaptop()">
         <f2ml-access-management-mobile
@@ -49,9 +48,7 @@
       </ng-template>
 
       <div class="access-management__footer__container">
-        <p class="access-management__footer__warning-text">{{ metadata.accessWarningLabel }}</p>
-        <button class="access-management__footer__button-update" mat-raised-button color="primary">{{ metadata.updateAccessLabel }}</button>
-     </div>
+      </div>
     </div>
   </f2ml-default-card>
 </f2ml-default-template>

@@ -40,7 +40,7 @@ export class AccessManagementEditableComponent {
 
   getNewAccessManagement(): AccessManagement {
     const id = -new Date().getTime();
-    return { id : id, name: '', firstName: '', role: '', phone: '', email: '' }
+    return { id : id, name: '', firstName: '', nif: '', phone: '', email: '' }
   }
 
 }
