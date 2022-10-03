@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DocumentResolver } from './document/document.resolver';
 
 const routes: Routes = [
   { path: '', redirectTo: 'requests', pathMatch: 'full' },
@@ -18,6 +19,9 @@ const routes: Routes = [
       breadcrumb: {
         alias: 'documents',
       },
+    },
+    resolve: {
+      transcodingTable: DocumentResolver,
     },
     loadChildren: () => import('./document/document.module').then(m => m.DocumentModule)
   },

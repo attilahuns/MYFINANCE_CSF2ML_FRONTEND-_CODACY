@@ -1,6 +1,6 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { AppState } from "src/app/state/app.state";
-import { Document, DocumentMetadata } from "../document";
+import { Document, DocumentMetadata, TranscodingTable } from "../document";
 import * as DocumentAction from "./document.actions";
 
 export interface State extends AppState {
@@ -9,6 +9,7 @@ export interface State extends AppState {
 export interface DocumentState {
   documents: Document[],
   metadata: DocumentMetadata,
+  transcodingTable : TranscodingTable[],
   error: string;
 }
 export const documentInitialState: DocumentState = {
@@ -40,12 +41,14 @@ export const documentInitialState: DocumentState = {
       }
     }
   },
+  transcodingTable: [],
   error: '',
 }
 
 const getDocumentState = createFeatureSelector<DocumentState>('document');
 export const getdocuments = createSelector(getDocumentState, state => state.documents);
 export const getDocumentsMetadata = createSelector(getDocumentState, state => state.metadata);
+export const getTranscodingTable = createSelector(getDocumentState, state => state.transcodingTable);
 export const getDocumentsError = createSelector(getDocumentState, state => state.error);
 export const getDocumentDetailMetadata = createSelector(getDocumentState, state => state.metadata.downloadCTALabel);
 
@@ -102,6 +105,20 @@ export const documentReducer = createReducer<DocumentState>(
           }
         }
       },
+      error: action.error,
+    }
+  }),
+  on(DocumentAction.loadTranscodingTableSuccess, (state, action): DocumentState => {
+    return {
+      ...state,
+      transcodingTable: action.transcodingTable,
+      error: '',
+    }
+  }),
+  on(DocumentAction.loadTranscodingTableFailure, (state, action): DocumentState => {
+    return {
+      ...state,
+      transcodingTable: [],
       error: action.error,
     }
   }),

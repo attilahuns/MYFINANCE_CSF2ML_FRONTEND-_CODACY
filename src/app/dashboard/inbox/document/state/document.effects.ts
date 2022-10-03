@@ -52,5 +52,17 @@ export class DocumentEffect {
     )
   });
 
+  loadtranscodingTable$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(DocumentAction.loadTranscodingTable),
+      mergeMap(() => this.documentService.transcodingtTable$.pipe(
+        map(transcodingTable => DocumentAction.loadTranscodingTableSuccess({transcodingTable})),
+        catchError(error => {
+          return of(DocumentAction.loadTranscodingTableFailure({error}))
+        })
+      ))
+    )
+  });
+
   constructor(private actions: Actions, private documentService: DocumentService) { }
 }

@@ -43,3 +43,8 @@ export interface DocumentMetadataTable {
     alt: string
   };
 }
+
+export interface TranscodingTable {
+  code: string;
+  label: string;
+}
